@@ -43,7 +43,7 @@ export const ConfirmWallet = () => {
         signature,
       });
     } catch (error) {
-      console.log(error, "fsdfs");
+      console.log(error);
     }
   }
   return <div onClick={signInWithEthereum}>{address}</div>;

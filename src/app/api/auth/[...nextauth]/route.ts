@@ -46,6 +46,28 @@ const handler = NextAuth({
   },
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
+    async signIn({user}) {
+        // connectToDb();
+        try {
+          console.log(user,'erwrewrwerewrewrew');
+          // 如果数据库里面没有用户的话，就把用户插到数据库当中
+          // const user = await User.findOne({ email: profile.email });
+
+          // if (!user) {
+          //   const newUser = new User({
+          //     username: profile.login,
+          //     email: profile.email,
+          //     image: profile.avatar_url,
+          //   });
+
+          //   await newUser.save();
+          // }
+        } catch (err) {
+          return false;
+        }
+      
+      return true;
+    },
     async session({ session, token }: { session: any; token: any }) {
       session.address = token.sub;
       session.user.name = token.sub;
