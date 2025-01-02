@@ -36,12 +36,12 @@ export const ConfirmWallet = () => {
       const signature = await signMessageAsync({
         message,
       });
-
-      signIn("credentials", {
-        message: JSON.stringify(message),
-        redirect: false,
-        signature,
-      });
+      // 处理登录/注册
+      // signIn("credentials", {
+      //   message: JSON.stringify(message),
+      //   redirect: false,
+      //   signature,
+      // });
     } catch (error) {
       console.log(error);
     }
