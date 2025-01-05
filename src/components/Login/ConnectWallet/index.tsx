@@ -4,7 +4,7 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 import classNames from "classnames";
 
 interface IConnectWallet {
-  children?: React.ReactNode;
+  children: (openConnectModal: () => void) => React.ReactNode;
   className?: string;
 }
 export const ConnectWallet: React.FC<IConnectWallet> = (props) => {
@@ -16,20 +16,11 @@ export const ConnectWallet: React.FC<IConnectWallet> = (props) => {
           const ready = mounted;
           const connected = ready && account && chain;
           if (!connected) {
-            return (
-              <div
-                className={classNames("w-full", className)}
-                onClick={openConnectModal}
-              >
-                {children}
-              </div>
-            );
+            return <> {children(openConnectModal)}</>;
           }
 
           if (chain.unsupported) {
-            return (
-              <div className={classNames("w-full", className)}>{children}</div>
-            );
+            return <> {children(openConnectModal)}</>;
           }
 
           if (account.address) {

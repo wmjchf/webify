@@ -1,11 +1,13 @@
 .content {
+  height: calc(100vh - 0.35rem);
+
   .left {
-    width: 150px;
-    height: 500px;
-    background-color: red;
+    width: 270px;
+    height: 100%;
+
+    border-right: solid 1px #cdcdcd;
   }
   .right {
-    height: 500px;
-    background-color: green;
+    height: 100%;
   }
 }
