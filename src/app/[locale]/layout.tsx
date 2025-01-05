@@ -1,10 +1,11 @@
 import "@rainbow-me/rainbowkit/styles.css";
-
+import { Providers } from "./providers";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 
 import { Header } from "../../components/Header";
 import { WalletProvider } from "../../rainbowkit/WalletProvider";
+import { Content } from "../../components/Content";
 import "../../styles/globals.css";
 
 async function RootLayout({
@@ -19,12 +20,14 @@ async function RootLayout({
   return (
     <html lang="en">
       <body>
-        <NextIntlClientProvider messages={messages}>
-          <WalletProvider>
-            <Header></Header>
-            {children}
-          </WalletProvider>
-        </NextIntlClientProvider>
+        <Providers>
+          <NextIntlClientProvider messages={messages}>
+            <WalletProvider>
+              <Header></Header>
+              <Content>{children}</Content>
+            </WalletProvider>
+          </NextIntlClientProvider>
+        </Providers>
       </body>
     </html>
   );
