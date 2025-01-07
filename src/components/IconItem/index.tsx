@@ -10,6 +10,7 @@ interface IIconItem {
 
 export const IconItem: React.FC<IIconItem> = (props) => {
   const { icon, title, isSelected = false } = props;
+
   return (
     <div
       className={classNames(

@@ -1,0 +1,36 @@
+.collapse {
+  .collapse_title {
+    height: 45px;
+    &:hover {
+      // background-color: #f5f8f9;
+      background-color: #181c1f;
+    }
+    span {
+      color: #576f76;
+      font-size: 12px;
+      letter-spacing: 2px;
+    }
+    img {
+      width: 13px;
+      height: 13px;
+      transition: all 0.25s;
+      &.reserve {
+        transform: rotate(180deg);
+      }
+    }
+  }
+  .collapse_content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease, opacity 0.2s ease;
+    opacity: 0;
+    &.open {
+      max-height: 500px; /* 根据内容最大高度调整 */
+      opacity: 1;
+    }
+    &.close {
+      max-height: 0;
+      opacity: 0;
+    }
+  }
+}

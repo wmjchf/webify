@@ -1,10 +1,12 @@
 .icon_item {
-  height: 40px;
+  height: 45px;
   &.active {
-    background-color: #e5ebee;
+    // background-color: #e5ebee;
+    background-color: #2a3236;
   }
   &:hover {
-    background-color: #f5f8f9;
+    // background-color: #f5f8f9;
+    background-color: #181c1f;
   }
   .left {
     width: 20px;
