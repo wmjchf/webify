@@ -7,6 +7,7 @@ import { Header } from "../../components/Header";
 import { WalletProvider } from "../../rainbowkit/WalletProvider";
 import { Content } from "../../components/Content";
 import "../../styles/globals.css";
+import "../../styles/iconfont.css";
 
 async function RootLayout({
   children,

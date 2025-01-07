@@ -1,0 +1,15 @@
+.icon_item {
+  height: 40px;
+  &.active {
+    background-color: #e5ebee;
+  }
+  &:hover {
+    background-color: #f5f8f9;
+  }
+  .left {
+    width: 20px;
+    i {
+      font-size: 20px;
+    }
+  }
+}
