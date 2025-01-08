@@ -16,7 +16,15 @@ export const Content: React.FC<IContent> = (props) => {
       </div>
 
       <div className={classNames(styles.right, "overflow-hidden")}>
-        {children}
+        <div
+          className={classNames(
+            styles.right_main,
+            "px-6 py-3 flex gap-lg w-full pb-xl"
+          )}
+        >
+          <div className="w-full flex-[1] min-w-0">{children}</div>
+          <div className="w-[316px] min-w-[316px]"></div>
+        </div>
       </div>
     </div>
   );

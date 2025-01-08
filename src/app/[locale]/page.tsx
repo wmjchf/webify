@@ -1,9 +1,23 @@
 import { useTranslations } from "next-intl";
-import { Button } from "@nextui-org/react";
+import { NewsItem } from "../../components/NewItem";
+import classNames from "classnames";
+import styles from "./index.module.scss";
 
 function Page() {
   const t = useTranslations("home");
-  return <div></div>;
+  return (
+    <div className={classNames(styles.page)}>
+      <NewsItem></NewsItem>
+      <NewsItem></NewsItem>
+      <NewsItem></NewsItem>
+      <NewsItem></NewsItem>
+      <NewsItem></NewsItem>
+      <NewsItem></NewsItem>
+      <NewsItem></NewsItem>
+      <NewsItem></NewsItem>
+      <NewsItem></NewsItem>
+    </div>
+  );
 }
 
 export default Page;

@@ -1,0 +1,23 @@
+.newsItem {
+  border-bottom: solid 1px #00000019;
+  &:hover {
+    background-color: #f5f8f9;
+    // background-color: #181c1f;
+  }
+  .left {
+    width: 200px;
+  }
+  .right {
+    .one {
+      .dot {
+        width: 2px;
+        height: 2px;
+        background-color: #5c6c74;
+        border-radius: 100%;
+      }
+      .time {
+        color: #5c6c74;
+      }
+    }
+  }
+}
