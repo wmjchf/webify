@@ -17,17 +17,15 @@ export const Collapse: React.FC<ICollapse> = (props) => {
   const [reserve, setReserve] = useState(false);
 
   return (
-    <div
-      className={classNames(styles.collapse)}
-      onClick={() => {
-        setReserve(!reserve);
-      }}
-    >
+    <div className={classNames(styles.collapse)}>
       <div
         className={classNames(
           styles.collapse_title,
           "flex items-center justify-between px-4 cursor-pointer rounded-md"
         )}
+        onClick={() => {
+          setReserve(!reserve);
+        }}
       >
         <span>{title}</span>
         <Image

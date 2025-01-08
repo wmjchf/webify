@@ -1,8 +1,11 @@
 import classNames from "classnames";
-import styles from "./index.module.scss";
-import { EmailLogin } from "../Login/EmailLogin";
-import { WalletLogin } from "../Login/WalletLogin";
 import Image from "next/image";
+import { Button } from "@nextui-org/react";
+
+import { Link } from "../../i18n/routing";
+
+import { WalletLogin } from "../Login/WalletLogin";
+import styles from "./index.module.scss";
 // import { ConnectWallet } from "../Login/ConnectWallet";
 
 export const Header = () => {
@@ -28,9 +31,15 @@ export const Header = () => {
       </div>
       <div className={styles.middle}></div>
       <div className={classNames(styles.right, "flex items-center gap-2")}>
-        {/* <Button color="primary">Connect Wallet</Button> */}
+        <Button
+          startContent={<i className="iconfont icon-tianjia"></i>}
+          // size="sm"
+          variant="light"
+        >
+          <Link href="/create">Share</Link>
+        </Button>
         <WalletLogin></WalletLogin>
-        <EmailLogin></EmailLogin>
+        {/* <EmailLogin></EmailLogin> */}
       </div>
     </div>
   );
