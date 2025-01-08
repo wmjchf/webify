@@ -1,15 +1,12 @@
-import { useTranslations } from "next-intl";
+// import { useTranslations } from "next-intl";
 import { NewsItem } from "../../components/NewItem";
-import classNames from "classnames";
+
 import styles from "./index.module.scss";
 
 function Page() {
-  const t = useTranslations("home");
+  // const t = useTranslations("home");
   return (
-    <div className={classNames(styles.page)}>
-      <NewsItem></NewsItem>
-      <NewsItem></NewsItem>
-      <NewsItem></NewsItem>
+    <div className={styles.page}>
       <NewsItem></NewsItem>
       <NewsItem></NewsItem>
       <NewsItem></NewsItem>

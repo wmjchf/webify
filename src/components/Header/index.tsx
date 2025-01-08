@@ -11,6 +11,7 @@ import styles from "./index.module.scss";
 export const Header = () => {
   return (
     <div
+      id="header"
       className={classNames(
         styles.header,
         "flex w-full h-14 px-2.5 justify-between"
