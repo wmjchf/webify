@@ -2,6 +2,7 @@ import "@rainbow-me/rainbowkit/styles.css";
 import { Providers } from "./providers";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
+import PagesTopLoader from "nextjs-toploader";
 
 import { Header } from "../../components/Header";
 import { WalletProvider } from "../../rainbowkit/WalletProvider";
@@ -29,6 +30,7 @@ async function RootLayout({
             </WalletProvider>
           </NextIntlClientProvider>
         </Providers>
+        <PagesTopLoader />
       </body>
     </html>
   );
