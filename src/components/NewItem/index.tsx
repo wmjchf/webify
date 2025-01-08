@@ -6,6 +6,7 @@ import { Avatar, Image } from "@nextui-org/react";
 import { Share } from "./components/Share";
 import { Collection } from "./components/Collection";
 import { LaterRead } from "./components/LaterRead";
+import { Vote } from "./components/Vote";
 
 interface INewsItem {}
 
@@ -44,6 +45,7 @@ export const NewsItem: React.FC<INewsItem> = (props) => {
           </span>
         </div>
         <div className={classNames(styles.three)}>
+          <Vote></Vote>
           <Share></Share>
           <Collection></Collection>
           <LaterRead></LaterRead>
