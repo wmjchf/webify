@@ -1,5 +1,4 @@
-import { Button } from "@nextui-org/react";
-import { Development } from "../../../components/Devlopment";
+import { Development } from "../../../../components/Devlopment";
 
 function Page() {
   return (

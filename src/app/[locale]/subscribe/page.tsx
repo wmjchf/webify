@@ -1,9 +1,10 @@
 import { Button } from "@nextui-org/react";
+import { Development } from "../../../components/Devlopment";
 
 function Page() {
   return (
     <div>
-      <Button>Subscribe</Button>
+      <Development></Development>
     </div>
   );
 }
