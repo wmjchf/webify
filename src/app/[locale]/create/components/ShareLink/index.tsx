@@ -1,11 +1,23 @@
 "use client";
 import { useState } from "react";
-import { Form, Input, Button, Image } from "@nextui-org/react";
+import {
+  Form,
+  Input,
+  Button,
+  Image,
+  Select,
+  SelectItem,
+} from "@nextui-org/react";
 import classNames from "classnames";
+
 import styles from "./index.module.scss";
 
 interface IShareLink {}
-
+export const animals = [
+  { key: "solana", label: "solana" },
+  { key: "ethereum", label: "ethereum" },
+  { key: "elephant", label: "Elephant" },
+];
 export const ShareLink: React.FC<IShareLink> = (props) => {
   const [errors, setErrors] = useState({});
   const onSubmit = (event: any) => {
@@ -33,6 +45,18 @@ export const ShareLink: React.FC<IShareLink> = (props) => {
         placeholder="parse title"
         disabled
       />
+      <div className="py-1"></div>
+      <Select
+        className="max-w-xs"
+        label="Tags"
+        placeholder="Choose Tags"
+        selectionMode="multiple"
+        labelPlacement={"outside"}
+      >
+        {animals.map((animal) => (
+          <SelectItem key={animal.key}>{animal.label}</SelectItem>
+        ))}
+      </Select>
       {/* <div className="flex flex-col">
         <span className="mb-3">Image</span>
         <Image
@@ -41,6 +65,7 @@ export const ShareLink: React.FC<IShareLink> = (props) => {
           width={300}
         />
       </div> */}
+
       <div className="py-2"></div>
       <Button type="submit">Share</Button>
     </Form>
