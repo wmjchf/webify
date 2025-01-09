@@ -42,15 +42,18 @@ export const Header = () => {
       </div>
       <div className={styles.middle}></div>
       <div className={classNames(styles.right, "flex items-center gap-2")}>
-        <Button
-          startContent={<i className="iconfont icon-tianjia"></i>}
-          // size="sm"
-          variant="light"
-        >
-          <Link href="/create">Share</Link>
-        </Button>
-        {/* <WalletLogin></WalletLogin> */}
-        <Dropdown>
+        <Link href="/create">
+          <Button
+            startContent={<i className="iconfont icon-tianjia"></i>}
+            // size="sm"
+            variant="light"
+          >
+            Share
+          </Button>
+        </Link>
+
+        <WalletLogin></WalletLogin>
+        {/* <Dropdown>
           <DropdownTrigger>
             <Avatar
               src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
@@ -82,7 +85,7 @@ export const Header = () => {
               Log Out
             </DropdownItem>
           </DropdownMenu>
-        </Dropdown>
+        </Dropdown> */}
         {/* <EmailLogin></EmailLogin> */}
       </div>
     </div>

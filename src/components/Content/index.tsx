@@ -19,11 +19,10 @@ export const Content: React.FC<IContent> = (props) => {
         <div
           className={classNames(
             styles.right_main,
-            "px-6 py-3 flex gap-lg w-full pb-xl"
+            "px-6 py-3 flex justify-center"
           )}
         >
-          <div className="w-full flex-[1] min-w-0">{children}</div>
-          <div className="w-[316px] min-w-[316px]"></div>
+          <div className="w-full max-w-screen-lg">{children}</div>
         </div>
       </div>
     </div>
