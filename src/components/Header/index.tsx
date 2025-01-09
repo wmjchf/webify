@@ -46,6 +46,7 @@ export const Header = () => {
           <Button
             startContent={<i className="iconfont icon-tianjia"></i>}
             // size="sm"
+            color="danger"
             variant="light"
           >
             Share

@@ -67,7 +67,9 @@ export const ShareLink: React.FC<IShareLink> = (props) => {
       </div> */}
 
       <div className="py-2"></div>
-      <Button type="submit">Share</Button>
+      <Button type="submit" color="danger">
+        Share
+      </Button>
     </Form>
   );
 };
