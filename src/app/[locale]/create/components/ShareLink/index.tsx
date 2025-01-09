@@ -44,6 +44,7 @@ export const ShareLink: React.FC<IShareLink> = (props) => {
         labelPlacement="outside"
         placeholder="parse title"
         disabled
+        isRequired
       />
       <div className="py-1"></div>
       <Select
