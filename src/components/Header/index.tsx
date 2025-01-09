@@ -52,8 +52,8 @@ export const Header = () => {
           </Button>
         </Link>
 
-        <WalletLogin></WalletLogin>
-        {/* <Dropdown>
+        {/* <WalletLogin></WalletLogin> */}
+        <Dropdown>
           <DropdownTrigger>
             <Avatar
               src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
@@ -73,6 +73,9 @@ export const Header = () => {
             <DropdownItem
               key="setting"
               startContent={<i className={"iconfont icon-shezhi text-5xl"} />}
+              onPress={() => {
+                push("/setting");
+              }}
             >
               Setting
             </DropdownItem>
@@ -85,7 +88,7 @@ export const Header = () => {
               Log Out
             </DropdownItem>
           </DropdownMenu>
-        </Dropdown> */}
+        </Dropdown>
         {/* <EmailLogin></EmailLogin> */}
       </div>
     </div>

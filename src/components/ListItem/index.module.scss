@@ -1,0 +1,26 @@
+.listItme {
+  .desc {
+    color: #576f76;
+  }
+  .right {
+    .right_container {
+      width: 25px;
+      height: 25px;
+      i {
+        position: relative;
+        left: 1px;
+      }
+    }
+  }
+  &:hover {
+    .right {
+      .right_container {
+        background-color: red;
+        border-radius: 50%;
+        i {
+          color: #fff;
+        }
+      }
+    }
+  }
+}
