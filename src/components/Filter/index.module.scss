@@ -1,0 +1,12 @@
+.filter {
+  .title {
+    color: #333;
+  }
+  .content {
+    span {
+      &.custom {
+        color: #666;
+      }
+    }
+  }
+}
