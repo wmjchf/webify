@@ -13,7 +13,12 @@ interface INav {}
 export const Nav: React.FC<INav> = (props) => {
   const path = usePathname();
   return (
-    <div className={classNames(styles.nav)}>
+    <div
+      className={classNames(
+        styles.nav,
+        "h-full bg-white fixed top-14 left-0 z-10"
+      )}
+    >
       <div className={classNames(styles.nav_common, "p-3")}>
         <div>
           <IconItem

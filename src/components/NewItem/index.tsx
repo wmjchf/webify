@@ -1,8 +1,8 @@
 import React from "react";
 import classNames from "classnames";
-
+import Image from "next/image";
 import styles from "./index.module.scss";
-import { Avatar, Image } from "@nextui-org/react";
+import { Avatar } from "@nextui-org/react";
 import { Share } from "./components/Share";
 import { Collection } from "./components/Collection";
 import { LaterRead } from "./components/LaterRead";
@@ -22,15 +22,20 @@ export const NewsItem: React.FC<INewsItem> = (props) => {
         <Image
           alt="NextUI hero Image"
           src="https://nextui.org/images/hero-card-complete.jpeg"
-          width={300}
+          width={102}
+          height={76}
+          className="rounded-md overflow-hidden"
         />
       </div>
       <div className={classNames(styles.right, "flex flex-col gap-3")}>
         <div className={classNames(styles.one, "flex items-center gap-2")}>
           <div className={classNames(styles.avatar, "flex items-center gap-2")}>
-            <Avatar
-              src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
-              size="sm"
+            <Image
+              src="https://nextui.org/images/hero-card-complete.jpeg"
+              alt=""
+              width={50}
+              height={50}
+              className="rounded-full overflow-hidden"
             />
             <span className="text-xs font-semibold">金色财经</span>
           </div>

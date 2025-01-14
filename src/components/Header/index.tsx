@@ -24,7 +24,7 @@ export const Header = () => {
       id="header"
       className={classNames(
         styles.header,
-        "flex w-full h-14 px-2.5 justify-between"
+        "flex w-full h-14 px-2.5 justify-between fixed top-0 left-0 bg-white z-20"
       )}
     >
       <div

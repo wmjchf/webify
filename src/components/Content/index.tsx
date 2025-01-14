@@ -11,7 +11,7 @@ interface IContent {
 export const Content: React.FC<IContent> = (props) => {
   const { children } = props;
   return (
-    <div className={classNames(styles.content)}>
+    <div className={classNames(styles.content, "pt-14")}>
       <div className={classNames(styles.left, "float-left")}>
         <Nav></Nav>
       </div>

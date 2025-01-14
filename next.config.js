@@ -9,6 +9,10 @@ const nextConfig = {
     config.externals.push("pino-pretty", "lokijs", "encoding");
     return config;
   },
+  images: {
+    domains: ["nextui.org"],
+    unoptimized: true,
+  },
 };
 
 module.exports = withNextIntl(nextConfig);

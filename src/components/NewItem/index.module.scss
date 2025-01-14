@@ -4,11 +4,15 @@
     background-color: #f5f8f9;
     // background-color: #181c1f;
   }
-  .left {
-    width: 200px;
-  }
   .right {
     .one {
+      .avatar {
+        img {
+          width: 30px;
+          height: 30px;
+          object-fit: cover;
+        }
+      }
       .dot {
         width: 2px;
         height: 2px;
