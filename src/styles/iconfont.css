@@ -1,10 +1,10 @@
 @font-face {
   font-family: "iconfont"; /* Project id 4804718 */
-  src: url("//at.alicdn.com/t/c/font_4804718_v5bnjwhuvjp.woff2?t=1736411769370")
+  src: url("//at.alicdn.com/t/c/font_4804718_uym1tbmp9th.woff2?t=1736849044855")
       format("woff2"),
-    url("//at.alicdn.com/t/c/font_4804718_v5bnjwhuvjp.woff?t=1736411769370")
+    url("//at.alicdn.com/t/c/font_4804718_uym1tbmp9th.woff?t=1736849044855")
       format("woff"),
-    url("//at.alicdn.com/t/c/font_4804718_v5bnjwhuvjp.ttf?t=1736411769370")
+    url("//at.alicdn.com/t/c/font_4804718_uym1tbmp9th.ttf?t=1736849044855")
       format("truetype");
 }
 
@@ -14,6 +14,10 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-sousuo:before {
+  content: "\e60a";
 }
 
 .icon-jiantou_xiangshang:before {

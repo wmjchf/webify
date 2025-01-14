@@ -9,6 +9,7 @@ import {
   DropdownItem,
   DropdownMenu,
   DropdownTrigger,
+  Input,
 } from "@nextui-org/react";
 
 import { Link, useRouter } from "../../i18n/routing";
@@ -40,7 +41,14 @@ export const Header = () => {
           alt=""
         ></Image>
       </div>
-      <div className={styles.middle}></div>
+      <div className={classNames(styles.middle, "h-full flex items-center")}>
+        <Input
+          label=""
+          placeholder="search"
+          className="w-96"
+          startContent={<i className="iconfont icon-sousuo"></i>}
+        />
+      </div>
       <div className={classNames(styles.right, "flex items-center gap-2")}>
         <Link href="/create">
           <Button

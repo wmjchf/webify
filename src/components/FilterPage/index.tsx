@@ -27,22 +27,23 @@ export const animals2 = [
   { value: "ethereum", label: "ethereum" },
   { value: "elephant", label: "Elephant" },
 ];
+//flex flex-col gap-4
 export const FilterPage: React.FC<IFilterPage> = (props) => {
   return (
-    <div className={classNames(styles.filterPage, "flex flex-col gap-4")}>
-      <Filter title="color" data={animals}></Filter>
+    <div className={classNames(styles.filterPage, "flex gap-2")}>
+      {/* <Filter title="color" data={animals}></Filter>
       <Filter title="tag" data={animals1}></Filter>
-      <Filter title="source" data={animals2}></Filter>
-      {/* <Select className="max-w-xs" label="Source" placeholder="Choose Source">
+      <Filter title="source" data={animals2}></Filter> */}
+      <Select className="max-w-xs" label="Source" placeholder="Choose Source">
         {animals.map((animal) => (
-          <SelectItem key={animal.key}>{animal.label}</SelectItem>
+          <SelectItem key={animal.value}>{animal.label}</SelectItem>
         ))}
       </Select>
       <Select className="max-w-xs" label="Tag" placeholder="Choose Tag">
         {animals.map((animal) => (
-          <SelectItem key={animal.key}>{animal.label}</SelectItem>
+          <SelectItem key={animal.value}>{animal.label}</SelectItem>
         ))}
-      </Select> */}
+      </Select>
     </div>
   );
 };
