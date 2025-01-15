@@ -34,12 +34,26 @@ export const FilterPage: React.FC<IFilterPage> = (props) => {
       {/* <Filter title="color" data={animals}></Filter>
       <Filter title="tag" data={animals1}></Filter>
       <Filter title="source" data={animals2}></Filter> */}
-      <Select className="max-w-xs" label="Source" placeholder="Choose Source">
+      <Select
+        className="max-w-xs rounded-full overflow-hidden"
+        placeholder="Choose Type"
+      >
         {animals.map((animal) => (
           <SelectItem key={animal.value}>{animal.label}</SelectItem>
         ))}
       </Select>
-      <Select className="max-w-xs" label="Tag" placeholder="Choose Tag">
+      <Select
+        className="max-w-xs rounded-full overflow-hidden"
+        placeholder="Choose Source"
+      >
+        {animals.map((animal) => (
+          <SelectItem key={animal.value}>{animal.label}</SelectItem>
+        ))}
+      </Select>
+      <Select
+        className="max-w-xs rounded-full overflow-hidden"
+        placeholder="Choose Tag"
+      >
         {animals.map((animal) => (
           <SelectItem key={animal.value}>{animal.label}</SelectItem>
         ))}

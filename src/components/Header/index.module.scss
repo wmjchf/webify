@@ -1,6 +1,19 @@
 .header {
   border-bottom: solid 1px #cdcdcd;
   // border-bottom: solid 1px #ffffff33;
-  .left {
+  .right {
+    .avatar {
+      width: 30px;
+      height: 30px;
+      object-fit: cover;
+      border-radius: 99999px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+  }
+  .middle {
+    input {
+      width: 32rem;
+    }
   }
 }

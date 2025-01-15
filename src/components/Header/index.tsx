@@ -45,7 +45,7 @@ export const Header = () => {
         <Input
           label=""
           placeholder="search"
-          className="w-96"
+          className="rounded-full overflow-hidden border-solid border-2 border-indigo-600"
           startContent={<i className="iconfont icon-sousuo"></i>}
         />
       </div>
@@ -61,12 +61,15 @@ export const Header = () => {
           </Button>
         </Link>
 
-        <WalletLogin></WalletLogin>
-        {/* <Dropdown>
+        {/* <WalletLogin></WalletLogin> */}
+        <Dropdown>
           <DropdownTrigger>
-            <Avatar
-              src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
-              size="sm"
+            <Image
+              alt="NextUI hero Image"
+              src="https://nextui.org/images/hero-card-complete.jpeg"
+              width={102}
+              height={76}
+              className={classNames(styles.avatar)}
             />
           </DropdownTrigger>
           <DropdownMenu aria-label="Dropdown menu with icons" variant="faded">
@@ -97,7 +100,7 @@ export const Header = () => {
               Log Out
             </DropdownItem>
           </DropdownMenu>
-        </Dropdown> */}
+        </Dropdown>
         {/* <EmailLogin></EmailLogin> */}
       </div>
     </div>

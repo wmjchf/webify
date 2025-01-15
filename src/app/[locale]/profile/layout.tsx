@@ -1,7 +1,7 @@
 import { Avatar, Button } from "@nextui-org/react";
 import styles from "./index.module.scss";
 import classNames from "classnames";
-import { Link } from "../../../i18n/routing";
+import Image from "next/image";
 import { Nav } from "./Nav";
 function Page({ children }: { children: React.ReactNode }) {
   return (
@@ -10,10 +10,12 @@ function Page({ children }: { children: React.ReactNode }) {
         className={classNames(styles.user, "flex items-center justify-between")}
       >
         <div className="flex gap-5 shrink-0 flex-1">
-          <Avatar
-            className="shrink-0 mt-2.5"
-            isBordered
-            src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
+          <Image
+            alt="NextUI hero Image"
+            src="https://nextui.org/images/hero-card-complete.jpeg"
+            width={102}
+            height={76}
+            className={classNames(styles.avatar, "shrink-0")}
           />
           <div className="flex flex-col">
             <span className="text-lg font-semibold">Own-Risk2535</span>

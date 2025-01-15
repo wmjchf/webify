@@ -49,7 +49,7 @@ export const NewsItem: React.FC<INewsItem> = (props) => {
             free today.
           </span>
         </div>
-        <div className={classNames(styles.three)}>
+        <div className={classNames(styles.three, "flex items-center gap-2")}>
           <Vote></Vote>
           <Share></Share>
           <Collection></Collection>

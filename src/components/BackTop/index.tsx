@@ -12,8 +12,7 @@ export const BackTop = () => {
         color="danger"
         radius="full"
         onPress={() => {
-          const odiv = document.getElementById("rightMain");
-          odiv?.scrollTo({
+          window.scrollTo({
             top: 0,
             behavior: "smooth",
           });
