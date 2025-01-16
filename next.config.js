@@ -5,6 +5,15 @@ const withNextIntl = createNextIntlPlugin();
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  async rewrites() {
+    console.log("ewrewrewrwe");
+    return [
+      {
+        source: "/api/:path*",
+        destination: "http://96a7-120-234-128-190.ngrok-free.app/:path*",
+      },
+    ];
+  },
   webpack: (config) => {
     config.externals.push("pino-pretty", "lokijs", "encoding");
     return config;

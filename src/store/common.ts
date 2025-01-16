@@ -3,19 +3,28 @@ import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 
 type Action = {
-  setName: (name: string) => void;
+  setToken: (token?: string) => void;
+  logout: () => void;
 };
 
 interface State {
-  name: string;
+  token: string | null;
 }
 
 export const useCommonStore = create<State & Action>()(
   immer((set) => ({
-    name: "demo",
-    setName: (name) =>
+    token: null,
+    setToken: (token) =>
       set((state) => {
-        state.name = name;
+        if (token) {
+          localStorage.setItem("token", token);
+        }
+        state.token = localStorage.getItem("token");
+      }),
+    logout: () =>
+      set((state) => {
+        localStorage.removeItem("token");
+        state.token = null;
       }),
   }))
 );

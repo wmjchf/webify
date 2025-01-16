@@ -24,7 +24,8 @@ export const ConnectWallet: React.FC<IConnectWallet> = (props) => {
           }
 
           if (account.address) {
-            return <></>;
+            // return <></>;
+            return <> {children(openConnectModal)}</>;
             // return <div className="w-full">{children}</div>;
           }
         }}

@@ -16,10 +16,27 @@ import { Link, useRouter } from "../../i18n/routing";
 
 import { WalletLogin } from "../Login/WalletLogin";
 import styles from "./index.module.scss";
+import { ConfirmWallet } from "../Login/ConfirmWallet";
+import { VerifyWallet } from "../Login/VerifyWallet";
+import { useCommonStore } from "../../store/common";
+import { useEffect } from "react";
+import { useDisconnect } from "wagmi";
+
 // import { ConnectWallet } from "../Login/ConnectWallet";
 
 export const Header = () => {
-  const { push } = useRouter();
+  const { setToken, token, logout } = useCommonStore();
+  const { disconnect } = useDisconnect({
+    mutation: {
+      onSuccess() {
+        logout();
+      },
+    },
+  });
+  useEffect(() => {
+    setToken();
+  }, []);
+
   return (
     <div
       id="header"
@@ -61,46 +78,59 @@ export const Header = () => {
           </Button>
         </Link>
 
-        {/* <WalletLogin></WalletLogin> */}
-        <Dropdown>
-          <DropdownTrigger>
-            <Image
-              alt="NextUI hero Image"
-              src="https://nextui.org/images/hero-card-complete.jpeg"
-              width={102}
-              height={76}
-              className={classNames(styles.avatar)}
-            />
-          </DropdownTrigger>
-          <DropdownMenu aria-label="Dropdown menu with icons" variant="faded">
-            <DropdownItem
-              key="profile"
-              startContent={<i className={"iconfont icon-Profile text-5xl"} />}
-              onPress={() => {
-                push("/profile");
-              }}
-            >
-              Profile
-            </DropdownItem>
-            <DropdownItem
-              key="setting"
-              startContent={<i className={"iconfont icon-shezhi text-5xl"} />}
-              onPress={() => {
-                push("/setting");
-              }}
-            >
-              Setting
-            </DropdownItem>
-            <DropdownItem
-              key="logout"
-              startContent={
-                <i className={"iconfont icon-tuichudenglu text-5xl"} />
-              }
-            >
-              Log Out
-            </DropdownItem>
-          </DropdownMenu>
-        </Dropdown>
+        {token ? (
+          <Dropdown>
+            <DropdownTrigger>
+              <Image
+                alt="NextUI hero Image"
+                src="https://nextui.org/images/hero-card-complete.jpeg"
+                width={102}
+                height={76}
+                className={classNames(styles.avatar)}
+              />
+            </DropdownTrigger>
+            <DropdownMenu aria-label="Dropdown menu with icons" variant="faded">
+              <DropdownItem
+                key="profile"
+                startContent={
+                  <i className={"iconfont icon-Profile text-5xl"} />
+                }
+                onPress={() => {
+                  // push("/profile");
+                }}
+              >
+                Profile
+              </DropdownItem>
+              <DropdownItem
+                key="setting"
+                startContent={<i className={"iconfont icon-shezhi text-5xl"} />}
+                onPress={() => {
+                  // push("/setting");
+                }}
+              >
+                Setting
+              </DropdownItem>
+              <DropdownItem
+                key="logout"
+                startContent={
+                  <i className={"iconfont icon-tuichudenglu text-5xl"} />
+                }
+                onPress={() => {
+                  disconnect();
+                }}
+              >
+                Log Out
+              </DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
+        ) : (
+          <>
+            <WalletLogin></WalletLogin>
+            <ConfirmWallet></ConfirmWallet>
+          </>
+        )}
+        {/* <VerifyWallet></VerifyWallet> */}
+
         {/* <EmailLogin></EmailLogin> */}
       </div>
     </div>

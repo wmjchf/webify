@@ -1,4 +1,4 @@
-const baseUrl = "http://127.0.0.1:7001/api";
+const baseUrl = "/api";
 
 const requestInterceptor = (options: RequestInit) => {
   // 在这里可以添加 token 或者其他统一的请求设置
@@ -17,7 +17,6 @@ const requestInterceptor = (options: RequestInit) => {
   return options;
 };
 const responseInterceptor = async (response: Response) => {
-  console.log(response, "erwrewrwe");
   if (response.status === 501) {
     // 重定向到登录页面
     // window.location.href = "/login";

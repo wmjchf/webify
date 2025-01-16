@@ -1,11 +1,14 @@
+"use clinet";
 import classNames from "classnames";
 import styles from "./index.module.scss";
 import { Button } from "@nextui-org/react";
 import { ConnectWallet } from "../ConnectWallet";
+import { VerifyWallet } from "../VerifyWallet";
 import { useTranslations } from "next-intl";
 
 export const WalletLogin = () => {
   const t = useTranslations("home");
+
   return (
     <div className={classNames(styles.wallet_login)}>
       <ConnectWallet>
@@ -22,6 +25,8 @@ export const WalletLogin = () => {
           );
         }}
       </ConnectWallet>
+
+      {/* <VerifyWallet></VerifyWallet> */}
     </div>
   );
 };
