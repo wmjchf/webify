@@ -1,10 +1,11 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import classNames from "classnames";
 import { Select, SelectItem } from "@nextui-org/react";
 import styles from "./index.module.scss";
 import { Filter } from "../Filter";
+import { useCommonStore } from "../../store/common";
 
 interface IFilterPage {}
 export const animals = [
@@ -29,6 +30,11 @@ export const animals2 = [
 ];
 //flex flex-col gap-4
 export const FilterPage: React.FC<IFilterPage> = (props) => {
+  const { getSourceList, sourceList, getTypeList, typeList } = useCommonStore();
+  useEffect(() => {
+    getSourceList();
+    getTypeList();
+  }, []);
   return (
     <div className={classNames(styles.filterPage, "flex gap-2")}>
       {/* <Filter title="color" data={animals}></Filter>
@@ -38,17 +44,21 @@ export const FilterPage: React.FC<IFilterPage> = (props) => {
         className="max-w-xs rounded-full overflow-hidden"
         placeholder="Choose Type"
       >
-        {animals.map((animal) => (
-          <SelectItem key={animal.value}>{animal.label}</SelectItem>
-        ))}
+        <SelectItem key={-1}>全部</SelectItem>
+        {sourceList &&
+          sourceList.map((animal) => (
+            <SelectItem key={animal.id}>{animal.name}</SelectItem>
+          ))}
       </Select>
       <Select
         className="max-w-xs rounded-full overflow-hidden"
         placeholder="Choose Source"
       >
-        {animals.map((animal) => (
-          <SelectItem key={animal.value}>{animal.label}</SelectItem>
-        ))}
+        <SelectItem key={-1}>全部</SelectItem>
+        {typeList &&
+          typeList.map((animal) => (
+            <SelectItem key={animal.id}>{animal.name}</SelectItem>
+          ))}
       </Select>
       <Select
         className="max-w-xs rounded-full overflow-hidden"

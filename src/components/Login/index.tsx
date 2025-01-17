@@ -1,0 +1,91 @@
+"use client";
+
+import {
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
+} from "@nextui-org/react";
+import classNames from "classnames";
+import Image from "next/image";
+import React, { useEffect } from "react";
+import styles from "./index.module.scss";
+import { WalletLogin } from "./WalletLogin";
+import { ConfirmWallet } from "./ConfirmWallet";
+import { useDisconnect } from "wagmi";
+import { useCommonStore } from "../../store/common";
+import { useRouter } from "../../i18n/routing";
+
+interface ILogin {
+  token?: string;
+}
+export const Login: React.FC<ILogin> = (props) => {
+  const { token } = props;
+  const { push } = useRouter();
+  const { logout, token: localToken, getUserInfo } = useCommonStore();
+  const { disconnect } = useDisconnect({
+    mutation: {
+      onSuccess() {
+        logout();
+      },
+    },
+  });
+
+  useEffect(() => {
+    token && getUserInfo();
+  }, []);
+
+  return (
+    <>
+      {token || localToken ? (
+        <Dropdown>
+          <DropdownTrigger>
+            <Image
+              alt="NextUI hero Image"
+              src="https://nextui.org/images/hero-card-complete.jpeg"
+              width={102}
+              height={76}
+              className={classNames(styles.avatar)}
+            />
+          </DropdownTrigger>
+          <DropdownMenu aria-label="Dropdown menu with icons" variant="faded">
+            <DropdownItem
+              key="profile"
+              startContent={<i className={"iconfont icon-Profile text-5xl"} />}
+              onPress={() => {
+                push("/profile");
+              }}
+            >
+              Profile
+            </DropdownItem>
+            <DropdownItem
+              key="setting"
+              startContent={<i className={"iconfont icon-shezhi text-5xl"} />}
+              onPress={() => {
+                push("/setting");
+              }}
+            >
+              Setting
+            </DropdownItem>
+            <DropdownItem
+              key="logout"
+              startContent={
+                <i className={"iconfont icon-tuichudenglu text-5xl"} />
+              }
+              onPress={() => {
+                disconnect();
+              }}
+            >
+              Log Out
+            </DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
+      ) : (
+        <>
+          <WalletLogin></WalletLogin>
+          <ConfirmWallet></ConfirmWallet>
+        </>
+      )}
+    </>
+  );
+};

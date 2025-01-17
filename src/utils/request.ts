@@ -1,3 +1,5 @@
+import Cookies from "js-cookie";
+
 const baseUrl = "/api";
 
 const requestInterceptor = (options: RequestInit) => {
@@ -6,13 +8,14 @@ const requestInterceptor = (options: RequestInit) => {
 
   // 确保只在客户端访问 localStorage
   if (typeof window !== "undefined") {
-    const token = localStorage.getItem("token");
+    const token = Cookies.get("token");
     token && Object.assign(headers, { Authorization: token });
   }
 
   options.headers = {
     ...options.headers,
     ...headers,
+    "ngrok-skip-browser-warning": true,
   };
   return options;
 };
