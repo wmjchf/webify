@@ -25,6 +25,7 @@ export const EditDescription = () => {
     try {
       const result = await updateUser({ bio });
       if (result.code === 200) {
+        getUserInfo();
         onClose();
       }
     } catch (error) {}

@@ -25,12 +25,7 @@ interface ILogin {
 export const Login: React.FC<ILogin> = (props) => {
   const { token, user } = props;
   const { push } = useRouter();
-  const {
-    logout,
-    token: localToken,
-    getUserInfo,
-    setUserInfo,
-  } = useCommonStore();
+  const { logout, token: localToken, setUserInfo } = useCommonStore();
   const { disconnect } = useDisconnect({
     mutation: {
       onSuccess() {

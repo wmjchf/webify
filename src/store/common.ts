@@ -71,10 +71,6 @@ export const useCommonStore = create<State & Action>()(
 
     user: null,
     getUserInfo: async () => {
-      const { user } = get();
-      if (user) {
-        return;
-      }
       const { data } = await getUserInfo();
 
       set((state) => {

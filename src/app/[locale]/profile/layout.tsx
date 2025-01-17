@@ -23,23 +23,23 @@ async function Page({
     });
     return;
   }
-  // let result = null;
-  // if (token) {
-  //   const data = await fetch(
-  //     "http://c135-120-234-128-190.ngrok-free.app/user/info/detail",
-  //     {
-  //       headers: {
-  //         Authorization: token,
-  //       },
-  //     }
-  //   );
-
-  //   console.log(data, "rewrwer");
-  // }
+  let user = null;
+  if (token) {
+    const resultJSON = await fetch(
+      "http://ffdf-120-234-128-190.ngrok-free.app/user/info/detail",
+      {
+        headers: {
+          Authorization: token,
+        },
+      }
+    );
+    const result = await resultJSON.json();
+    user = result.data;
+  }
 
   return (
     <div className={styles.page}>
-      <User></User>
+      <User user={user}></User>
       <div className={classNames(styles.router, "pt-5")}>
         <Nav></Nav>
         <div className={classNames(styles.router_content, "py-3")}>

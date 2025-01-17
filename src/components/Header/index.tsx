@@ -9,15 +9,23 @@ import { Link, useRouter } from "../../i18n/routing";
 import styles from "./index.module.scss";
 
 import { Login } from "../Login";
-import { getUserInfo } from "../../service/user";
 
 export const Header = async () => {
   const cookieStore = cookies();
   const token = cookieStore.get("token")?.value;
-  // const user = token && (await getServerUserInfo(token));
-
-  // console.log(user, "rewrwerw");
-
+  let user = null;
+  if (token) {
+    const resultJSON = await fetch(
+      "http://ffdf-120-234-128-190.ngrok-free.app/user/info/detail",
+      {
+        headers: {
+          Authorization: token,
+        },
+      }
+    );
+    const result = await resultJSON.json();
+    user = result.data;
+  }
   return (
     <div
       id="header"
@@ -59,7 +67,7 @@ export const Header = async () => {
             Share
           </Button>
         </Link>
-        <Login token={token}></Login>
+        <Login token={token} user={user}></Login>
 
         {/* <EmailLogin></EmailLogin> */}
       </div>

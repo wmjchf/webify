@@ -7,26 +7,33 @@ import { DEFAULT_AVATAR } from "../../../../../constant/url";
 import { Button } from "@nextui-org/react";
 
 import { IUser } from "../../../../../service/user";
+import { useCommonStore } from "../../../../../store/common";
 
 interface IUserProps {
   user?: IUser;
 }
 export const User: React.FC<IUserProps> = (props) => {
   const { user } = props;
+  const { user: clientUser } = useCommonStore();
+  console.log(clientUser, "erwrewrwerwe");
+  const merge = clientUser || user;
   return (
     <div
-      className={classNames(styles.user, "flex items-center justify-between")}
+      className={classNames(
+        styles.user,
+        "flex items-center justify-between gap-2"
+      )}
     >
       <div className="flex gap-5 shrink-0 flex-1">
         <Image
           alt="NextUI hero Image"
-          src={user?.pictureUrl || DEFAULT_AVATAR}
+          src={merge?.pictureUrl || DEFAULT_AVATAR}
           width={102}
           height={76}
           className={classNames(styles.avatar, "shrink-0")}
         />
         <div className="flex flex-col">
-          <span className="text-lg font-semibold">{user?.nickname}</span>
+          <span className="text-lg font-semibold">{merge?.nickname}</span>
           <span className="text-sm">{user?.bio}</span>
         </div>
       </div>

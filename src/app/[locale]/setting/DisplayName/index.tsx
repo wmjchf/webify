@@ -1,5 +1,4 @@
 "use client";
-import styles from "./index.module.scss";
 import classNames from "classnames";
 import { ListItem } from "../../../../components/ListItem";
 import {
@@ -14,7 +13,7 @@ import {
 } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import { useCommonStore } from "../../../../store/common";
-import { updateUser } from "../../../../service/user";
+import { updateUser, getUserInfo } from "../../../../service/user";
 
 export const DisplayName = () => {
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
@@ -25,6 +24,7 @@ export const DisplayName = () => {
     try {
       const result = await updateUser({ nickname });
       if (result.code === 200) {
+        getUserInfo();
         onClose();
       }
     } catch (error) {}
