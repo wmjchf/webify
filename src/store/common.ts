@@ -75,7 +75,10 @@ export const useCommonStore = create<State & Action>()(
         return;
       }
       const { data } = await getUserInfo();
-      console.log(data, "rewrwerw");
+
+      set((state) => {
+        state.user = data;
+      });
     },
   }))
 );

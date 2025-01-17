@@ -12,6 +12,7 @@ interface ILoginParams {
   loginType: LOGIN_TYPE;
   signature: string;
   message: string;
+  nonce: string;
 }
 
 export const login = (data: ILoginParams) => {
@@ -43,7 +44,17 @@ export const updateUser = (data: IUpdateUserParams) => {
   });
 };
 
-export interface IUser {}
+export interface IUser {
+  bio?: string;
+  email?: string;
+  facebook?: string;
+  fansCount?: string;
+
+  followCount?: string;
+  nickname?: string;
+  pictureUrl?: string;
+  walletAddress?: string;
+}
 export const getUserInfo = (userId?: string) => {
   return fetcher<IUser>(
     userId ? `/user/info/detail/{userId}` : `/user/info/detail`

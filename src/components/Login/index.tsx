@@ -15,6 +15,7 @@ import { ConfirmWallet } from "./ConfirmWallet";
 import { useDisconnect } from "wagmi";
 import { useCommonStore } from "../../store/common";
 import { useRouter } from "../../i18n/routing";
+import { DEFAULT_AVATAR } from "../../constant/url";
 
 interface ILogin {
   token?: string;
@@ -22,7 +23,7 @@ interface ILogin {
 export const Login: React.FC<ILogin> = (props) => {
   const { token } = props;
   const { push } = useRouter();
-  const { logout, token: localToken, getUserInfo } = useCommonStore();
+  const { logout, token: localToken, getUserInfo, user } = useCommonStore();
   const { disconnect } = useDisconnect({
     mutation: {
       onSuccess() {
@@ -42,7 +43,7 @@ export const Login: React.FC<ILogin> = (props) => {
           <DropdownTrigger>
             <Image
               alt="NextUI hero Image"
-              src="https://nextui.org/images/hero-card-complete.jpeg"
+              src={user?.pictureUrl || DEFAULT_AVATAR}
               width={102}
               height={76}
               className={classNames(styles.avatar)}

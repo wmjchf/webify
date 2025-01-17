@@ -71,7 +71,8 @@ export const ConfirmWallet = () => {
         const { data: token } = await login({
           loginType: 1,
           signature,
-          message: nonceRef.current,
+          nonce: nonceRef.current,
+          message,
         });
         setSigning(false);
         setToken(token);
