@@ -67,7 +67,7 @@ export const ConfirmWallet = () => {
         const signature = await signMessageAsync({
           message,
         });
-        console.log(message);
+
         const { data: token } = await login({
           loginType: 1,
           signature,

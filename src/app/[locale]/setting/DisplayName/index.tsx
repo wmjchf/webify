@@ -10,11 +10,32 @@ import {
   ModalFooter,
   Button,
   useDisclosure,
+  Input,
 } from "@nextui-org/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useCommonStore } from "../../../../store/common";
+import { updateUser } from "../../../../service/user";
 
 export const DisplayName = () => {
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
+  const { user, getUserInfo } = useCommonStore();
+  const [nickname, setNickname] = useState(user?.nickname);
+
+  const handleUpdateUser = async () => {
+    try {
+      const result = await updateUser({ nickname });
+      if (result.code === 200) {
+        onClose();
+      }
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    if (user?.nickname) {
+      setNickname(user?.nickname);
+    }
+  }, [user]);
+
   return (
     <>
       <ListItem
@@ -24,39 +45,44 @@ export const DisplayName = () => {
       >
         <i className="iconfont icon-icon_arrow_right"></i>
       </ListItem>
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange} className="rounded">
         <ModalContent>
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1">
-                Modal Title
+                DISPLAY NAME
               </ModalHeader>
               <ModalBody>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Nullam pulvinar risus non risus hendrerit venenatis.
-                  Pellentesque sit amet hendrerit risus, sed porttitor quam.
-                </p>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Nullam pulvinar risus non risus hendrerit venenatis.
-                  Pellentesque sit amet hendrerit risus, sed porttitor quam.
-                </p>
-                <p>
-                  Magna exercitation reprehenderit magna aute tempor cupidatat
-                  consequat elit dolor adipisicing. Mollit dolor eiusmod sunt ex
-                  incididunt cillum quis. Velit duis sit officia eiusmod Lorem
-                  aliqua enim laboris do dolor eiusmod. Et mollit incididunt
-                  nisi consectetur esse laborum eiusmod pariatur proident Lorem
-                  eiusmod et. Culpa deserunt nostrud ad veniam.
-                </p>
+                <Input
+                  value={nickname}
+                  label=""
+                  placeholder="display name"
+                  className="rounded overflow-hidden"
+                  onChange={(event) => {
+                    setNickname(event.target.value);
+                  }}
+                />
               </ModalBody>
               <ModalFooter>
-                <Button color="danger" variant="light" onPress={onClose}>
-                  Close
+                <Button
+                  color="danger"
+                  variant="bordered"
+                  className={classNames("rounded")}
+                  size="sm"
+                  onPress={() => {
+                    onClose();
+                  }}
+                >
+                  CANCEL
                 </Button>
-                <Button color="primary" onPress={onClose}>
-                  Action
+                <Button
+                  color="danger"
+                  onPress={handleUpdateUser}
+                  size="sm"
+                  className={classNames("rounded")}
+                  isLoading={false}
+                >
+                  CONFIRM
                 </Button>
               </ModalFooter>
             </>

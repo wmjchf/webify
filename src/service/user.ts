@@ -60,3 +60,13 @@ export const getUserInfo = (userId?: string) => {
     userId ? `/user/info/detail/{userId}` : `/user/info/detail`
   );
 };
+
+export const getServerUserInfo = (token: string) => {
+  const headers = {};
+
+  token && Object.assign(headers, { Authorization: token });
+
+  return fetcher<IUser>(`/user/info/detail`, {
+    headers,
+  });
+};

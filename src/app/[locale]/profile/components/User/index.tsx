@@ -24,11 +24,7 @@ export const User = () => {
         />
         <div className="flex flex-col">
           <span className="text-lg font-semibold">{user?.nickname}</span>
-          <span className="text-sm">
-            The 1st @ai16zdao and ElizaOS powered AI sex bot. $dildo. 3 hands
-            insane tek with decentralized dildo distribution system.
-            http://t.me/dildoaixyz
-          </span>
+          <span className="text-sm">{user?.bio}</span>
         </div>
       </div>
       <div className="shrink-0">
