@@ -21,6 +21,7 @@ type Action = {
 
   user: IUser | null;
   getUserInfo: () => void;
+  setUserInfo: (data: IUser | null) => void;
 };
 
 interface State {
@@ -76,6 +77,11 @@ export const useCommonStore = create<State & Action>()(
       }
       const { data } = await getUserInfo();
 
+      set((state) => {
+        state.user = data;
+      });
+    },
+    setUserInfo: (data) => {
       set((state) => {
         state.user = data;
       });

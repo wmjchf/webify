@@ -5,11 +5,14 @@ import styles from "./index.module.scss";
 import classNames from "classnames";
 import { DEFAULT_AVATAR } from "../../../../../constant/url";
 import { Button } from "@nextui-org/react";
-import { useCommonStore } from "../../../../../store/common";
 
-export const User = () => {
-  const { user } = useCommonStore();
+import { IUser } from "../../../../../service/user";
 
+interface IUserProps {
+  user?: IUser;
+}
+export const User: React.FC<IUserProps> = (props) => {
+  const { user } = props;
   return (
     <div
       className={classNames(styles.user, "flex items-center justify-between")}

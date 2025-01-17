@@ -61,12 +61,16 @@ export const getUserInfo = (userId?: string) => {
   );
 };
 
-export const getServerUserInfo = (token: string) => {
-  const headers = {};
+// export const getServerUserInfo = (token: string) => {
+//   const headers = {};
 
-  token && Object.assign(headers, { Authorization: token });
+//   token && Object.assign(headers, { Authorization: token });
 
-  return fetcher<IUser>(`/user/info/detail`, {
-    headers,
-  });
-};
+//   return fetcher<IUser>(
+//     `http://c135-120-234-128-190.ngrok-free.app/user/info/detail`,
+//     {
+//       headers,
+//     },
+//     true
+//   );
+// };

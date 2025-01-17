@@ -9,7 +9,7 @@ import { Link, useRouter } from "../../i18n/routing";
 import styles from "./index.module.scss";
 
 import { Login } from "../Login";
-import { getServerUserInfo, getUserInfo } from "../../service/user";
+import { getUserInfo } from "../../service/user";
 
 export const Header = async () => {
   const cookieStore = cookies();
