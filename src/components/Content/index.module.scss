@@ -3,7 +3,7 @@
 
   .left {
     width: 270px;
-    height: 100vh;
+    height: calc(100vh - 3.5rem);
     // border-right: solid 1px #ffffff33;
   }
   .right {

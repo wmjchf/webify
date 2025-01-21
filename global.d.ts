@@ -3,3 +3,8 @@ interface IResponse<T> {
   msg: string;
   data: T;
 }
+interface IPaginationResponse<T> {
+  count: number;
+  currentPage: string;
+  rows: T[];
+}

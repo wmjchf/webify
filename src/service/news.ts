@@ -20,8 +20,30 @@ export const getTypeList = () => {
   return fetcher<IGetTypeListItem[]>("/article/type/list");
 };
 
-export const getShareNewsList = () => {
-  return fetcher<{ id: number; name: string }[]>("/article/index/page");
+interface IGetShareNewsListParams {
+  title?: string;
+  articleSourceId?: string;
+  formTypeId?: number;
+  articleTypeIds?: number;
+  sort?: number;
+  pageSizes: number;
+  currentPage: number;
+}
+export interface INewsItem {
+  title: string;
+  url: string;
+  imageUrl: string;
+  intro: string;
+  likeCount: number;
+  dislikeCount: number;
+  id: string;
+  created: number;
+}
+export const getShareNewsList = (data: IGetShareNewsListParams) => {
+  return fetcher<IPaginationResponse<INewsItem>>("/article/index/page", {
+    method: "GET",
+    params: data,
+  });
 };
 
 export const likeOrDislike = () => {
@@ -37,9 +59,23 @@ export const collectShareNews = () => {
 export const readLater = () => {
   return fetcher<{ id: number; name: string }[]>("/article/later/{articleId}");
 };
-
-export const createShareNews = () => {
-  return fetcher<{ id: number; name: string }[]>("/article/create");
+interface ICreateShareNewsParams {
+  title: string;
+  imageUrl: string;
+  isVideo: number;
+  videoUrl: string;
+  url: string;
+  intro: string;
+  articleTypeIds: string;
+}
+export const createShareNews = (data: ICreateShareNewsParams) => {
+  return fetcher<string>("/article/create", {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "content-type": "application/json",
+    },
+  });
 };
 
 export const getReadLater = () => {

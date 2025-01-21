@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Form,
   Input,
@@ -7,10 +7,13 @@ import {
   Image,
   Select,
   SelectItem,
+  Textarea,
 } from "@nextui-org/react";
 import classNames from "classnames";
+import { createShareNews } from "../../../../../service/news";
 
 import styles from "./index.module.scss";
+import { useCommonStore } from "../../../../../store/common";
 
 interface IShareLink {}
 export const animals = [
@@ -20,16 +23,48 @@ export const animals = [
 ];
 export const ShareLink: React.FC<IShareLink> = (props) => {
   const [errors, setErrors] = useState({});
-  const onSubmit = (event: any) => {
+
+  const { getTypeList, typeList } = useCommonStore();
+  const [url, setUrl] = useState("");
+  const [title, setTitle] = useState("");
+  const [intro, setIntro] = useState("");
+  const [isVideo, setIsVideo] = useState(0);
+  const [videoUrl, setVideoUrl] = useState("");
+  const [articleTypeIds, setArticleTypeIds] = useState("");
+  useEffect(() => {
+    getTypeList();
+  }, []);
+
+  const onSubmit = async (event: any) => {
     event.preventDefault();
 
     const data = Object.fromEntries(new FormData(event.currentTarget));
 
-    if (!data.username) {
-      setErrors({ username: "Username is required" });
-
+    if (!data.url) {
+      setErrors({ url: "url is required" });
       return;
     }
+    if (!data.title) {
+      setErrors({ title: "title is required" });
+      return;
+    }
+
+    if (!data.articleTypeIds) {
+      setErrors({ articleTypeIds: "tags is required" });
+      return;
+    }
+
+    const result = createShareNews({
+      title,
+      imageUrl: "https://nextui.org/images/hero-card-complete.jpeg",
+      isVideo,
+      videoUrl,
+      url,
+      intro,
+      articleTypeIds,
+    });
+
+    console.log(result, "rewrwerw");
   };
   return (
     <Form
@@ -37,26 +72,56 @@ export const ShareLink: React.FC<IShareLink> = (props) => {
       validationErrors={errors}
       onSubmit={onSubmit}
     >
-      <Input label="Link URL" name="url" radius={"md"} isRequired />
+      <Input
+        label="Link URL"
+        name="url"
+        radius={"md"}
+        isRequired
+        onChange={(event) => {
+          setUrl(event.target.value);
+        }}
+      />
       <div className="py-4"></div>
       <Input
         label="Title"
+        name="title"
         labelPlacement="outside"
         placeholder="parse title"
-        disabled
         isRequired
+        onChange={(event) => {
+          setTitle(event.target.value);
+        }}
+      />
+      <div className="py-1"></div>
+      <Textarea
+        label="Description"
+        name="intro"
+        labelPlacement="outside"
+        placeholder="parse description"
+        onChange={(event) => {
+          setIntro(event.target.value);
+        }}
       />
       <div className="py-1"></div>
       <Select
         className="max-w-xs"
         label="Tags"
+        name="articleTypeIds"
         placeholder="Choose Tags"
         selectionMode="multiple"
         labelPlacement={"outside"}
+        isRequired
+        multiple
+        onChange={(event) => {
+          setArticleTypeIds(`,${event.target.value},`);
+        }}
       >
-        {animals.map((animal) => (
-          <SelectItem key={animal.key}>{animal.label}</SelectItem>
-        ))}
+        {typeList &&
+          typeList.map((animal) => (
+            <SelectItem key={animal.id} value={animal.id}>
+              {animal.name}
+            </SelectItem>
+          ))}
       </Select>
       {/* <div className="flex flex-col">
         <span className="mb-3">Image</span>

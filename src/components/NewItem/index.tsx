@@ -7,10 +7,15 @@ import { Share } from "./components/Share";
 import { Collection } from "./components/Collection";
 import { LaterRead } from "./components/LaterRead";
 import { Vote } from "./components/Vote";
+import { INewsItem } from "../../service/news";
+import { timeAgo } from "../../utils/time";
 
-interface INewsItem {}
+interface INewsItemPramas {
+  data: INewsItem;
+}
 
-export const NewsItem: React.FC<INewsItem> = (props) => {
+export const NewsItem: React.FC<INewsItemPramas> = (props) => {
+  const { data } = props;
   return (
     <div
       className={classNames(
@@ -21,7 +26,7 @@ export const NewsItem: React.FC<INewsItem> = (props) => {
       <div className={classNames(styles.left, "shrink-0")}>
         <Image
           alt="NextUI hero Image"
-          src="https://nextui.org/images/hero-card-complete.jpeg"
+          src={data.imageUrl}
           width={102}
           height={76}
           className="rounded-md overflow-hidden"
@@ -40,14 +45,12 @@ export const NewsItem: React.FC<INewsItem> = (props) => {
             <span className="text-xs font-semibold">金色财经</span>
           </div>
           <span className={classNames(styles.dot)}></span>
-          <span className={classNames(styles.time, "text-xs")}>1d ago</span>
+          <span className={classNames(styles.time, "text-xs")}>
+            {timeAgo(data.created)}
+          </span>
         </div>
         <div className={styles.two}>
-          <span className="text-base font-semibold">
-            Now inbox zero takes zero effort. Get fresh ideas, instant first
-            drafts, and helpful writing suggestions with Grammarly. Try it for
-            free today.
-          </span>
+          <span className="text-base font-semibold">{data.title}</span>
         </div>
         <div className={classNames(styles.three, "flex items-center gap-2")}>
           <Vote></Vote>

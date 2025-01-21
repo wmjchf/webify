@@ -2,7 +2,11 @@ import Cookies from "js-cookie";
 
 const baseUrl = "/api";
 
-const requestInterceptor = (options: RequestInit) => {
+interface CustomRequestInit extends RequestInit {
+  params?: Record<string, any>;
+}
+
+const requestInterceptor = (options: CustomRequestInit) => {
   // 在这里可以添加 token 或者其他统一的请求设置
   const headers = {};
 
@@ -44,10 +48,18 @@ const responseInterceptor = async (response: Response) => {
 };
 export const fetcher = async <T>(
   url: string,
-  options: RequestInit = {}
+  options: CustomRequestInit = {}
 ): Promise<IResponse<T>> => {
   const modifiedOptions = requestInterceptor(options);
-  const response = await fetch(`${baseUrl}${url}`, modifiedOptions);
+  let searchParams = "";
+  if (options.params) {
+    const str = new URLSearchParams(options.params).toString();
+    searchParams = `?${str}`;
+  }
+  const response = await fetch(
+    `${baseUrl}${url}${searchParams}`,
+    modifiedOptions
+  );
   await responseInterceptor(response);
   const result: IResponse<T> = await response.json();
 

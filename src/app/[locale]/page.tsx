@@ -4,26 +4,20 @@ import { FilterPage } from "../../components/FilterPage";
 import { NewsList } from "./components/NewsList";
 import styles from "./index.module.scss";
 
-function Page() {
+async function Page() {
   // const t = useTranslations("home");
-  const data = [
-    { id: 1 },
-    { id: 2 },
-    { id: 3 },
-    { id: 4 },
-    { id: 5 },
-    { id: 6 },
-    { id: 7 },
-    { id: 8 },
-    { id: 9 },
-    { id: 10 },
-  ];
 
+  const resultJSON = await fetch(
+    "http://da64-120-234-128-190.ngrok-free.app/article/index/page?pageSizes=10&currentPage=1"
+  );
+  const result = await resultJSON.json();
+  const data = result.data.rows;
+  const total = result.data.count;
   return (
     <div className={styles.page}>
       <FilterPage></FilterPage>
       <div className="py-2"></div>
-      <NewsList data={data}></NewsList>
+      <NewsList data={data} total={total}></NewsList>
     </div>
   );
 }

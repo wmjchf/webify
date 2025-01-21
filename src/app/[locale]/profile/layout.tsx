@@ -26,7 +26,7 @@ async function Page({
   let user = null;
   if (token) {
     const resultJSON = await fetch(
-      "http://ffdf-120-234-128-190.ngrok-free.app/user/info/detail",
+      "http://da64-120-234-128-190.ngrok-free.app/user/info/detail",
       {
         headers: {
           Authorization: token,
