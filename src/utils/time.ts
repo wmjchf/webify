@@ -1,7 +1,6 @@
 import dayjs from "dayjs";
 
 export function timeAgo(createdTime: number) {
-  console.log(createdTime, "erwrwe");
   const now = dayjs().unix();
 
   const timeDiff = now - createdTime; // 计算时间差，单位为毫秒

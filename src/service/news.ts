@@ -36,7 +36,7 @@ export interface INewsItem {
   intro: string;
   likeCount: number;
   dislikeCount: number;
-  id: string;
+  articleId: number;
   created: number;
 }
 export const getShareNewsList = (data: IGetShareNewsListParams) => {
@@ -52,12 +52,37 @@ export const likeOrDislike = () => {
   );
 };
 
-export const collectShareNews = () => {
+export const getCollectionList = () => {
   return fetcher<{ id: number; name: string }[]>(`/article/collect/page`);
 };
 
-export const readLater = () => {
-  return fetcher<{ id: number; name: string }[]>("/article/later/{articleId}");
+export const collectShareNews = (typeId: string, articleId: string) => {
+  return fetcher<boolean>(`/article/collect/${typeId}/${articleId}`, {
+    method: "POST",
+  });
+};
+
+export const deleteCollection = (typeId: string, articleId: string) => {
+  return fetcher<boolean>(`/article/collect/delete/${typeId}/${articleId}`, {
+    method: "POST",
+  });
+};
+
+export const readLater = (typeId: string, articleId: string) => {
+  return fetcher<{ id: number; name: string }[]>(
+    `/article/later/${typeId}/${articleId}`,
+    {
+      method: "POST",
+    }
+  );
+};
+export const deleteReadLater = (typeId: string, articleId: string) => {
+  return fetcher<{ id: number; name: string }[]>(
+    `/article/later/delete/${typeId}/${articleId}`,
+    {
+      method: "POST",
+    }
+  );
 };
 interface ICreateShareNewsParams {
   title: string;
@@ -85,16 +110,6 @@ export const getReadLater = () => {
 export const readNews = () => {
   return fetcher<{ id: number; name: string }[]>(
     `/article/later/delete/{typeId}/{articleId}`
-  );
-};
-
-export const getCollectionList = () => {
-  return fetcher<{ id: number; name: string }[]>(`/article/collect/page`);
-};
-
-export const deleteCollection = () => {
-  return fetcher<{ id: number; name: string }[]>(
-    `/article/collect/delete/{typeId}/{articleId}`
   );
 };
 

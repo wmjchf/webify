@@ -56,15 +56,14 @@ export const ShareLink: React.FC<IShareLink> = (props) => {
 
     const result = createShareNews({
       title,
-      imageUrl: "https://nextui.org/images/hero-card-complete.jpeg",
+      imageUrl:
+        "https://coinfire-img.oss-cn-hongkong.aliyuncs.com/0e51942e-b9b0-4944-97c2-3639a3de5c38.jpg",
       isVideo,
       videoUrl,
       url,
       intro,
       articleTypeIds,
     });
-
-    console.log(result, "rewrwerw");
   };
   return (
     <Form

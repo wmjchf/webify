@@ -16,6 +16,7 @@ interface INewsItemPramas {
 
 export const NewsItem: React.FC<INewsItemPramas> = (props) => {
   const { data } = props;
+
   return (
     <div
       className={classNames(
@@ -55,8 +56,8 @@ export const NewsItem: React.FC<INewsItemPramas> = (props) => {
         <div className={classNames(styles.three, "flex items-center gap-2")}>
           <Vote></Vote>
           <Share></Share>
-          <Collection></Collection>
-          <LaterRead></LaterRead>
+          <Collection newsId={`${data.articleId}`} typeId="1"></Collection>
+          <LaterRead newsId={`${data.articleId}`} typeId="1"></LaterRead>
         </div>
       </div>
     </div>

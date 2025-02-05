@@ -15,16 +15,17 @@ export const NewsList: React.FC<INewsList> = (props) => {
   const { data, total } = props;
 
   const [list, setList] = useState<INewsItem[]>(data);
-  useEffect(() => {
-    getShareNewsList({
-      pageSizes: 10,
-      currentPage: 1,
-    });
-  }, []);
+  // useEffect(() => {
+  //   getShareNewsList({
+  //     pageSizes: 10,
+  //     currentPage: 1,
+  //   });
+  // }, []);
+
   return (
     <>
       {list.map((item) => {
-        return <NewsItem key={item.id} data={item}></NewsItem>;
+        return <NewsItem key={item.articleId} data={item}></NewsItem>;
       })}
       {total === list.length && (
         <div className="text-center py-3">

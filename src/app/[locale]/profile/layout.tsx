@@ -2,7 +2,7 @@ import styles from "./index.module.scss";
 import classNames from "classnames";
 
 import { Nav } from "./components/Nav";
-
+import { BASE_URL } from "../../../constant/url";
 import { User } from "./components/User";
 import { cookies } from "next/headers";
 import { redirect } from "../../../i18n/routing";
@@ -25,14 +25,11 @@ async function Page({
   }
   let user = null;
   if (token) {
-    const resultJSON = await fetch(
-      "http://da64-120-234-128-190.ngrok-free.app/user/info/detail",
-      {
-        headers: {
-          Authorization: token,
-        },
-      }
-    );
+    const resultJSON = await fetch(`${BASE_URL}/user/info/detail`, {
+      headers: {
+        Authorization: token,
+      },
+    });
     const result = await resultJSON.json();
     user = result.data;
   }

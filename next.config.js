@@ -6,11 +6,10 @@ const withNextIntl = createNextIntlPlugin();
 const nextConfig = {
   reactStrictMode: true,
   async rewrites() {
-    console.log("ewrewrewrwe");
     return [
       {
         source: "/api/:path*",
-        destination: "http://da64-120-234-128-190.ngrok-free.app/:path*",
+        destination: "http://ca89-165-154-21-202.ngrok-free.app/:path*",
       },
     ];
   },

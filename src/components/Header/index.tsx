@@ -5,25 +5,22 @@ import Image from "next/image";
 import { Button, Input } from "@nextui-org/react";
 import { cookies } from "next/headers";
 import { Link, useRouter } from "../../i18n/routing";
+import { BASE_URL } from "../../constant/url";
 
 import styles from "./index.module.scss";
 
 import { Login } from "../Login";
 
 export const Header = async () => {
-  console.log("erwrewrewrwerwe");
   const cookieStore = cookies();
   const token = cookieStore.get("token")?.value;
   let user = null;
   if (token) {
-    const resultJSON = await fetch(
-      "http://da64-120-234-128-190.ngrok-free.app/user/info/detail",
-      {
-        headers: {
-          Authorization: token,
-        },
-      }
-    );
+    const resultJSON = await fetch(`${BASE_URL}/user/info/detail`, {
+      headers: {
+        Authorization: token,
+      },
+    });
 
     const result = await resultJSON.json();
     user = result.data;

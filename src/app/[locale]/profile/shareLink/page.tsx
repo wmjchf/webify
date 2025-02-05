@@ -4,12 +4,12 @@ import { NewsItem } from "../../../../components/NewItem";
 function Page() {
   return (
     <div>
+      {/* <NewsItem></NewsItem>
       <NewsItem></NewsItem>
       <NewsItem></NewsItem>
       <NewsItem></NewsItem>
       <NewsItem></NewsItem>
-      <NewsItem></NewsItem>
-      <NewsItem></NewsItem>
+      <NewsItem></NewsItem> */}
     </div>
   );
 }
