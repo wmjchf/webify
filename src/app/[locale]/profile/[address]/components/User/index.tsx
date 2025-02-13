@@ -14,9 +14,9 @@ interface IUserProps {
 }
 export const User: React.FC<IUserProps> = (props) => {
   const { user } = props;
-  const { user: clientUser } = useCommonStore();
+  // const { user: clientUser } = useCommonStore();
 
-  const merge = clientUser || user;
+  const merge = user;
   return (
     <div
       className={classNames(

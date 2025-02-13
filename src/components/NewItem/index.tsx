@@ -10,6 +10,7 @@ import { Vote } from "./components/Vote";
 import { createHistory, INewsItem } from "../../service/news";
 import { timeAgo } from "../../utils/time";
 import { DEFAULT_AVATAR } from "../../constant/url";
+import { useRouter } from "../../i18n/routing";
 
 interface INewsItemPramas {
   data: INewsItem;
@@ -17,11 +18,13 @@ interface INewsItemPramas {
 
 export const NewsItem: React.FC<INewsItemPramas> = (props) => {
   const { data } = props;
+  const router = useRouter();
   const readNews = async () => {
     await createHistory("1", `${data.articleId}`);
+    window.open(data.url);
   };
   return (
-    <Link href={data.url} target="_blank" onClick={readNews}>
+    <div onClick={readNews}>
       <div
         className={classNames(
           styles.newsItem,
@@ -43,6 +46,7 @@ export const NewsItem: React.FC<INewsItemPramas> = (props) => {
               className={classNames(styles.avatar, "flex items-center gap-2")}
               onClick={(event) => {
                 event.stopPropagation();
+                router.push(`/profile/${data.createdUserId}`);
               }}
             >
               <Image
@@ -72,6 +76,6 @@ export const NewsItem: React.FC<INewsItemPramas> = (props) => {
           </div>
         </div>
       </div>
-    </Link>
+    </div>
   );
 };

@@ -9,11 +9,12 @@ import { redirect } from "../../../../i18n/routing";
 
 async function Page({
   children,
-  params: { locale },
+  params: { locale, address },
 }: {
   children: React.ReactNode;
-  params: { locale: string };
+  params: { locale: string; address: string };
 }) {
+  console.log(address, "erwrewrewrewrewrwe");
   const cookieStore = cookies();
   const token = cookieStore.get("token")?.value;
   if (!token) {
@@ -24,7 +25,11 @@ async function Page({
     return;
   }
   let user = null;
-  if (token) {
+  if (address) {
+    const resultJSON = await fetch(`${BASE_URL}/user/info/detail/${address}`);
+    const result = await resultJSON.json();
+    user = result.data;
+  } else if (token) {
     const resultJSON = await fetch(`${BASE_URL}/user/info/detail`, {
       headers: {
         Authorization: token,
