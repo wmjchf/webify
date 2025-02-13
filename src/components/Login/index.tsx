@@ -56,7 +56,7 @@ export const Login: React.FC<ILogin> = (props) => {
               key="profile"
               startContent={<i className={"iconfont icon-Profile text-5xl"} />}
               onPress={() => {
-                push("/profile");
+                push(`/profile/${user?.id}`);
               }}
             >
               Profile

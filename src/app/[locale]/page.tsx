@@ -15,7 +15,7 @@ async function Page() {
   const result = await resultJSON.json();
   const data = result.data.rows;
   const total = result.data.count;
-
+  console.log(data, "ewrewrew");
   return (
     <div className={styles.page}>
       <FilterPage></FilterPage>

@@ -49,7 +49,7 @@ export interface IUser {
   email?: string;
   facebook?: string;
   fansCount?: string;
-
+  id: number;
   followCount?: string;
   nickname?: string;
   pictureUrl?: string;

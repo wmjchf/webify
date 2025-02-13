@@ -2,10 +2,10 @@ import styles from "./index.module.scss";
 import classNames from "classnames";
 
 import { Nav } from "./components/Nav";
-import { BASE_URL } from "../../../constant/url";
+import { BASE_URL } from "../../../../constant/url";
 import { User } from "./components/User";
 import { cookies } from "next/headers";
-import { redirect } from "../../../i18n/routing";
+import { redirect } from "../../../../i18n/routing";
 
 async function Page({
   children,

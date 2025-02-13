@@ -25,6 +25,7 @@ export const Header = async () => {
     const result = await resultJSON.json();
     user = result.data;
   }
+
   return (
     <div
       id="header"

@@ -38,6 +38,9 @@ export interface INewsItem {
   dislikeCount: number;
   articleId: number;
   created: number;
+  createdUserName: string;
+  createdUserId: number;
+  createdUserLogo: string;
 }
 export const getShareNewsList = (data: IGetShareNewsListParams) => {
   return fetcher<IPaginationResponse<INewsItem>>("/article/index/page", {
@@ -107,24 +110,24 @@ export const getReadLater = () => {
   return fetcher<{ id: number; name: string }[]>("/article/later/page");
 };
 
-export const readNews = () => {
-  return fetcher<{ id: number; name: string }[]>(
-    `/article/later/delete/{typeId}/{articleId}`
-  );
-};
-
 export const getHistoryList = () => {
   return fetcher<{ id: number; name: string }[]>(`/article/history/page`);
 };
 
-export const deleteHistory = () => {
+export const deleteHistory = (typeId: string, articleId: string) => {
   return fetcher<{ id: number; name: string }[]>(
-    `/article/history/delete/{typeId}/{articleId}`
+    `/article/history/delete/${typeId}/${articleId}`,
+    {
+      method: "POST",
+    }
   );
 };
 
-export const createHistory = () => {
+export const createHistory = (typeId: string, articleId: string) => {
   return fetcher<{ id: number; name: string }[]>(
-    `/article/history/{typeId}/{articleId}`
+    `/article/history/${typeId}/${articleId}`,
+    {
+      method: "POST",
+    }
   );
 };
