@@ -61,6 +61,21 @@ export const getUserInfo = (userId?: string) => {
   );
 };
 
+interface IHandleFollowParams {
+  typeId: number;
+  followUserId: number;
+  status: number;
+}
+export const handleFollow = (data: IHandleFollowParams) => {
+  return fetcher<{ id: number; name: string }[]>(`/user/info/follow/create`, {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "content-type": "application/json",
+    },
+  });
+};
+
 // export const getServerUserInfo = (token: string) => {
 //   const headers = {};
 

@@ -14,7 +14,6 @@ async function Page({
   children: React.ReactNode;
   params: { locale: string; address: string };
 }) {
-  console.log(address, "erwrewrewrewrewrwe");
   const cookieStore = cookies();
   const token = cookieStore.get("token")?.value;
   if (!token) {

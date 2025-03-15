@@ -6,17 +6,26 @@ import classNames from "classnames";
 import { DEFAULT_AVATAR } from "../../../../../../constant/url";
 import { Button } from "@nextui-org/react";
 
-import { IUser } from "../../../../../../service/user";
+import { handleFollow, IUser } from "../../../../../../service/user";
 import { useCommonStore } from "../../../../../../store/common";
 
 interface IUserProps {
-  user?: IUser;
+  user: IUser;
 }
 export const User: React.FC<IUserProps> = (props) => {
   const { user } = props;
   // const { user: clientUser } = useCommonStore();
 
   const merge = user;
+
+  const doFollow = async () => {
+    const result = await handleFollow({
+      typeId: 1,
+      followUserId: user.id,
+      status: 1,
+    });
+  };
+
   return (
     <div
       className={classNames(
