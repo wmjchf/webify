@@ -1,11 +1,6 @@
 "use client";
 
-import {
-  useAccount,
-  useDisconnect,
-  useSignMessage,
-  useSwitchAccount,
-} from "wagmi";
+import { useAccount, useDisconnect, useSignMessage } from "wagmi";
 import { SiweMessage } from "siwe";
 import Cookies from "js-cookie";
 import {
@@ -17,10 +12,11 @@ import {
   ModalHeader,
   useDisclosure,
 } from "@nextui-org/react";
-import { useEffect, useRef, useState } from "react";
-import { getNonce, login } from "../../../service/user";
-import { useCommonStore } from "../../../store/common";
 import classNames from "classnames";
+import { useEffect, useRef, useState } from "react";
+import { getWalletSignatureContent, login } from "../../../service/user";
+import { useCommonStore } from "../../../store/common";
+
 import styles from "./index.module.scss";
 
 export const ConfirmWallet = () => {
@@ -31,22 +27,25 @@ export const ConfirmWallet = () => {
   const [signing, setSigning] = useState(false);
   const nonceRef = useRef<string>("");
   const { disconnect } = useDisconnect();
-  async function createSiweMessage(address: `0x${string}`, statement: string) {
+  async function createSiweMessage() {
     try {
-      const { data: nonce } = await getNonce(address);
+      const {
+        data: { nonce, message },
+      } = await getWalletSignatureContent();
+
       nonceRef.current = nonce;
       const domain = window.location.host;
       const origin = window.location.origin;
-      const message = new SiweMessage({
+      const siweMessage = new SiweMessage({
         domain,
         address,
-        statement,
+        statement: message,
         uri: origin,
         chainId,
         nonce,
         version: "1",
       });
-      return message.prepareMessage();
+      return siweMessage.prepareMessage();
     } catch (error) {
       console.log(error, "erwrewrwe");
     }
@@ -57,21 +56,18 @@ export const ConfirmWallet = () => {
       return;
     }
     try {
-      const message = await createSiweMessage(
-        address,
-        `Sign in with Ethereum to the app.`
-      );
+      const message = await createSiweMessage();
 
       if (message) {
         setSigning(true);
+
         const signature = await signMessageAsync({
           message,
         });
-
+        console.log(signature, "erwrewrwe");
         const { data: token } = await login({
-          loginType: 1,
           signature,
-          nonce: nonceRef.current,
+          walletAddress: address,
           message,
         });
         setSigning(false);

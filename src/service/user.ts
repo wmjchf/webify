@@ -6,17 +6,26 @@ export const getNonce = (address: `0x${string}`) => {
   });
 };
 
+export const getWalletSignatureContent = () => {
+  return fetcher<{ message: string; nonce: string }>(
+    `/public/login/getWalletSignatureContent`,
+    {
+      method: "GET",
+    }
+  );
+};
+
 type LOGIN_TYPE = 1 | 2; // 1钱包登录 2邮箱登录
 
 interface ILoginParams {
-  loginType: LOGIN_TYPE;
+  // loginType: LOGIN_TYPE;
   signature: string;
   message: string;
-  nonce: string;
+  walletAddress: string;
 }
 
 export const login = (data: ILoginParams) => {
-  return fetcher<string>(`/user/info/login`, {
+  return fetcher<string>(`/public/login/walletLogin`, {
     method: "POST",
     body: JSON.stringify(data),
     headers: {
