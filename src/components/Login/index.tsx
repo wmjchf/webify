@@ -8,10 +8,10 @@ import {
 } from "@nextui-org/react";
 import classNames from "classnames";
 import Image from "next/image";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import styles from "./index.module.scss";
 import { WalletLogin } from "./WalletLogin";
-import { ConfirmWallet } from "./ConfirmWallet";
+import { ConfirmWallet, IConfirmWalletRef } from "./ConfirmWallet";
 import { useDisconnect } from "wagmi";
 import { useCommonStore } from "../../store/common";
 import { useRouter } from "../../i18n/routing";
@@ -26,6 +26,7 @@ export const Login: React.FC<ILogin> = (props) => {
   const { token, user } = props;
   const { push } = useRouter();
   const { logout, token: localToken, setUserInfo } = useCommonStore();
+  const confirmWalletRef = useRef<IConfirmWalletRef>(null);
   const { disconnect } = useDisconnect({
     mutation: {
       onSuccess() {
@@ -85,8 +86,13 @@ export const Login: React.FC<ILogin> = (props) => {
         </Dropdown>
       ) : (
         <>
-          <WalletLogin></WalletLogin>
-          <ConfirmWallet></ConfirmWallet>
+          <WalletLogin
+            onClick={() => {
+              confirmWalletRef.current?.open &&
+                confirmWalletRef.current?.open();
+            }}
+          ></WalletLogin>
+          <ConfirmWallet ref={confirmWalletRef}></ConfirmWallet>
         </>
       )}
     </>
