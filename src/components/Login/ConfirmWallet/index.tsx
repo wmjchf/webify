@@ -1,7 +1,6 @@
 "use client";
 
 import { useAccount, useDisconnect, useSignMessage } from "wagmi";
-import { SiweMessage } from "siwe";
 import Cookies from "js-cookie";
 import {
   Button,
@@ -38,38 +37,17 @@ export const ConfirmWallet = forwardRef<IConfirmWalletRef, IConfirmWallet>(
     const { setToken } = useCommonStore();
     const { signMessageAsync } = useSignMessage();
     const [signing, setSigning] = useState(false);
-    const nonceRef = useRef<string>("");
+
     const { disconnect } = useDisconnect();
-    async function createSiweMessage() {
-      try {
-        const {
-          data: { nonce, message },
-        } = await getWalletSignatureContent();
-        console.log(nonce, message, "werrwe");
-        nonceRef.current = nonce;
-        const domain = window.location.host;
-        const origin = window.location.origin;
-        const siweMessage = new SiweMessage({
-          domain,
-          address,
-          statement: message,
-          uri: origin,
-          chainId,
-          nonce,
-          version: "1",
-        });
-        return siweMessage.prepareMessage();
-      } catch (error) {
-        console.log(error, "erwrewrwe");
-      }
-    }
 
     async function signInWithEthereum() {
       if (!address) {
         return;
       }
       try {
-        const message = await createSiweMessage();
+        const {
+          data: { message },
+        } = await getWalletSignatureContent();
 
         if (message) {
           setSigning(true);
@@ -78,7 +56,9 @@ export const ConfirmWallet = forwardRef<IConfirmWalletRef, IConfirmWallet>(
             message,
           });
 
-          const { data: token } = await login({
+          const {
+            data: { token },
+          } = await login({
             signature,
             walletAddress: address,
             message,

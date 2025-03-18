@@ -25,13 +25,16 @@ interface ILoginParams {
 }
 
 export const login = (data: ILoginParams) => {
-  return fetcher<string>(`/public/login/walletLogin`, {
-    method: "POST",
-    body: JSON.stringify(data),
-    headers: {
-      "content-type": "application/json",
-    },
-  });
+  return fetcher<{ token: string; userId: number }>(
+    `/public/login/walletLogin`,
+    {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "content-type": "application/json",
+      },
+    }
+  );
 };
 
 interface IUpdateUserParams {

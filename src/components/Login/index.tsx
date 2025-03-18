@@ -39,9 +39,11 @@ export const Login: React.FC<ILogin> = (props) => {
     setUserInfo(user || null);
   }, []);
 
+  const mergeToken = token || localToken;
+
   return (
     <>
-      {token || localToken ? (
+      {mergeToken ? (
         <Dropdown>
           <DropdownTrigger>
             <Image
