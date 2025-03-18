@@ -8,25 +8,20 @@ import {
 } from "@nextui-org/react";
 import classNames from "classnames";
 import Image from "next/image";
-import React, { useEffect, useRef } from "react";
+import React from "react";
+import { useDisconnect } from "wagmi";
 import styles from "./index.module.scss";
 import { WalletLogin } from "./WalletLogin";
-import { ConfirmWallet, IConfirmWalletRef } from "./ConfirmWallet";
-import { useDisconnect } from "wagmi";
-import { useCommonStore } from "../../store/common";
-import { useRouter } from "../../i18n/routing";
-import { DEFAULT_AVATAR } from "../../constant/url";
-import { IUser } from "../../service/user";
 
-interface ILogin {
-  token?: string;
-  user?: IUser;
-}
+import { useCommonStore } from "../../store/common";
+
+import { DEFAULT_AVATAR } from "../../constant/url";
+
+import Link from "next/link";
+
+interface ILogin {}
 export const Login: React.FC<ILogin> = (props) => {
-  const { token, user } = props;
-  const { push } = useRouter();
-  const { logout, token: localToken, setUserInfo } = useCommonStore();
-  const confirmWalletRef = useRef<IConfirmWalletRef>(null);
+  const { logout, token, user } = useCommonStore();
   const { disconnect } = useDisconnect({
     mutation: {
       onSuccess() {
@@ -35,15 +30,9 @@ export const Login: React.FC<ILogin> = (props) => {
     },
   });
 
-  useEffect(() => {
-    setUserInfo(user || null);
-  }, []);
-
-  const mergeToken = token || localToken;
-
   return (
     <>
-      {mergeToken ? (
+      {token ? (
         <Dropdown>
           <DropdownTrigger>
             <Image
@@ -58,20 +47,14 @@ export const Login: React.FC<ILogin> = (props) => {
             <DropdownItem
               key="profile"
               startContent={<i className={"iconfont icon-Profile text-5xl"} />}
-              onPress={() => {
-                push(`/profile/${user?.id}`);
-              }}
             >
-              Profile
+              <Link href={`/profile/${user?.id}`}> Profile</Link>
             </DropdownItem>
             <DropdownItem
               key="setting"
               startContent={<i className={"iconfont icon-shezhi text-5xl"} />}
-              onPress={() => {
-                push("/setting");
-              }}
             >
-              Setting
+              <Link href={`/setting`}>Setting</Link>
             </DropdownItem>
             <DropdownItem
               key="logout"
@@ -87,15 +70,7 @@ export const Login: React.FC<ILogin> = (props) => {
           </DropdownMenu>
         </Dropdown>
       ) : (
-        <>
-          <WalletLogin
-            onClick={() => {
-              confirmWalletRef.current?.open &&
-                confirmWalletRef.current?.open();
-            }}
-          ></WalletLogin>
-          <ConfirmWallet ref={confirmWalletRef}></ConfirmWallet>
-        </>
+        <WalletLogin />
       )}
     </>
   );

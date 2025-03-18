@@ -19,16 +19,20 @@ type Action = {
   typeList: IGetTypeListItem[] | null;
   getTypeList: () => void;
 
-  user: IUser | null;
   getUserInfo: () => void;
   setUserInfo: (data: IUser | null) => void;
+
+  hydrateCommon: (data: CommonState) => void;
 };
 
-interface State {
+export interface CommonState {
   token?: string;
+  user?: IUser | null;
+
+  _hydrated?: boolean;
 }
 
-export const useCommonStore = create<State & Action>()(
+export const useCommonStore = create<CommonState & Action>()(
   immer((set, get) => ({
     token: undefined,
     setToken: (token) =>
@@ -80,6 +84,15 @@ export const useCommonStore = create<State & Action>()(
     setUserInfo: (data) => {
       set((state) => {
         state.user = data;
+      });
+    },
+    _hydrated: false,
+    hydrateCommon: (data) => {
+      set((state) => {
+        console.log("hydrating common store");
+        state.user = data.user;
+        state.token = data.token;
+        state._hydrated = true;
       });
     },
   }))

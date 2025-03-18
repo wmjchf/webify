@@ -1,29 +1,11 @@
 import classNames from "classnames";
 import Image from "next/image";
 import { Button, Input } from "@nextui-org/react";
-import { cookies } from "next/headers";
-import { Link, useRouter } from "../../i18n/routing";
-import { BASE_URL } from "../../constant/url";
-
+import { Link } from "../../i18n/routing";
+import { Login } from "../Login";
 import styles from "./index.module.scss";
 
-import { Login } from "../Login";
-
 export const Header = async () => {
-  const cookieStore = cookies();
-  const token = cookieStore.get("token")?.value;
-  let user = null;
-  if (token) {
-    const resultJSON = await fetch(`${BASE_URL}/user/info/detail`, {
-      headers: {
-        Authorization: token,
-      },
-    });
-
-    const result = await resultJSON.json();
-    user = result.data;
-  }
-
   return (
     <div
       id="header"
@@ -65,7 +47,7 @@ export const Header = async () => {
             Share
           </Button>
         </Link>
-        <Login token={token} user={user}></Login>
+        <Login></Login>
 
         {/* <EmailLogin></EmailLogin> */}
       </div>
