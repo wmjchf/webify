@@ -6,6 +6,7 @@ import PagesTopLoader from "nextjs-toploader";
 
 import { Header } from "../../components/Header";
 import { WalletProvider } from "../../rainbowkit/WalletProvider";
+import { StoreProvider } from "../../components/StoreProvider";
 import { Content } from "../../components/Content";
 import "../../styles/globals.css";
 import "../../styles/iconfont.css";
@@ -22,14 +23,17 @@ async function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Providers>
-          <NextIntlClientProvider messages={messages}>
-            <WalletProvider>
-              <Header></Header>
-              <Content>{children}</Content>
-            </WalletProvider>
-          </NextIntlClientProvider>
-        </Providers>
+        <StoreProvider>
+          <Providers>
+            <NextIntlClientProvider messages={messages}>
+              <WalletProvider>
+                <Header></Header>
+                <Content>{children}</Content>
+              </WalletProvider>
+            </NextIntlClientProvider>
+          </Providers>
+        </StoreProvider>
+
         <PagesTopLoader />
       </body>
     </html>
