@@ -5,18 +5,17 @@ import React from "react";
 import styles from "./index.module.scss";
 import { WalletLogin } from "./WalletLogin";
 
-import { BASE_URL, DEFAULT_AVATAR } from "../../../constant/url";
-
-import { cookies } from "next/headers";
+import { DEFAULT_AVATAR } from "../../../constant/url";
 
 import { DropDownUser } from "./DropDownUser";
 import { IUser } from "../../../service/user";
-import { fetcherUser } from "../../../function/user";
+import { fetcherCurrentUser } from "../../../function/user";
 
 interface ILogin {}
 export const Login: React.FC<ILogin> = async (props) => {
-  const { user, token } = await fetcherUser();
-  if (token) {
+  const { user } = await fetcherCurrentUser();
+  console.log(user, "erwrewrwe111");
+  if (user) {
     return (
       <DropDownUser
         user={user}

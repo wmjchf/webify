@@ -9,13 +9,9 @@ import { Header } from "../../components/Header";
 import { WalletProvider } from "../../rainbowkit/WalletProvider";
 import { StoreProvider } from "../../components/client/StoreProvider";
 import { Content } from "../../components/Content";
-
-import { BASE_URL, DEFAULT_AVATAR } from "../../constant/url";
+import { fetcherCurrentUser } from "../../function/user";
 import "../../styles/globals.css";
 import "../../styles/iconfont.css";
-import styles from "./index.module.scss";
-import { fetcherUser } from "../../function/user";
-import { IUser } from "../../service/user";
 
 async function RootLayout({
   children,
@@ -25,11 +21,11 @@ async function RootLayout({
   params: { locale: string };
 }) {
   const messages = await getMessages();
-  const { user, token } = await fetcherUser();
+  const { user, token, userId } = await fetcherCurrentUser();
   return (
     <html lang="en">
       <body>
-        <StoreProvider commonState={{ token, user }}>
+        <StoreProvider commonState={{ token, user, userId }}>
           <Providers>
             <NextIntlClientProvider messages={messages}>
               <WalletProvider>

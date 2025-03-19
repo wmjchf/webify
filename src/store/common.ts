@@ -10,7 +10,10 @@ import {
 import { IUser, getUserInfo } from "../service/user";
 
 type Action = {
-  setToken: (token?: string) => void;
+  setToken: (token: string) => void;
+
+  setUserId: (userId: string) => void;
+
   logout: () => void;
 
   sourceList: IGetSourceListItem[] | null;
@@ -27,6 +30,9 @@ type Action = {
 
 export interface CommonState {
   token?: string;
+
+  userId?: string;
+
   user?: IUser | null;
 
   _hydrated?: boolean;
@@ -35,12 +41,18 @@ export interface CommonState {
 export const useCommonStore = create<CommonState & Action>()(
   immer((set, get) => ({
     token: undefined,
+
+    userId: undefined,
+
     setToken: (token) =>
       set((state) => {
-        if (token) {
-          Cookies.set("token", token);
-        }
-        state.token = Cookies.get("token");
+        state.token = token;
+        Cookies.set("token", `${token}`);
+      }),
+    setUserId: (userId) =>
+      set((state) => {
+        state.userId = userId;
+        Cookies.set("userId", `${userId}`);
       }),
     logout: () =>
       set((state) => {
@@ -89,10 +101,10 @@ export const useCommonStore = create<CommonState & Action>()(
     _hydrated: false,
     hydrateCommon: (data) => {
       set((state) => {
-        console.log("hydrating common store");
         state.user = data.user;
         state.token = data.token;
         state._hydrated = true;
+        state.userId = data.userId;
       });
     },
   }))
