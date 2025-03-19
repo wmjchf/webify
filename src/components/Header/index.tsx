@@ -2,10 +2,12 @@ import classNames from "classnames";
 import Image from "next/image";
 import { Button, Input } from "@nextui-org/react";
 import { Link } from "../../i18n/routing";
-import { Login } from "../Login";
+import { Login } from "../client/Login";
 import styles from "./index.module.scss";
+import { cookies } from "next/headers";
 
-export const Header = async () => {
+interface IHeader {}
+export const Header: React.FC<IHeader> = async (props) => {
   return (
     <div
       id="header"
@@ -48,7 +50,6 @@ export const Header = async () => {
           </Button>
         </Link>
         <Login></Login>
-
         {/* <EmailLogin></EmailLogin> */}
       </div>
     </div>

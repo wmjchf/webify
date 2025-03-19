@@ -19,8 +19,8 @@ import React, {
   forwardRef,
   useImperativeHandle,
 } from "react";
-import { getWalletSignatureContent, login } from "../../../service/user";
-import { useCommonStore } from "../../../store/common";
+import { getWalletSignatureContent, login } from "../../../../service/user";
+import { useCommonStore } from "../../../../store/common";
 
 import styles from "./index.module.scss";
 

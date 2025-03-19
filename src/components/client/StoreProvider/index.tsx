@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { CommonState, useCommonStore } from "../../store/common";
+import { CommonState, useCommonStore } from "../../../store/common";
 
 interface IStoreProvider {
   children?: React.ReactNode;

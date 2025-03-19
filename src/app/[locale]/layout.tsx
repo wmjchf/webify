@@ -7,12 +7,15 @@ import { cookies } from "next/headers";
 import { Providers } from "./providers";
 import { Header } from "../../components/Header";
 import { WalletProvider } from "../../rainbowkit/WalletProvider";
-import { StoreProvider } from "../../components/StoreProvider";
+import { StoreProvider } from "../../components/client/StoreProvider";
 import { Content } from "../../components/Content";
 
-import { BASE_URL } from "../../constant/url";
+import { BASE_URL, DEFAULT_AVATAR } from "../../constant/url";
 import "../../styles/globals.css";
 import "../../styles/iconfont.css";
+import styles from "./index.module.scss";
+import { fetcherUser } from "../../function/user";
+import { IUser } from "../../service/user";
 
 async function RootLayout({
   children,
@@ -22,19 +25,7 @@ async function RootLayout({
   params: { locale: string };
 }) {
   const messages = await getMessages();
-  const cookieStore = cookies();
-  const token = cookieStore.get("token")?.value;
-  let user = null;
-  if (token) {
-    const resultJSON = await fetch(`${BASE_URL}/user/info/detail`, {
-      headers: {
-        Authorization: token,
-      },
-    });
-
-    const result = await resultJSON.json();
-    user = result.data;
-  }
+  const { user, token } = await fetcherUser();
   return (
     <html lang="en">
       <body>
