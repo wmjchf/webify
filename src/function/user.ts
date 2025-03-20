@@ -4,12 +4,13 @@ import { BASE_URL } from "../constant/url";
 
 export const fetcherCurrentUser = async () => {
   const cookieStore = cookies();
-  const userId = cookieStore.get("userId")?.value;
+  const uid = cookieStore.get("uid")?.value;
   const token = cookieStore.get("token")?.value;
   let user: IUser | null = null;
-  if (userId) {
+
+  if (uid) {
     try {
-      const str = new URLSearchParams({ userId }).toString();
+      const str = new URLSearchParams({ uid }).toString();
 
       const resultJSON = await fetch(
         `${BASE_URL}/public/user/getUserInfo?${str}`,
@@ -19,7 +20,8 @@ export const fetcherCurrentUser = async () => {
       );
       const result = await resultJSON.json();
       user = result.data;
+      console.log(`${BASE_URL}/public/user/getUserInfo?${str}`, "erwrwe");
     } catch (error) {}
   }
-  return { user, userId, token };
+  return { user, uid, token };
 };

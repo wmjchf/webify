@@ -30,44 +30,39 @@ export const animals2 = [
 ];
 //flex flex-col gap-4
 export const FilterPage: React.FC<IFilterPage> = (props) => {
-  const { getSourceList, sourceList, getTypeList, typeList } = useCommonStore();
-  useEffect(() => {
-    getSourceList();
-    getTypeList();
-  }, []);
+  const { sourceList, typeList } = useCommonStore();
+
   return (
     <div className={classNames(styles.filterPage, "flex gap-2")}>
       {/* <Filter title="color" data={animals}></Filter>
       <Filter title="tag" data={animals1}></Filter>
       <Filter title="source" data={animals2}></Filter> */}
-      <Select
+      {/* <Select
         className="max-w-xs rounded-full overflow-hidden"
         placeholder="Choose Type"
       >
-        <SelectItem key={-1}>全部</SelectItem>
         {sourceList &&
           sourceList.map((animal) => (
             <SelectItem key={animal.id}>{animal.name}</SelectItem>
           ))}
-      </Select>
-      <Select
+      </Select> */}
+      {/* <Select
         className="max-w-xs rounded-full overflow-hidden"
         placeholder="Choose Source"
       >
-        <SelectItem key={-1}>全部</SelectItem>
         {typeList &&
           typeList.map((animal) => (
             <SelectItem key={animal.id}>{animal.name}</SelectItem>
           ))}
-      </Select>
-      <Select
+      </Select> */}
+      {/* <Select
         className="max-w-xs rounded-full overflow-hidden"
         placeholder="Choose Tag"
       >
         {animals.map((animal) => (
           <SelectItem key={animal.value}>{animal.label}</SelectItem>
         ))}
-      </Select>
+      </Select> */}
     </div>
   );
 };

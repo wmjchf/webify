@@ -14,7 +14,7 @@ import { fetcherCurrentUser } from "../../../function/user";
 interface ILogin {}
 export const Login: React.FC<ILogin> = async (props) => {
   const { user } = await fetcherCurrentUser();
-  console.log(user, "erwrewrwe111");
+
   if (user) {
     return (
       <DropDownUser

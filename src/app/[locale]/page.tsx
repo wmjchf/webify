@@ -8,14 +8,16 @@ import { BASE_URL } from "../../constant/url";
 async function Page() {
   // const t = useTranslations("home");
 
-  // const resultJSON = await fetch(
-  //   `${BASE_URL}/article/index/page?pageSizes=10&currentPage=1`
-  // );
+  const resultJSON = await fetch(`${BASE_URL}/public/page/home`);
 
-  // const result = await resultJSON.json();
+  const result = await resultJSON.json();
+
+  const articleSource = result.data.articleSource;
+  const articleType = result.data.articleType;
+  const article = result.data.article;
   // const data = result.data.rows;
   // const total = result.data.count;
-  // console.log(data, "ewrewrew");
+  // console.log(articleSource, articleType, article, "ewrewrew");
   return (
     <div className={styles.page}>
       <FilterPage></FilterPage>

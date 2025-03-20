@@ -21,11 +21,11 @@ async function RootLayout({
   params: { locale: string };
 }) {
   const messages = await getMessages();
-  const { user, token, userId } = await fetcherCurrentUser();
+  const { user, token, uid } = await fetcherCurrentUser();
   return (
     <html lang="en">
       <body>
-        <StoreProvider commonState={{ token, user, userId }}>
+        <StoreProvider commonState={{ token, user, uid }}>
           <Providers>
             <NextIntlClientProvider messages={messages}>
               <WalletProvider>

@@ -1,26 +1,15 @@
 import { create } from "zustand";
 import Cookies from "js-cookie";
 import { immer } from "zustand/middleware/immer";
-import {
-  IGetSourceListItem,
-  IGetTypeListItem,
-  getSourceList,
-  getTypeList,
-} from "../service/news";
+import { IGetSourceListItem, IGetTypeListItem } from "../service/news";
 import { IUser, getUserInfo } from "../service/user";
 
 type Action = {
   setToken: (token: string) => void;
 
-  setUserId: (userId: string) => void;
+  setUid: (uid: string) => void;
 
   logout: () => void;
-
-  sourceList: IGetSourceListItem[] | null;
-  getSourceList: () => void;
-
-  typeList: IGetTypeListItem[] | null;
-  getTypeList: () => void;
 
   getUserInfo: () => void;
   setUserInfo: (data: IUser | null) => void;
@@ -31,11 +20,15 @@ type Action = {
 export interface CommonState {
   token?: string;
 
-  userId?: string;
+  uid?: string;
 
   user?: IUser | null;
 
   _hydrated?: boolean;
+
+  sourceList?: IGetSourceListItem[] | null;
+
+  typeList?: IGetTypeListItem[] | null;
 }
 
 export const useCommonStore = create<CommonState & Action>()(
@@ -49,41 +42,24 @@ export const useCommonStore = create<CommonState & Action>()(
         state.token = token;
         Cookies.set("token", `${token}`);
       }),
-    setUserId: (userId) =>
+    setUid: (uid) =>
       set((state) => {
-        state.userId = userId;
-        Cookies.set("userId", `${userId}`);
+        state.uid = uid;
+
+        Cookies.set("uid", `${uid}`);
       }),
     logout: () =>
       set((state) => {
         Cookies.remove("token");
+        Cookies.remove("userId");
         state.token = undefined;
+        state.uid = undefined;
         window.location.reload();
       }),
 
     sourceList: null,
-    getSourceList: async () => {
-      const { sourceList } = get();
-      if (sourceList) {
-        return;
-      }
-      const { data } = await getSourceList();
-      set((state) => {
-        state.sourceList = data;
-      });
-    },
 
     typeList: null,
-    getTypeList: async () => {
-      const { typeList } = get();
-      if (typeList) {
-        return;
-      }
-      const { data } = await getTypeList();
-      set((state) => {
-        state.typeList = data;
-      });
-    },
 
     user: null,
     getUserInfo: async () => {
@@ -99,12 +75,15 @@ export const useCommonStore = create<CommonState & Action>()(
       });
     },
     _hydrated: false,
+
     hydrateCommon: (data) => {
       set((state) => {
         state.user = data.user;
         state.token = data.token;
         state._hydrated = true;
-        state.userId = data.userId;
+        state.uid = data.uid;
+        state.sourceList = data.sourceList;
+        state.typeList = data.typeList;
       });
     },
   }))

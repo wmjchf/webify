@@ -8,8 +8,9 @@ import {
   Link,
 } from "@nextui-org/react";
 import React from "react";
-import { Logout } from "../Logout";
+import { useDisconnect } from "wagmi";
 import { IUser } from "../../../../service/user";
+import { useCommonStore } from "../../../../store/common";
 
 interface IDropDownUser {
   user?: IUser | null;
@@ -17,6 +18,15 @@ interface IDropDownUser {
 }
 export const DropDownUser: React.FC<IDropDownUser> = (props) => {
   const { user, avatar } = props;
+  const { logout } = useCommonStore();
+
+  const { disconnect } = useDisconnect({
+    mutation: {
+      onSuccess() {
+        logout();
+      },
+    },
+  });
   return (
     <Dropdown>
       <DropdownTrigger>{avatar}</DropdownTrigger>
@@ -25,15 +35,27 @@ export const DropDownUser: React.FC<IDropDownUser> = (props) => {
           key="profile"
           startContent={<i className={"iconfont icon-Profile text-5xl"} />}
         >
-          <Link href={`/profile/${user?.id}`}> Profile</Link>
+          <Link href={`/profile/${user?.id}`} className="text-black">
+            Profile
+          </Link>
         </DropdownItem>
         <DropdownItem
           key="setting"
           startContent={<i className={"iconfont icon-shezhi text-5xl"} />}
         >
-          <Link href={`/setting`}>Setting</Link>
+          <Link href={`/setting`} className="text-black">
+            Setting
+          </Link>
         </DropdownItem>
-        <Logout></Logout>
+        <DropdownItem
+          key="logout"
+          startContent={<i className={"iconfont icon-tuichudenglu text-5xl"} />}
+          onPress={() => {
+            disconnect();
+          }}
+        >
+          Log Out
+        </DropdownItem>
       </DropdownMenu>
     </Dropdown>
   );

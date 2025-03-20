@@ -25,16 +25,13 @@ interface ILoginParams {
 }
 
 export const login = (data: ILoginParams) => {
-  return fetcher<{ token: string; userId: number }>(
-    `/public/login/walletLogin`,
-    {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "content-type": "application/json",
-      },
-    }
-  );
+  return fetcher<{ token: string; uid: number }>(`/public/login/walletLogin`, {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "content-type": "application/json",
+    },
+  });
 };
 
 interface IUpdateUserParams {
@@ -60,12 +57,12 @@ export interface IUser {
   bio?: string;
   email?: string;
   facebook?: string;
-  fansCount?: string;
+  // fansCount?: string;
   id: number;
-  followCount?: string;
+  // followCount?: string;
   nickname?: string;
-  pictureUrl?: string;
-  walletAddress?: string;
+  picture_url?: string;
+  wallet_address?: string;
 }
 export const getUserInfo = (userId?: string) => {
   return fetcher<IUser>(
