@@ -10,7 +10,7 @@ import {
   Button,
   useDisclosure,
   Input,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import { useEffect, useState } from "react";
 import { useCommonStore } from "../../../../store/common";
 import { updateUser, getUserInfo } from "../../../../service/user";

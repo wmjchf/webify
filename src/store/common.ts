@@ -1,8 +1,8 @@
 import { create } from "zustand";
 import Cookies from "js-cookie";
 import { immer } from "zustand/middleware/immer";
-import { IGetSourceListItem, IGetTypeListItem } from "../service/news";
 import { IUser, getUserInfo } from "../service/user";
+import { IArticleSource, IArticleType } from "../service/public";
 
 type Action = {
   setToken: (token: string) => void;
@@ -26,9 +26,9 @@ export interface CommonState {
 
   _hydrated?: boolean;
 
-  sourceList?: IGetSourceListItem[] | null;
+  sourceList?: IArticleSource[] | null;
 
-  typeList?: IGetTypeListItem[] | null;
+  typeList?: IArticleType[] | null;
 }
 
 export const useCommonStore = create<CommonState & Action>()(

@@ -2,7 +2,7 @@ import React from "react";
 
 import styles from "./index.module.scss";
 import { Link } from "../../i18n/routing";
-import { Button } from "@nextui-org/react";
+import { Button } from "@heroui/react";
 
 interface ICreateShare {
   token?: string;

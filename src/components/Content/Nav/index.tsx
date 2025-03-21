@@ -4,7 +4,7 @@ import React from "react";
 import classNames from "classnames";
 import styles from "./index.module.scss";
 import { IconItem } from "../../IconItem";
-import { Divider } from "@nextui-org/react";
+import { Divider } from "@heroui/react";
 import { usePathname } from "../../../i18n/routing";
 import { Collapse } from "../Collapse";
 

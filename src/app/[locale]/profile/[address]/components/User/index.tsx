@@ -4,7 +4,7 @@ import Image from "next/image";
 import styles from "./index.module.scss";
 import classNames from "classnames";
 import { DEFAULT_AVATAR } from "../../../../../../constant/url";
-import { Button } from "@nextui-org/react";
+import { Button } from "@heroui/react";
 
 import { handleFollow, IUser } from "../../../../../../service/user";
 import { useCommonStore } from "../../../../../../store/common";

@@ -20,7 +20,6 @@ export const fetcherCurrentUser = async () => {
       );
       const result = await resultJSON.json();
       user = result.data;
-      console.log(`${BASE_URL}/public/user/getUserInfo?${str}`, "erwrwe");
     } catch (error) {}
   }
   return { user, uid, token };

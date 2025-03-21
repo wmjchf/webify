@@ -8,7 +8,7 @@ import {
   Select,
   SelectItem,
   Textarea,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import classNames from "classnames";
 import { createShareNews } from "../../../../../service/news";
 

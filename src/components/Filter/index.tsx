@@ -3,7 +3,7 @@
 import classNames from "classnames";
 import React, { useState } from "react";
 import styles from "./index.module.scss";
-import { Button, Chip } from "@nextui-org/react";
+import { Button, Chip } from "@heroui/react";
 
 interface IItem {
   value: string;

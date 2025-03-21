@@ -1,6 +1,6 @@
 import { fetcher } from "../utils/request";
 
-interface IArticleSource {
+export interface IArticleSource {
   id: number;
   name: string;
   site_url: string;
@@ -8,7 +8,7 @@ interface IArticleSource {
   article_type_ids: string;
   sort: number;
 }
-interface IArticleType {
+export interface IArticleType {
   id: number;
   type_id: number;
   name: string;
@@ -17,7 +17,7 @@ interface IArticleType {
   sort: number;
 }
 
-interface IArticle {
+export interface IArticle {
   id: number;
   title: string;
   image_url: string;

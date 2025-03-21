@@ -2,7 +2,7 @@
 
 import React, { useEffect } from "react";
 import classNames from "classnames";
-import { Select, SelectItem } from "@nextui-org/react";
+import { Select, SelectItem } from "@heroui/react";
 import styles from "./index.module.scss";
 import { Filter } from "../Filter";
 import { useCommonStore } from "../../store/common";
@@ -34,26 +34,29 @@ export const FilterPage: React.FC<IFilterPage> = (props) => {
 
   return (
     <div className={classNames(styles.filterPage, "flex gap-2")}>
-      {/* <Filter title="color" data={animals}></Filter>
-      <Filter title="tag" data={animals1}></Filter>
-      <Filter title="source" data={animals2}></Filter> */}
       {/* <Select
         className="max-w-xs rounded-full overflow-hidden"
         placeholder="Choose Type"
+        items={sourceList?.map((item) => {
+          return {
+            value: item.id,
+            label: item.name,
+          };
+        })}
       >
-        {sourceList &&
-          sourceList.map((animal) => (
-            <SelectItem key={animal.id}>{animal.name}</SelectItem>
-          ))}
+        {(source) => <SelectItem key={source.value}>{source.label}</SelectItem>}
       </Select> */}
       {/* <Select
         className="max-w-xs rounded-full overflow-hidden"
         placeholder="Choose Source"
+        items={typeList?.map((item) => {
+          return {
+            value: item.id,
+            label: item.name,
+          };
+        })}
       >
-        {typeList &&
-          typeList.map((animal) => (
-            <SelectItem key={animal.id}>{animal.name}</SelectItem>
-          ))}
+        {(type) => <SelectItem key={type.value}>{type.label}</SelectItem>}
       </Select> */}
       {/* <Select
         className="max-w-xs rounded-full overflow-hidden"

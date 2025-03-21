@@ -11,7 +11,7 @@ import {
   Button,
   useDisclosure,
   Textarea,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import { useEffect, useState } from "react";
 import { useCommonStore } from "../../../../store/common";
 import { updateUser } from "../../../../service/user";

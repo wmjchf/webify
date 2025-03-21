@@ -6,7 +6,7 @@ import {
   DropdownMenu,
   DropdownTrigger,
   Link,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import React from "react";
 import { useDisconnect } from "wagmi";
 import { IUser } from "../../../../service/user";

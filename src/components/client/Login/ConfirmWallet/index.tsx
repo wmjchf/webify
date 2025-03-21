@@ -10,7 +10,7 @@ import {
   ModalFooter,
   ModalHeader,
   useDisclosure,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import classNames from "classnames";
 import React, {
   useEffect,

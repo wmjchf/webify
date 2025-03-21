@@ -3,7 +3,7 @@
 import React from "react";
 import { useCommonStore } from "../../../../store/common";
 import { useDisconnect } from "wagmi";
-import { DropdownItem } from "@nextui-org/react";
+import { DropdownItem } from "@heroui/react";
 
 export const Logout = () => {
   const { logout } = useCommonStore();

@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import Image from "next/image";
-import { Button, Input } from "@nextui-org/react";
+import { Button, Input } from "@heroui/react";
 import { Link } from "../../i18n/routing";
 import { Login } from "../client/Login";
 import styles from "./index.module.scss";

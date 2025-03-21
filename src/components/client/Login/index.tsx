@@ -22,7 +22,7 @@ export const Login: React.FC<ILogin> = async (props) => {
         avatar={
           <Image
             alt="NextUI hero Image"
-            src={(user as IUser)?.pictureUrl || DEFAULT_AVATAR}
+            src={(user as IUser)?.picture_url || DEFAULT_AVATAR}
             width={102}
             height={76}
             className={classNames(styles.avatar)}

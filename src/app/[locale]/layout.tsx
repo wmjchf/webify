@@ -3,8 +3,8 @@ import "@rainbow-me/rainbowkit/styles.css";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import PagesTopLoader from "nextjs-toploader";
-import { cookies } from "next/headers";
-import { Providers } from "./providers";
+import { HeroUIProvider } from "@heroui/react";
+// import { Providers } from "./providers";
 import { Header } from "../../components/Header";
 import { WalletProvider } from "../../rainbowkit/WalletProvider";
 import { StoreProvider } from "../../components/client/StoreProvider";
@@ -12,6 +12,7 @@ import { Content } from "../../components/Content";
 import { fetcherCurrentUser } from "../../function/user";
 import "../../styles/globals.css";
 import "../../styles/iconfont.css";
+import { fetcherHome } from "../../function/common";
 
 async function RootLayout({
   children,
@@ -22,18 +23,19 @@ async function RootLayout({
 }) {
   const messages = await getMessages();
   const { user, token, uid } = await fetcherCurrentUser();
+  const { sourceList, typeList } = await fetcherHome();
   return (
     <html lang="en">
       <body>
-        <StoreProvider commonState={{ token, user, uid }}>
-          <Providers>
+        <StoreProvider commonState={{ token, user, uid, sourceList, typeList }}>
+          <HeroUIProvider>
             <NextIntlClientProvider messages={messages}>
               <WalletProvider>
                 <Header></Header>
                 <Content>{children}</Content>
               </WalletProvider>
             </NextIntlClientProvider>
-          </Providers>
+          </HeroUIProvider>
         </StoreProvider>
 
         <PagesTopLoader />

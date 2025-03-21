@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import styles from "./index.module.scss";
-import { Button } from "@nextui-org/react";
+import { Button } from "@heroui/react";
 import Image from "next/image";
 
 export const EmailLogin = () => {
