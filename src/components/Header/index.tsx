@@ -4,7 +4,6 @@ import { Button, Input } from "@heroui/react";
 import { Link } from "../../i18n/routing";
 import { Login } from "../client/Login";
 import styles from "./index.module.scss";
-import { cookies } from "next/headers";
 
 interface IHeader {}
 export const Header: React.FC<IHeader> = async (props) => {
@@ -33,7 +32,7 @@ export const Header: React.FC<IHeader> = async (props) => {
         <Input
           label=""
           placeholder="search"
-          className="rounded-full overflow-hidden border-solid border-2 border-indigo-600"
+          // className="rounded-full overflow-hidden border-solid border-2 border-indigo-600"
           startContent={<i className="iconfont icon-sousuo"></i>}
         />
       </div>
