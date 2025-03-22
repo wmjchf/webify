@@ -67,3 +67,17 @@ export const getUserInfo = () => {
     method: "GET",
   });
 };
+
+interface IGetArticleListParams {
+  sourceTypeId: number;
+  articleTypeId: number;
+  page: number;
+  pageSize: number;
+}
+
+export const getArticleList = (params: IGetArticleListParams) => {
+  return fetcher<IUser>("/public/page/home/getArticleList", {
+    method: "GET",
+    params,
+  });
+};

@@ -13,82 +13,43 @@ interface IItem {
 interface IFilter {
   data: IItem[];
   title?: string;
+  className?: string;
 }
 
 export const Filter: React.FC<IFilter> = (props) => {
-  const { data, title } = props;
+  const { data, title, className } = props;
 
-  const [value, setValue] = useState<string[]>([]);
+  const [value, setValue] = useState<string>();
 
   return (
-    <div className={classNames(styles.filter, "flex gap-5 items-center")}>
-      {/* <span className={classNames(styles.title, "text-sm")}>{title}</span> */}
-      <Chip color="danger" variant="dot">
+    <div className={classNames("flex flex-row gap-4", className)}>
+      <div
+        className={classNames("shrink-0 relative text-sm cursor-pointer", {
+          "text-red-500": !value,
+        })}
+        onClick={() => {
+          setValue(undefined);
+        }}
+      >
         {title}
-      </Chip>
-      <div className={classNames("flex gap-1 items-center", styles.content)}>
-        <Button
-          radius="full"
-          size="sm"
-          onPress={() => {
-            setValue([]);
-          }}
-          variant={value.length != 0 ? "light" : "solid"}
-          color={value.length != 0 ? "secondary" : "danger"}
-        >
-          <span
-            className={classNames(
-              value.length != 0 && styles.custom,
-              "text-sm"
-            )}
-          >
-            all
-          </span>
-        </Button>
+      </div>
+      <div className="flex flex-1 flex-row shrink-0 gap-8 flex-wrap">
         {data.map((item) => {
           return (
-            // <div
-            //   className={classNames(
-            //     styles.item,
-            //     value.includes(item.value) && "text-blue-600",
-            //     "text-sm cursor-pointer hover:text-blue-600"
-            //   )}
-            //   key={item.value}
-            //   onClick={() => {
-            //     const newSet = new Set([...value, item.value]);
-            //   }}
-            // >
-            //   <span>{item.label}</span>
-            // </div>
-            <Button
-              onPress={() => {
-                // const exist = value.find((v) => v === item.value);
-                // if (mult) {
-                //   if (exist) {
-                //     setValue(value.filter((v) => v !== item.value));
-                //   } else {
-                //     setValue([...value, item.value]);
-                //   }
-                // } else {
-                //   setValue([item.value]);
-                // }
-                setValue([item.value]);
-              }}
-              radius="full"
-              size="sm"
-              variant={!value.includes(item.value) ? "light" : "solid"}
+            <div
+              className={classNames(
+                "flex justify-center items-center text-sm cursor-pointer hover:text-blue-500",
+                {
+                  "text-red-500": value === item.value,
+                }
+              )}
               key={item.value}
-              color={!value.includes(item.value) ? "default" : "danger"}
+              onClick={() => {
+                setValue(item.value);
+              }}
             >
-              <span
-                className={classNames(
-                  !value.includes(item.value) && styles.custom,
-                  "text-sm"
-                )}
-              >
-                {item.label}
-              </span>
-            </Button>
+              {item.label}
+            </div>
           );
         })}
       </div>

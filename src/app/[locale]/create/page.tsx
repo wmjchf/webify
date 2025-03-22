@@ -4,11 +4,11 @@ import { ShareLink } from "./components/ShareLink";
 
 function Page() {
   return (
-    <div className={styles.page}>
-      <div className={classNames(styles.title)}>
-        <span className={"font-bold px-4"}>Share Link</span>
+    <div>
+      <div>
+        <span className={"text-[30px]font-bold px-4"}>Share Link</span>
       </div>
-      <div className={classNames(styles.content, "px-4")}>
+      <div className={classNames("px-4")}>
         <ShareLink></ShareLink>
       </div>
     </div>

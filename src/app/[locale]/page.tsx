@@ -4,6 +4,8 @@ import { FilterPage } from "../../components/FilterPage";
 import { NewsList } from "./components/NewsList";
 import styles from "./index.module.scss";
 import { BASE_URL } from "../../constant/url";
+import { Filter } from "../../components/Filter";
+import { IArticleSource, IArticleType } from "../../service/public";
 
 async function Page() {
   // const t = useTranslations("home");
@@ -12,17 +14,12 @@ async function Page() {
 
   const result = await resultJSON.json();
 
-  const articleSource = result.data.articleSource;
-  const articleType = result.data.articleType;
   const article = result.data.article;
-  // const data = result.data.rows;
-  // const total = result.data.count;
-  // console.log(articleSource, articleType, article, "ewrewrew");
+
   return (
-    <div className={styles.page}>
+    <div className="h-full">
       <FilterPage></FilterPage>
-      <div className="py-2"></div>
-      {/* <NewsList data={data} total={total}></NewsList> */}
+      <NewsList data={article}></NewsList>
     </div>
   );
 }

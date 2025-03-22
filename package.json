@@ -23,6 +23,7 @@
     "nextjs-toploader": "^3.7.15",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-infinite-scroll-component": "^6.1.0",
     "siwe": "^2.3.2",
     "viem": "2.21.55",
     "wagmi": "^2.14.3",

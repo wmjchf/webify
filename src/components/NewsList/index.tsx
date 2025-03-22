@@ -2,18 +2,21 @@
 
 import React, { useEffect, useState } from "react";
 
+import InfiniteScroll from "react-infinite-scroll-component";
+
 import styles from "./index.module.scss";
 
-import { NewsItem } from "../../../../components/NewItem";
-import { getShareNewsList, INewsItem } from "../../../../service/news";
+import { NewsItem } from "../NewItem";
+// import { getShareNewsList, INewsItem } from "../";
 
 interface INewsList {
   data: any[];
+  total: number;
 }
 export const NewsList: React.FC<INewsList> = (props) => {
-  const { data } = props;
+  const { data, total } = props;
 
-  const [list, setList] = useState<INewsItem[]>(data);
+  const [list, setList] = useState<any[]>(data);
   // useEffect(() => {
   //   getShareNewsList({
   //     pageSizes: 10,
@@ -22,7 +25,12 @@ export const NewsList: React.FC<INewsList> = (props) => {
   // }, []);
 
   return (
-    <>
+    <InfiniteScroll
+      dataLength={list.length}
+      hasMore={true}
+      loader={<></>}
+      next={() => {}}
+    >
       {list.map((item) => {
         return <NewsItem key={item.articleId} data={item}></NewsItem>;
       })}
@@ -31,6 +39,6 @@ export const NewsList: React.FC<INewsList> = (props) => {
           <span className="text-xs text-neutral-300">没有更多了</span>
         </div>
       )} */}
-    </>
+    </InfiniteScroll>
   );
 };

@@ -24,16 +24,13 @@ export const animals = [
 export const ShareLink: React.FC<IShareLink> = (props) => {
   const [errors, setErrors] = useState({});
 
-  const { getTypeList, typeList } = useCommonStore();
+  const { articleType } = useCommonStore();
   const [url, setUrl] = useState("");
   const [title, setTitle] = useState("");
   const [intro, setIntro] = useState("");
   const [isVideo, setIsVideo] = useState(0);
   const [videoUrl, setVideoUrl] = useState("");
   const [articleTypeIds, setArticleTypeIds] = useState("");
-  useEffect(() => {
-    getTypeList();
-  }, []);
 
   const onSubmit = async (event: any) => {
     event.preventDefault();
@@ -102,7 +99,7 @@ export const ShareLink: React.FC<IShareLink> = (props) => {
         }}
       />
       <div className="py-1"></div>
-      <Select
+      {/* <Select
         className="max-w-xs"
         label="Tags"
         name="articleTypeIds"
@@ -121,7 +118,7 @@ export const ShareLink: React.FC<IShareLink> = (props) => {
               {animal.name}
             </SelectItem>
           ))}
-      </Select>
+      </Select> */}
       {/* <div className="flex flex-col">
         <span className="mb-3">Image</span>
         <Image

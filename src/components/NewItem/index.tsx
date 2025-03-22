@@ -2,7 +2,6 @@ import React from "react";
 import classNames from "classnames";
 import Image from "next/image";
 import styles from "./index.module.scss";
-import Link from "next/link";
 import { Share } from "./components/Share";
 import { Collection } from "./components/Collection";
 import { LaterRead } from "./components/LaterRead";

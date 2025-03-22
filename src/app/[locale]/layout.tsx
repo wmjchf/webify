@@ -23,11 +23,14 @@ async function RootLayout({
 }) {
   const messages = await getMessages();
   const { user, token, uid } = await fetcherCurrentUser();
-  const { sourceList, typeList } = await fetcherHome();
+  const { articleSource, articleType } = await fetcherHome();
+
   return (
     <html lang="en">
       <body>
-        <StoreProvider commonState={{ token, user, uid, sourceList, typeList }}>
+        <StoreProvider
+          commonState={{ token, user, uid, articleSource, articleType }}
+        >
           <HeroUIProvider>
             <NextIntlClientProvider messages={messages}>
               <WalletProvider>
