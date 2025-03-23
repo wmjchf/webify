@@ -1,6 +1,6 @@
 // import { useTranslations } from "next-intl";
 import { NewsItem } from "../../../components/NewItem";
-import { NewsList } from "../components/NewsList";
+// import { NewsList } from "../components/NewsList";
 import { BASE_URL } from "../../../constant/url";
 import { cookies } from "next/headers";
 import styles from "./index.module.scss";
@@ -27,7 +27,7 @@ async function Page() {
 
   return (
     <div className={styles.page}>
-      <NewsList data={data} total={total}></NewsList>
+      {/* <NewsList data={data} total={total}></NewsList> */}
     </div>
   );
 }

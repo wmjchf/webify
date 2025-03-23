@@ -1,4 +1,5 @@
 import { fetcher } from "../utils/request";
+import { IArticle } from "./public";
 
 export const postAdd = (data: {
   title: string;
@@ -19,9 +20,13 @@ export const postAdd = (data: {
   );
 };
 
-export const uploadFile = (data: FormData) => {
-  return fetcher<{ filename: string; url: string }>("/general/lib/uploadFile", {
-    method: "POST",
-    body: data,
+export const getPostList = (params: {
+  sort: string;
+  page: number;
+  pageSize: number;
+}) => {
+  return fetcher<IArticle[]>("/userAdmin/post/list", {
+    method: "GET",
+    params,
   });
 };

@@ -5,35 +5,25 @@ import React, { useRef, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 import { NewsItem } from "../NewItem";
-import {
-  getArticleList,
-  IArticle,
-  IArticleSource,
-  IArticleType,
-} from "../../service/public";
-import { FilterPage } from "../FilterPage";
-import { Filter } from "../Filter";
-import { useCommonStore } from "../../store/common";
+import { getArticleList, IArticle } from "../../service/public";
 
-interface IHomeList {
+interface IPostList {
   data: IArticle[];
-
-  articleSource: IArticleSource[];
-  articleType: IArticleType[];
 }
-export const HomeList: React.FC<IHomeList> = (props) => {
-  const { data, articleSource, articleType } = props;
+export const PostList: React.FC<IPostList> = (props) => {
+  const { data } = props;
 
   const pageRef = useRef(1);
   const listRef = useRef<IArticle[]>(data);
   const [list, setList] = useState<IArticle[]>(data);
-  const [hasMore, setHasMore] = useState(true);
+  const [hasMore, setHasMore] = useState(data.length === 10);
 
   const articleTypeIdRef = useRef<string>("0");
   const sourceTypeIdIdRef = useRef<string>("0");
 
   const handleGetList = async () => {
     pageRef.current += 1;
+
     const result = await getArticleList({
       articleTypeId: articleTypeIdRef.current,
       sourceTypeId: sourceTypeIdIdRef.current,
@@ -58,36 +48,6 @@ export const HomeList: React.FC<IHomeList> = (props) => {
 
   return (
     <div>
-      <Filter
-        title="全部来源"
-        data={[
-          ...articleSource.map((item) => ({
-            value: `${item.id}`,
-            label: item.name,
-          })),
-        ]}
-        className="mt-4 mb-7"
-        onChange={(value) => {
-          sourceTypeIdIdRef.current = value;
-          reset();
-          handleGetList();
-        }}
-      ></Filter>
-      <Filter
-        title="全部类型"
-        data={[
-          ...articleType.map((item) => ({
-            value: `${item.id}`,
-            label: item.name,
-          })),
-        ]}
-        className="mb-7"
-        onChange={(value) => {
-          articleTypeIdRef.current = value;
-          reset();
-          handleGetList();
-        }}
-      ></Filter>
       <InfiniteScroll
         dataLength={list.length}
         hasMore={hasMore}
