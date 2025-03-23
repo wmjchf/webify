@@ -19,10 +19,10 @@ import React, {
   forwardRef,
   useImperativeHandle,
 } from "react";
-import { getWalletSignatureContent, login } from "../../../../service/user";
-import { useCommonStore } from "../../../../store/common";
 
 import styles from "./index.module.scss";
+import { getWalletSignatureContent, login } from "../../../service/user";
+import { useCommonStore } from "../../../store/common";
 
 export interface IConfirmWalletRef {
   open?: () => void;

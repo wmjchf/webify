@@ -37,37 +37,19 @@ export const login = (data: ILoginParams) => {
 interface IUpdateUserParams {
   nickname?: string;
   email?: string;
-  pictureUrl?: string;
+  picture_url?: string;
   bio?: string;
   twitter?: string;
   facebook?: string;
-  password?: string;
 }
 export const updateUser = (data: IUpdateUserParams) => {
-  return fetcher<string>(`/user/info/update`, {
+  return fetcher<string>(`/userAdmin/user/updateUserInfo`, {
     method: "POST",
     body: JSON.stringify(data),
     headers: {
       "content-type": "application/json",
     },
   });
-};
-
-export interface IUser {
-  bio?: string;
-  email?: string;
-  facebook?: string;
-  // fansCount?: string;
-  id: number;
-  // followCount?: string;
-  nickname?: string;
-  picture_url?: string;
-  wallet_address?: string;
-}
-export const getUserInfo = (userId?: string) => {
-  return fetcher<IUser>(
-    userId ? `/user/info/detail/{userId}` : `/user/info/detail`
-  );
 };
 
 interface IHandleFollowParams {

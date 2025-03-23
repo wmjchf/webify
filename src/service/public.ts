@@ -62,9 +62,10 @@ export interface IUser {
   wallet_address?: string;
 }
 
-export const getUserInfo = () => {
+export const getUserInfo = (uid: string) => {
   return fetcher<IUser>("/public/user/getUserInfo", {
     method: "GET",
+    params: { uid },
   });
 };
 

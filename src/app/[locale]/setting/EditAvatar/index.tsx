@@ -1,5 +1,5 @@
 "use client";
-import styles from "./index.module.scss";
+
 import classNames from "classnames";
 import { ListItem } from "../../../../components/ListItem";
 import {
@@ -11,10 +11,30 @@ import {
   Button,
   useDisclosure,
 } from "@heroui/react";
+
+import { UploadImage } from "../../../../components/BackTop/UploadImage";
+import { useCommonStore } from "../../../../store/common";
+import { DEFAULT_AVATAR } from "../../../../constant/url";
 import { useState } from "react";
+import { updateUser } from "../../../../service/user";
 
 export const EditAvatar = () => {
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
+  const { user, getUserInfo } = useCommonStore();
+  const [imageUrl, setImageUrl] = useState("");
+
+  const handleUpdateUser = async () => {
+    try {
+      const result = await updateUser({
+        picture_url: imageUrl,
+      });
+      if (result.code === 200) {
+        getUserInfo();
+        onClose();
+      }
+    } catch (error) {}
+  };
+
   return (
     <>
       <ListItem
@@ -28,35 +48,38 @@ export const EditAvatar = () => {
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1">
-                Modal Title
-              </ModalHeader>
-              <ModalBody>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Nullam pulvinar risus non risus hendrerit venenatis.
-                  Pellentesque sit amet hendrerit risus, sed porttitor quam.
-                </p>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Nullam pulvinar risus non risus hendrerit venenatis.
-                  Pellentesque sit amet hendrerit risus, sed porttitor quam.
-                </p>
-                <p>
-                  Magna exercitation reprehenderit magna aute tempor cupidatat
-                  consequat elit dolor adipisicing. Mollit dolor eiusmod sunt ex
-                  incididunt cillum quis. Velit duis sit officia eiusmod Lorem
-                  aliqua enim laboris do dolor eiusmod. Et mollit incididunt
-                  nisi consectetur esse laborum eiusmod pariatur proident Lorem
-                  eiusmod et. Culpa deserunt nostrud ad veniam.
-                </p>
+              <ModalHeader className="flex flex-col gap-1">AVATAR</ModalHeader>
+              <ModalBody className="flex justify-center items-center">
+                <UploadImage
+                  width={150}
+                  height={150}
+                  className="rounded-full w-[150px] h-[150px]"
+                  src={user?.picture_url || DEFAULT_AVATAR}
+                  onChanged={(url) => {
+                    setImageUrl(url);
+                  }}
+                ></UploadImage>
               </ModalBody>
               <ModalFooter>
-                <Button color="danger" variant="light" onPress={onClose}>
-                  Close
+                <Button
+                  color="danger"
+                  variant="bordered"
+                  className={classNames("rounded")}
+                  size="sm"
+                  onPress={() => {
+                    onClose();
+                  }}
+                >
+                  CANCEL
                 </Button>
-                <Button color="primary" onPress={onClose}>
-                  Action
+                <Button
+                  color="danger"
+                  onPress={handleUpdateUser}
+                  size="sm"
+                  className={classNames("rounded")}
+                  isLoading={false}
+                >
+                  CONFIRM
                 </Button>
               </ModalFooter>
             </>

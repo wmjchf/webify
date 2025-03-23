@@ -2,15 +2,14 @@
 
 import React from "react";
 
-import styles from "./index.module.scss";
 import classNames from "classnames";
-import { Link, usePathname } from "../../../../../../i18n/routing";
+import { Link, usePathname } from "../../i18n/routing";
 import { Button } from "@heroui/react";
 
 export const Nav = () => {
   const path = usePathname();
   return (
-    <div className={classNames(styles.router_list, "flex items-center gap-2")}>
+    <div className={classNames("flex items-center gap-2")}>
       <Link href={"/profile/shareLink"}>
         <Button
           radius="full"

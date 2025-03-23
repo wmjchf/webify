@@ -2,11 +2,14 @@ import classNames from "classnames";
 import Image from "next/image";
 import { Button, Input } from "@heroui/react";
 import { Link } from "../../i18n/routing";
-import { Login } from "../client/Login";
+
 import styles from "./index.module.scss";
+import { fetcherCurrentUser } from "../../function/user";
+import { Login } from "../Login";
 
 interface IHeader {}
 export const Header: React.FC<IHeader> = async (props) => {
+  const { user } = await fetcherCurrentUser();
   return (
     <div
       id="header"
@@ -48,7 +51,7 @@ export const Header: React.FC<IHeader> = async (props) => {
             Share
           </Button>
         </Link>
-        <Login></Login>
+        <Login user={user}></Login>
         {/* <EmailLogin></EmailLogin> */}
       </div>
     </div>

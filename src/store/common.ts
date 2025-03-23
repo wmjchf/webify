@@ -1,8 +1,12 @@
 import { create } from "zustand";
 import Cookies from "js-cookie";
 import { immer } from "zustand/middleware/immer";
-import { IUser, getUserInfo } from "../service/user";
-import { IArticleSource, IArticleType } from "../service/public";
+import {
+  getUserInfo,
+  IArticleSource,
+  IArticleType,
+  IUser,
+} from "../service/public";
 
 type Action = {
   setToken: (token: string) => void;
@@ -12,7 +16,6 @@ type Action = {
   logout: () => void;
 
   getUserInfo: () => void;
-  setUserInfo: (data: IUser | null) => void;
 
   hydrateCommon: (data: CommonState) => void;
 };
@@ -48,7 +51,6 @@ export const useCommonStore = create<CommonState & Action>()(
     setUid: (uid) =>
       set((state) => {
         state.uid = uid;
-
         Cookies.set("uid", `${uid}`);
       }),
     logout: () =>
@@ -62,17 +64,13 @@ export const useCommonStore = create<CommonState & Action>()(
 
     user: null,
     getUserInfo: async () => {
-      const { data } = await getUserInfo();
+      const { uid } = get();
+      const { data } = await getUserInfo(uid as string);
+      set((state) => {
+        state.user = data;
+      });
+    },
 
-      set((state) => {
-        state.user = data;
-      });
-    },
-    setUserInfo: (data) => {
-      set((state) => {
-        state.user = data;
-      });
-    },
     _hydrated: false,
 
     hydrateCommon: (data) => {

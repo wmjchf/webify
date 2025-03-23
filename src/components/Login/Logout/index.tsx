@@ -1,9 +1,10 @@
 "use client";
 
 import React from "react";
-import { useCommonStore } from "../../../../store/common";
+
 import { useDisconnect } from "wagmi";
 import { DropdownItem } from "@heroui/react";
+import { useCommonStore } from "../../../store/common";
 
 export const Logout = () => {
   const { logout } = useCommonStore();

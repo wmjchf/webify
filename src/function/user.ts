@@ -1,13 +1,12 @@
 import { cookies } from "next/headers";
-import { IUser } from "../service/user";
 import { BASE_URL } from "../constant/url";
+import { IUser } from "../service/public";
 
 export const fetcherCurrentUser = async () => {
   const cookieStore = cookies();
   const uid = cookieStore.get("uid")?.value;
   const token = cookieStore.get("token")?.value;
   let user: IUser | null = null;
-
   if (uid) {
     try {
       const str = new URLSearchParams({ uid }).toString();

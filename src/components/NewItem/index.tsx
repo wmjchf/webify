@@ -1,6 +1,7 @@
+"use client";
+
 import React from "react";
 import classNames from "classnames";
-import Image from "next/image";
 import { PlaceholderImage } from "../PlaceholderImage";
 import styles from "./index.module.scss";
 import { Share } from "./components/Share";
@@ -19,7 +20,6 @@ interface INewsItemPramas {
 
 export const NewsItem: React.FC<INewsItemPramas> = (props) => {
   const { data } = props;
-  const router = useRouter();
   const readNews = async () => {
     // await createHistory("1", `${data.articleId}`);
     window.open(data.url);
@@ -39,6 +39,7 @@ export const NewsItem: React.FC<INewsItemPramas> = (props) => {
             width={102}
             height={76}
             imgClassName="object-cover"
+            className="w-[102px] h-[76px] rounded-md"
           />
         </div>
         <div className={classNames(styles.right, "flex flex-col gap-3")}>

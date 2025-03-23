@@ -1,4 +1,5 @@
 import { BASE_URL } from "../constant/url";
+import { IUser } from "../service/public";
 
 export const fetcherHome = async () => {
   const resultJSON = await fetch(`${BASE_URL}/public/page/home`);
@@ -21,4 +22,22 @@ export const fetcherHomeArticle = async () => {
   const result = await resultJSON.json();
   const { article } = result.data;
   return { article };
+};
+
+export const fetcherOtherUser = async (uid: string) => {
+  let user: IUser | null = null;
+  if (uid) {
+    try {
+      const str = new URLSearchParams({ uid }).toString();
+      const resultJSON = await fetch(
+        `${BASE_URL}/public/user/getUserInfo?${str}`,
+        {
+          method: "GET",
+        }
+      );
+      const result = await resultJSON.json();
+      user = result.data;
+    } catch (error) {}
+  }
+  return user;
 };

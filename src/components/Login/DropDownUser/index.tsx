@@ -5,12 +5,13 @@ import {
   DropdownItem,
   DropdownMenu,
   DropdownTrigger,
-  Link,
 } from "@heroui/react";
+
 import React from "react";
 import { useDisconnect } from "wagmi";
-import { IUser } from "../../../../service/user";
-import { useCommonStore } from "../../../../store/common";
+import { IUser } from "../../../service/public";
+import { useCommonStore } from "../../../store/common";
+import { Link } from "../../../i18n/routing";
 
 interface IDropDownUser {
   user?: IUser | null;
@@ -29,13 +30,15 @@ export const DropDownUser: React.FC<IDropDownUser> = (props) => {
   });
   return (
     <Dropdown>
-      <DropdownTrigger>{avatar}</DropdownTrigger>
+      <DropdownTrigger>
+        <div>{avatar}</div>
+      </DropdownTrigger>
       <DropdownMenu aria-label="Dropdown menu with icons" variant="faded">
         <DropdownItem
           key="profile"
           startContent={<i className={"iconfont icon-Profile text-5xl"} />}
         >
-          <Link href={`/profile/${user?.id}`} className="text-black">
+          <Link href={`/my/shareLink`} className="text-black">
             Profile
           </Link>
         </DropdownItem>

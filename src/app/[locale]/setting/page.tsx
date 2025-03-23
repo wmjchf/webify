@@ -6,11 +6,11 @@ import { EditDescription } from "./EditDescription";
 
 function Page() {
   return (
-    <div className={styles.page}>
-      <div className={classNames(styles.title)}>
-        <span className={"font-bold px-4"}>Setting</span>
+    <div>
+      <div>
+        <span className={"font-bold text-[30px] px-4"}>Setting</span>
       </div>
-      <div className={classNames(styles.content, "px-4")}>
+      <div className={classNames("px-4")}>
         <DisplayName></DisplayName>
         <EditDescription></EditDescription>
         <EditAvatar></EditAvatar>

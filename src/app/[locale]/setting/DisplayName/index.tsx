@@ -13,7 +13,7 @@ import {
 } from "@heroui/react";
 import { useEffect, useState } from "react";
 import { useCommonStore } from "../../../../store/common";
-import { updateUser, getUserInfo } from "../../../../service/user";
+import { updateUser } from "../../../../service/user";
 
 export const DisplayName = () => {
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();

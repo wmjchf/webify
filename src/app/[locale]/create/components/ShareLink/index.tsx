@@ -13,7 +13,7 @@ import { createShareNews } from "../../../../../service/news";
 
 import { useCommonStore } from "../../../../../store/common";
 import { getUrlInfo } from "../../../../../service/common";
-import { UploadImage } from "../../../../../components/client/UploadImage";
+import { UploadImage } from "../../../../../components/BackTop/UploadImage";
 import { postAdd } from "../../../../../service/post";
 import { message } from "antd";
 
@@ -144,9 +144,12 @@ export const ShareLink: React.FC<IShareLink> = (props) => {
           <span className="text-[#f31260] ml-[1px]">*</span>
         </div>
         <UploadImage
+          width={204}
+          height={152}
           onChanged={(url) => {
             setImageUrl(url);
           }}
+          className="rounded-md w-[204px] h-[152px]"
         ></UploadImage>
       </div>
 

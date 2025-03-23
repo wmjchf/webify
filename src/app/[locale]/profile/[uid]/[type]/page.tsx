@@ -1,7 +1,6 @@
-import { Button } from "@heroui/react";
 import { Development } from "../../../../../components/Devlopment";
 
-function Page() {
+async function Page({ params: { type } }: { params: { type: string } }) {
   return (
     <div>
       <Development></Development>

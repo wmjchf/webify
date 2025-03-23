@@ -1,21 +1,17 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 
 import InfiniteScroll from "react-infinite-scroll-component";
-
-import styles from "./index.module.scss";
 
 import { NewsItem } from "../NewItem";
 import { getArticleList, IArticle } from "../../service/public";
 import { FilterPage } from "../FilterPage";
-import { get } from "http";
-// import { getShareNewsList, INewsItem } from "../";
 
-interface INewsList {
+interface IHomeList {
   data: IArticle[];
 }
-export const NewsList: React.FC<INewsList> = (props) => {
+export const HomeList: React.FC<IHomeList> = (props) => {
   const { data } = props;
 
   const pageRef = useRef(1);

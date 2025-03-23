@@ -40,8 +40,8 @@ export const EditDescription = () => {
   return (
     <>
       <ListItem
-        title="Display Name"
-        desc="Changing your display name won’t change your username"
+        title="Display Description"
+        desc="Changing your display description"
         onClick={onOpen}
       >
         <i className="iconfont icon-icon_arrow_right"></i>

@@ -1,9 +1,9 @@
 import { fetcherHomeArticle } from "../../function/common";
-import { NewsList } from "../../components/NewsList";
+import { HomeList } from "../../components/HomeList";
 
 async function Page() {
   const { article } = await fetcherHomeArticle();
-  return <NewsList data={article}></NewsList>;
+  return <HomeList data={article}></HomeList>;
 }
 
 export default Page;
