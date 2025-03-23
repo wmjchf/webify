@@ -8,24 +8,29 @@ import styles from "./index.module.scss";
 
 import { NewsItem } from "../NewItem";
 import { getArticleList, IArticle } from "../../service/public";
+import { FilterPage } from "../FilterPage";
+import { get } from "http";
 // import { getShareNewsList, INewsItem } from "../";
 
 interface INewsList {
   data: IArticle[];
-  total?: number;
 }
 export const NewsList: React.FC<INewsList> = (props) => {
-  const { data, total } = props;
+  const { data } = props;
+
   const pageRef = useRef(1);
   const listRef = useRef<IArticle[]>(data);
   const [list, setList] = useState<IArticle[]>(data);
   const [hasMore, setHasMore] = useState(true);
 
+  const articleTypeIdRef = useRef<string>("0");
+  const sourceTypeIdIdRef = useRef<string>("0");
+
   const handleGetList = async () => {
     pageRef.current += 1;
     const result = await getArticleList({
-      articleTypeId: 0,
-      sourceTypeId: 0,
+      articleTypeId: articleTypeIdRef.current,
+      sourceTypeId: sourceTypeIdIdRef.current,
       page: pageRef.current,
       pageSize: 10,
     });
@@ -39,26 +44,44 @@ export const NewsList: React.FC<INewsList> = (props) => {
     }
   };
 
+  const reset = () => {
+    pageRef.current = 0;
+    setHasMore(true);
+    listRef.current = [];
+  };
+
   return (
-    <InfiniteScroll
-      dataLength={list.length}
-      hasMore={hasMore}
-      loader={<></>}
-      next={handleGetList}
-      endMessage={
-        <p className="text-center pt-4 pb-3 text-neutral-300">
-          Yay! You have seen it all
-        </p>
-      }
-    >
-      {list.map((item) => {
-        return <NewsItem key={item.id} data={item}></NewsItem>;
-      })}
-      {/* {total === list.length && (
-        <div className="text-center py-3">
-          <span className="text-xs text-neutral-300">没有更多了</span>
-        </div>
-      )} */}
-    </InfiniteScroll>
+    <div>
+      <FilterPage
+        className="mb-2"
+        onSourceChange={(value) => {
+          sourceTypeIdIdRef.current = value;
+          reset();
+          handleGetList();
+        }}
+        onTypeChange={(value) => {
+          articleTypeIdRef.current = value;
+          reset();
+          handleGetList();
+        }}
+      ></FilterPage>
+      <InfiniteScroll
+        dataLength={list.length}
+        hasMore={hasMore}
+        loader={<></>}
+        next={() => {
+          handleGetList();
+        }}
+        endMessage={
+          <p className="text-center pt-4 pb-3 text-neutral-300">
+            Yay! You have seen it all
+          </p>
+        }
+      >
+        {list.map((item) => {
+          return <NewsItem key={item.id} data={item}></NewsItem>;
+        })}
+      </InfiniteScroll>
+    </div>
   );
 };

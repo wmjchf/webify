@@ -69,8 +69,8 @@ export const getUserInfo = () => {
 };
 
 interface IGetArticleListParams {
-  sourceTypeId: number;
-  articleTypeId: number;
+  sourceTypeId: string;
+  articleTypeId: string;
   page: number;
   pageSize: number;
 }
