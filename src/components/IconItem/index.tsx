@@ -18,8 +18,12 @@ export const IconItem: React.FC<IIconItem> = (props) => {
       <div
         className={classNames(
           styles.icon_item,
-          isSelected && styles.active,
-          "flex items-center gap-3 cursor-pointer rounded-md px-5"
+          // isSelected && styles.active,
+          "flex items-center gap-3 cursor-pointer rounded-md px-5 hover:bg-red-50",
+          {
+            "bg-red-100": isSelected,
+            "text-red-500": isSelected,
+          }
         )}
       >
         <div

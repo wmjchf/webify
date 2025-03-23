@@ -65,16 +65,16 @@ export const Nav: React.FC<INav> = (props) => {
               isSelected={path === "/favorite"}
               href={"/favorite"}
             ></IconItem>
-            <div className="py-3">
+            {/* <div className="py-3">
               <Divider></Divider>
-            </div>
+            </div> */}
             <IconItem
               icon="icon-fenxiang"
               title="Share"
               isSelected={path === "/share"}
               href={"/share"}
             ></IconItem>
-            <IconItem
+            {/* <IconItem
               icon="icon-wodeguanzhu"
               title="Following"
               isSelected={path === "/following"}
@@ -85,7 +85,7 @@ export const Nav: React.FC<INav> = (props) => {
               title="Fan"
               isSelected={path === "/fans"}
               href={"/fans"}
-            ></IconItem>
+            ></IconItem> */}
           </Collapse>
         </div>
       </div>
