@@ -26,9 +26,9 @@ export interface CommonState {
 
   _hydrated?: boolean;
 
-  articleSource?: IArticleSource[] | null;
+  articleSource: IArticleSource[];
 
-  articleType?: IArticleType[] | null;
+  articleType: IArticleType[];
 }
 
 export const useCommonStore = create<CommonState & Action>()(
@@ -37,6 +37,9 @@ export const useCommonStore = create<CommonState & Action>()(
 
     userId: undefined,
 
+    articleSource: [],
+
+    articleType: [],
     setToken: (token) =>
       set((state) => {
         state.token = token;
@@ -56,10 +59,6 @@ export const useCommonStore = create<CommonState & Action>()(
         state.uid = undefined;
         window.location.reload();
       }),
-
-    sourceList: null,
-
-    typeList: null,
 
     user: null,
     getUserInfo: async () => {

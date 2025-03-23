@@ -4,16 +4,18 @@ import {
   Form,
   Input,
   Button,
-  Image,
   Select,
   SelectItem,
   Textarea,
 } from "@heroui/react";
-import classNames from "classnames";
+import { useDebounceCallback } from "usehooks-ts";
 import { createShareNews } from "../../../../../service/news";
 
-import styles from "./index.module.scss";
 import { useCommonStore } from "../../../../../store/common";
+import { getUrlInfo } from "../../../../../service/common";
+import { UploadImage } from "../../../../../components/client/UploadImage";
+import { postAdd } from "../../../../../service/post";
+import { message } from "antd";
 
 interface IShareLink {}
 export const animals = [
@@ -28,8 +30,7 @@ export const ShareLink: React.FC<IShareLink> = (props) => {
   const [url, setUrl] = useState("");
   const [title, setTitle] = useState("");
   const [intro, setIntro] = useState("");
-  const [isVideo, setIsVideo] = useState(0);
-  const [videoUrl, setVideoUrl] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
   const [articleTypeIds, setArticleTypeIds] = useState("");
 
   const onSubmit = async (event: any) => {
@@ -51,17 +52,34 @@ export const ShareLink: React.FC<IShareLink> = (props) => {
       return;
     }
 
-    const result = createShareNews({
+    const result = await postAdd({
       title,
-      imageUrl:
-        "https://coinfire-img.oss-cn-hongkong.aliyuncs.com/0e51942e-b9b0-4944-97c2-3639a3de5c38.jpg",
-      isVideo,
-      videoUrl,
+      image_url: imageUrl,
+
       url,
       intro,
-      articleTypeIds,
+      article_type_ids: articleTypeIds,
     });
+    if (result.code === 200) {
+      message.success("Share Success");
+    }
   };
+
+  const handleGetUrlInfo = async (url: string) => {
+    if (!url) {
+      return;
+    }
+    const result = await getUrlInfo(url);
+    if (result.code === 200) {
+      setTitle(result.data.title);
+      setIntro(result.data.description);
+    }
+  };
+  const debouncedGetUrlInfo = useDebounceCallback(handleGetUrlInfo, 100);
+
+  useEffect(() => {
+    debouncedGetUrlInfo(url);
+  }, [url]);
   return (
     <Form
       className="w-full max-w-2xl flex flex-col gap-3 py-4"
@@ -71,7 +89,8 @@ export const ShareLink: React.FC<IShareLink> = (props) => {
       <Input
         label="Link URL"
         name="url"
-        radius={"md"}
+        labelPlacement="outside"
+        placeholder="parse Link URL"
         isRequired
         onChange={(event) => {
           setUrl(event.target.value);
@@ -81,8 +100,9 @@ export const ShareLink: React.FC<IShareLink> = (props) => {
       <Input
         label="Title"
         name="title"
+        value={title}
         labelPlacement="outside"
-        placeholder="parse title"
+        placeholder="parse Title"
         isRequired
         onChange={(event) => {
           setTitle(event.target.value);
@@ -91,15 +111,16 @@ export const ShareLink: React.FC<IShareLink> = (props) => {
       <div className="py-1"></div>
       <Textarea
         label="Description"
+        value={intro}
         name="intro"
         labelPlacement="outside"
-        placeholder="parse description"
+        placeholder="parse Description"
         onChange={(event) => {
           setIntro(event.target.value);
         }}
       />
       <div className="py-1"></div>
-      {/* <Select
+      <Select
         className="max-w-xs"
         label="Tags"
         name="articleTypeIds"
@@ -112,21 +133,22 @@ export const ShareLink: React.FC<IShareLink> = (props) => {
           setArticleTypeIds(`,${event.target.value},`);
         }}
       >
-        {typeList &&
-          typeList.map((animal) => (
-            <SelectItem key={animal.id} value={animal.id}>
-              {animal.name}
-            </SelectItem>
-          ))}
-      </Select> */}
-      {/* <div className="flex flex-col">
-        <span className="mb-3">Image</span>
-        <Image
-          alt="NextUI hero Image"
-          src="https://nextui.org/images/hero-card-complete.jpeg"
-          width={300}
-        />
-      </div> */}
+        {articleType?.map((item) => {
+          return <SelectItem key={item.id}>{item.name}</SelectItem>;
+        })}
+      </Select>
+
+      <div className="flex flex-col">
+        <div className="mb-3">
+          <span className="text-[#111813]">Image</span>
+          <span className="text-[#f31260] ml-[1px]">*</span>
+        </div>
+        <UploadImage
+          onChanged={(url) => {
+            setImageUrl(url);
+          }}
+        ></UploadImage>
+      </div>
 
       <div className="py-2"></div>
       <Button type="submit" color="danger" className="rounded">

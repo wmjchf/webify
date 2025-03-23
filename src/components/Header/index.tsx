@@ -12,7 +12,7 @@ export const Header: React.FC<IHeader> = async (props) => {
       id="header"
       className={classNames(
         styles.header,
-        "flex w-full h-14 px-2.5 justify-between fixed top-0 left-0 bg-white z-20"
+        "flex w-full h-14 px-2.5 justify-between fixed top-0 left-0 bg-white z-30"
       )}
     >
       <div

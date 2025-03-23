@@ -1,11 +1,17 @@
 import { fetcher } from "../utils/request";
 
-export const getUrlInfo = (url: string) => {
+export const postAdd = (data: {
+  title: string;
+  image_url: string;
+  url: string;
+  intro: string;
+  article_type_ids: string;
+}) => {
   return fetcher<{ title: string; description: string; image: string }>(
-    "/general/lib/getUrlInfo",
+    "/userAdmin/post/add",
     {
       method: "POST",
-      body: JSON.stringify({ url }),
+      body: JSON.stringify(data),
       headers: {
         "content-type": "application/json",
       },

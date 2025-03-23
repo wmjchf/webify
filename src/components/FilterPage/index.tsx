@@ -4,16 +4,18 @@ import React from "react";
 import classNames from "classnames";
 import { Select, SelectItem } from "@heroui/react";
 import { useCommonStore } from "../../store/common";
-import styles from "./index.module.scss";
 
-interface IFilterPage {}
+interface IFilterPage {
+  className?: string;
+}
 
-export const FilterPage: React.FC<IFilterPage> = () => {
+export const FilterPage: React.FC<IFilterPage> = (props) => {
+  const { className } = props;
   const { articleSource, articleType } = useCommonStore();
 
   return (
-    <div className={classNames(styles.filterPage, "flex gap-2")}>
-      {articleSource && (
+    <div className={classNames("flex gap-2", className)}>
+      {
         <Select
           className="max-w-xs rounded-full overflow-hidden"
           placeholder="Choose Type"
@@ -22,8 +24,8 @@ export const FilterPage: React.FC<IFilterPage> = () => {
             return <SelectItem key={item.id}>{item.name}</SelectItem>;
           })}
         </Select>
-      )}
-      {articleType && (
+      }
+      {
         <Select
           className="max-w-xs rounded-full overflow-hidden"
           placeholder="Choose Source"
@@ -32,7 +34,7 @@ export const FilterPage: React.FC<IFilterPage> = () => {
             return <SelectItem key={item.id}>{item.name}</SelectItem>;
           })}
         </Select>
-      )}
+      }
     </div>
   );
 };
