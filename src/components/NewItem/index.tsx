@@ -13,6 +13,7 @@ import { timeAgo } from "../../utils/time";
 import { DEFAULT_AVATAR } from "../../constant/url";
 import { useRouter } from "../../i18n/routing";
 import { IArticle } from "../../service/public";
+import Image from "next/image";
 
 interface INewsItemPramas {
   data: IArticle;
@@ -51,15 +52,15 @@ export const NewsItem: React.FC<INewsItemPramas> = (props) => {
                 // router.push(`/profile/${data.createdUserId}`);
               }}
             >
-              {/* <Image
-                src={data?.createdUserLogo || DEFAULT_AVATAR}
+              <Image
+                src={data?.from_id_info?.picture_url || DEFAULT_AVATAR}
                 alt=""
                 width={50}
                 height={50}
                 className="rounded-full overflow-hidden"
-              /> */}
+              />
               <span className="text-xs font-semibold">
-                {/* {data?.createdUserName} */}
+                {data?.from_id_info?.nickname}
               </span>
             </div>
             <span className={classNames(styles.dot)}></span>

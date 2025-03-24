@@ -37,6 +37,13 @@ export interface IArticle {
   updated: number;
   created: number;
   article_source: IArticleSource;
+  from_id_info: {
+    id: number;
+    uid: number;
+    nickname: string;
+    bio: string;
+    picture_url: string;
+  };
 }
 export interface IHomeData {
   articleSource: IArticleSource[];

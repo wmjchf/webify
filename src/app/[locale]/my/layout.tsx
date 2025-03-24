@@ -12,6 +12,7 @@ async function Page({
   params: { locale: string };
 }) {
   const { user } = await fetcherCurrentUser();
+
   return (
     <div>
       <User user={user} isCurrentUser={true}></User>
