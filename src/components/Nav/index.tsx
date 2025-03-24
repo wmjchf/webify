@@ -48,26 +48,6 @@ export const Nav = () => {
           <span className="text-sm font-semibold">History</span>
         </Button>
       </Link>
-
-      <Link href={"/profile/following"}>
-        <Button
-          radius="full"
-          size="sm"
-          variant={path === "/profile/following" ? "flat" : "light"}
-        >
-          <span className="text-sm font-semibold">Following</span>
-        </Button>
-      </Link>
-
-      <Link href={"/profile/fans"}>
-        <Button
-          radius="full"
-          size="sm"
-          variant={path === "/profile/fans" ? "flat" : "light"}
-        >
-          <span className="text-sm font-semibold">Fans</span>
-        </Button>
-      </Link>
     </div>
   );
 };
