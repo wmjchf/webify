@@ -36,15 +36,15 @@ export const DropDownUser: React.FC<IDropDownUser> = (props) => {
       <DropdownMenu aria-label="Dropdown menu with icons" variant="faded">
         <DropdownItem
           key="user"
-          className="hover:!border-transparent hover:!bg-transparent"
+          className="!border-[#E5E5E5] border-t-0 border-l-0 border-r-0 rounded-none hover:!bg-transparent"
           // startContent={<i className={"iconfont icon-Profile text-5xl"} />}
         >
           <div className="flex items-center justify-center gap-8">
-            <div className="flex flex-col items-center justify-center gap-1 text-[rgba(51,51,51,0.6)] hover:text-[#f31260]">
+            <div className="flex flex-col items-center justify-center gap-1 text-[#333333] hover:text-[#000000]">
               <span>23</span>
               <span>follower</span>
             </div>
-            <div className="flex flex-col items-center justify-center gap-1 text-[rgba(51,51,51,0.6)] hover:text-[#f31260]">
+            <div className="flex flex-col items-center justify-center gap-1 text-[#333333] hover:text-[#000000]">
               <span>34</span>
               <span>fans</span>
             </div>
