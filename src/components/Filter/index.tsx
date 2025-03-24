@@ -20,7 +20,7 @@ interface IFilter {
 export const Filter: React.FC<IFilter> = (props) => {
   const { data, title, className, onChange } = props;
 
-  const [value, setValue] = useState<string>();
+  const [value, setValue] = useState<string>("0");
 
   return (
     <div className={classNames("flex flex-row", className)}>
@@ -28,11 +28,11 @@ export const Filter: React.FC<IFilter> = (props) => {
         className={classNames(
           "shrink-0 h-[28px]  px-3 mr-4 box-border hover:text-red-500 relative text-sm cursor-pointer flex justify-center items-center rounded-full",
           {
-            "text-red-500": value === "0",
+            "text-[#f31260]": value === "0",
             "bg-red-100": value === "0",
-            "border-red-500": value === "0",
+            "border-[#f31260]": value === "0",
             border: value === "0",
-            "text-[#666666]": value !== "0",
+            "text-gray-900": value !== "0",
           }
         )}
         onClick={() => {
@@ -49,10 +49,10 @@ export const Filter: React.FC<IFilter> = (props) => {
               className={classNames(
                 "flex justify-center box-border items-center text-sm cursor-pointer hover:text-red-500 h-[28px] px-3 rounded-full",
                 {
-                  "text-red-500": value === item.value,
+                  "text-[#f31260]": value === item.value,
                   "bg-red-100": value === item.value,
-                  "text-[#666666]": value !== item.value,
-                  "border-red-500": value === item.value,
+                  "text-gray-900": value !== item.value,
+                  "border-[#f31260]": value === item.value,
                   border: value === item.value,
                 }
               )}
