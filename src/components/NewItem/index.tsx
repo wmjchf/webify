@@ -21,6 +21,7 @@ interface INewsItemPramas {
 
 export const NewsItem: React.FC<INewsItemPramas> = (props) => {
   const { data } = props;
+  const router = useRouter();
   const readNews = async () => {
     // await createHistory("1", `${data.articleId}`);
     window.open(data.url);
@@ -49,7 +50,7 @@ export const NewsItem: React.FC<INewsItemPramas> = (props) => {
               className={classNames(styles.avatar, "flex items-center gap-2")}
               onClick={(event) => {
                 event.stopPropagation();
-                // router.push(`/profile/${data.createdUserId}`);
+                router.push(`/profile/${data?.from_id_info?.uid}`);
               }}
             >
               <Image

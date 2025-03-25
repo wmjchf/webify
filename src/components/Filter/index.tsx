@@ -15,33 +15,44 @@ interface IFilter {
   title?: string;
   className?: string;
   onChange?: (value: string) => void;
+  value?: string;
+  multiple?: boolean;
 }
 
 export const Filter: React.FC<IFilter> = (props) => {
-  const { data, title, className, onChange } = props;
-
-  const [value, setValue] = useState<string>("0");
+  const { data, title, className, onChange, value, multiple } = props;
 
   return (
     <div className={classNames("flex flex-row", className)}>
-      <div
-        className={classNames(
-          "shrink-0 h-[28px]  px-3 mr-4 box-border hover:text-red-500 relative text-sm cursor-pointer flex justify-center items-center rounded-full",
-          {
-            "text-[#f31260]": value === "0",
-            "bg-red-100": value === "0",
-            "border-[#f31260]": value === "0",
-            border: value === "0",
-            "text-gray-900": value !== "0",
-          }
-        )}
-        onClick={() => {
-          setValue("0");
-          onChange && onChange("0");
-        }}
-      >
-        {title}
-      </div>
+      {title && (
+        <div
+          className={classNames(
+            "shrink-0 h-[28px]  px-3 mr-4 box-border hover:text-red-500 relative text-sm cursor-pointer flex justify-center items-center rounded-full",
+            {
+              "text-[#f31260]": value?.includes("0"),
+              "bg-red-100": value?.includes("0"),
+              "border-[#f31260]": value?.includes("0"),
+              border: value?.includes("0"),
+              "text-gray-900": !value?.includes("0"),
+            }
+          )}
+          onClick={() => {
+            if (value?.includes("0")) {
+              const newValue = value
+                .split(",")
+                .filter((item) => item !== "0")
+                .join(",");
+              onChange && onChange(newValue);
+            } else {
+              const newValue = multiple ? (value ? `${value},0` : "0") : "0";
+              onChange && onChange(newValue);
+            }
+          }}
+        >
+          {title}
+        </div>
+      )}
+
       <div className="flex flex-1 flex-row shrink-0 gap-5 flex-wrap">
         {data.map((item) => {
           return (
@@ -49,17 +60,29 @@ export const Filter: React.FC<IFilter> = (props) => {
               className={classNames(
                 "flex justify-center box-border items-center text-sm cursor-pointer hover:text-red-500 h-[28px] px-3 rounded-full",
                 {
-                  "text-[#f31260]": value === item.value,
-                  "bg-red-100": value === item.value,
-                  "text-gray-900": value !== item.value,
-                  "border-[#f31260]": value === item.value,
-                  border: value === item.value,
+                  "text-[#f31260]": value?.includes(item.value),
+                  "bg-red-100": value?.includes(item.value),
+                  "text-gray-900": !value?.includes(item.value),
+                  "border-[#f31260]": value?.includes(item.value),
+                  border: value === value?.includes(item.value),
                 }
               )}
               key={item.value}
               onClick={() => {
-                setValue(item.value);
-                onChange && onChange(item.value);
+                if (value?.includes(item.value)) {
+                  const newValue = value
+                    .split(",")
+                    .filter((child) => child !== item.value)
+                    .join(",");
+                  onChange && onChange(newValue);
+                } else {
+                  const newValue = multiple
+                    ? value
+                      ? `${value},${item.value}`
+                      : item.value
+                    : item.value;
+                  onChange && onChange(newValue);
+                }
               }}
             >
               {item.label}

@@ -1,23 +1,18 @@
 "use client";
 import { useEffect, useState } from "react";
-import {
-  Form,
-  Input,
-  Button,
-  Select,
-  SelectItem,
-  Textarea,
-} from "@heroui/react";
+import { Form, Input, Button, Textarea } from "@heroui/react";
 import { useDebounceCallback } from "usehooks-ts";
-import { createShareNews } from "../../../../../service/news";
+import { message } from "antd";
 
-import { useCommonStore } from "../../../../../store/common";
 import { getUrlInfo } from "../../../../../service/common";
 import { UploadImage } from "../../../../../components/BackTop/UploadImage";
 import { postAdd } from "../../../../../service/post";
-import { message } from "antd";
+import { Filter } from "../../../../../components/Filter";
+import { IArticleType } from "../../../../../service/public";
 
-interface IShareLink {}
+interface IShareLink {
+  articleType: IArticleType[];
+}
 export const animals = [
   { key: "solana", label: "solana" },
   { key: "ethereum", label: "ethereum" },
@@ -26,12 +21,13 @@ export const animals = [
 export const ShareLink: React.FC<IShareLink> = (props) => {
   const [errors, setErrors] = useState({});
 
-  const { articleType } = useCommonStore();
+  const { articleType } = props;
+
   const [url, setUrl] = useState("");
   const [title, setTitle] = useState("");
   const [intro, setIntro] = useState("");
   const [imageUrl, setImageUrl] = useState("");
-  const [articleTypeIds, setArticleTypeIds] = useState("");
+  const [articleTypeIds, setArticleTypeIds] = useState<string>();
 
   const onSubmit = async (event: any) => {
     event.preventDefault();
@@ -47,10 +43,10 @@ export const ShareLink: React.FC<IShareLink> = (props) => {
       return;
     }
 
-    if (!data.articleTypeIds) {
-      setErrors({ articleTypeIds: "tags is required" });
-      return;
-    }
+    // if (!data.articleTypeIds) {
+    //   setErrors({ articleTypeIds: "tags is required" });
+    //   return;
+    // }
 
     const result = await postAdd({
       title,
@@ -115,12 +111,30 @@ export const ShareLink: React.FC<IShareLink> = (props) => {
         name="intro"
         labelPlacement="outside"
         placeholder="parse Description"
+        minRows={2}
         onChange={(event) => {
           setIntro(event.target.value);
         }}
       />
-      <div className="py-1"></div>
-      <Select
+      <div className="pb-1"></div>
+      <div>
+        <span className="text-base">Tags</span>
+      </div>
+      <Filter
+        data={articleType.map((item) => {
+          return {
+            value: item.id.toString(),
+            label: item.name,
+          };
+        })}
+        multiple
+        className="h-[28px] mb-2"
+        value={articleTypeIds}
+        onChange={(v) => {
+          setArticleTypeIds(v);
+        }}
+      ></Filter>
+      {/* <Select
         className="max-w-xs"
         label="Tags"
         name="articleTypeIds"
@@ -135,13 +149,13 @@ export const ShareLink: React.FC<IShareLink> = (props) => {
       >
         {articleType?.map((item) => {
           return <SelectItem key={item.id}>{item.name}</SelectItem>;
-        })}
-      </Select>
+        })} */}
+      {/* </Select> */}
 
       <div className="flex flex-col">
         <div className="mb-3">
           <span className="text-[#111813]">Image</span>
-          <span className="text-[#f31260] ml-[1px]">*</span>
+          {/* <span className="text-[#f31260] ml-[1px]">*</span> */}
         </div>
         <UploadImage
           width={204}
