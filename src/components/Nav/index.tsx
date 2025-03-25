@@ -8,42 +8,59 @@ import { Button } from "@heroui/react";
 
 export const Nav = () => {
   const path = usePathname();
+
   return (
     <div className={classNames("flex items-center gap-2")}>
-      <Link href={"/profile/shareLink"}>
+      <Link href={"/my/share"}>
         <Button
           radius="full"
           size="sm"
-          variant={path === "/profile/shareLink" ? "flat" : "light"}
+          variant={"flat"}
+          className={classNames(
+            path === "/my/share" ? "bg-[#f31260] text-white" : "bg-transparent"
+          )}
         >
           <span className="text-sm font-semibold">Share Link</span>
         </Button>
       </Link>
-      <Link href={"/profile/collection"}>
+      <Link href={"/my/collect"}>
         <Button
           radius="full"
           size="sm"
-          variant={path === "/profile/collection" ? "flat" : "light"}
+          variant={"flat"}
+          className={classNames(
+            path === "/my/collect"
+              ? "bg-[#f31260] text-white"
+              : "bg-transparent"
+          )}
         >
           <span className="text-sm font-semibold">Collection</span>
         </Button>
       </Link>
 
-      <Link href={"/profile/readLater"}>
+      <Link href={"/my/later"}>
         <Button
           radius="full"
           size="sm"
-          variant={path === "/profile/readLater" ? "flat" : "light"}
+          variant={"flat"}
+          className={classNames(
+            path === "/my/later" ? "bg-[#f31260] text-white" : "bg-transparent"
+          )}
         >
           <span className="text-sm font-semibold">Read Later</span>
         </Button>
       </Link>
 
-      <Link href={"/profile/history"}>
+      <Link href={"/my/history"}>
         <Button
           radius="full"
           size="sm"
-          variant={path === "/profile/history" ? "flat" : "light"}
+          variant={"flat"}
+          className={classNames(
+            path === "/my/history"
+              ? "bg-[#f31260] text-white"
+              : "bg-transparent"
+          )}
         >
           <span className="text-sm font-semibold">History</span>
         </Button>
