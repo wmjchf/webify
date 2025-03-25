@@ -5,11 +5,12 @@ import React, { useEffect, useState } from "react";
 import { Button } from "@heroui/react";
 
 import { collectAdd, collectDel } from "../../../../service/collect";
+import { POSTTYPE } from "../../../../constant/type";
 interface ICollectionProps {
-  article_id: string;
+  articleId: string;
 }
 export const Collection: React.FC<ICollectionProps> = (props) => {
-  const { article_id } = props;
+  const { articleId } = props;
 
   const [isCollect, setIsCollect] = useState(false);
 
@@ -21,7 +22,7 @@ export const Collection: React.FC<ICollectionProps> = (props) => {
     let historyCollection =
       historyCollectionStr && JSON.parse(historyCollectionStr);
 
-    setIsCollect(!!(historyCollection && historyCollection[article_id]));
+    setIsCollect(!!(historyCollection && historyCollection[articleId]));
   }, []);
 
   const collectArticle = async () => {
@@ -30,7 +31,8 @@ export const Collection: React.FC<ICollectionProps> = (props) => {
     try {
       if (isCollect) {
         result = await collectDel({
-          article_id: article_id,
+          articleId: articleId,
+          typeId: POSTTYPE.ARTICLE,
         });
         if (result.code === 200) {
           const historyCollectionStr =
@@ -38,10 +40,10 @@ export const Collection: React.FC<ICollectionProps> = (props) => {
           let historyCollection =
             historyCollectionStr && JSON.parse(historyCollectionStr);
           if (historyCollection) {
-            historyCollection[article_id] = false;
+            historyCollection[articleId] = false;
           } else {
             historyCollection = {
-              [article_id]: false,
+              [articleId]: false,
             };
           }
           localStorage.setItem(
@@ -52,7 +54,8 @@ export const Collection: React.FC<ICollectionProps> = (props) => {
         }
       } else {
         result = await collectAdd({
-          article_id: article_id,
+          articleId: articleId,
+          typeId: POSTTYPE.ARTICLE,
         });
         if (result.code === 200) {
           const historyCollectionStr =
@@ -60,10 +63,10 @@ export const Collection: React.FC<ICollectionProps> = (props) => {
           let historyCollection =
             historyCollectionStr && JSON.parse(historyCollectionStr);
           if (historyCollection) {
-            historyCollection[article_id] = true;
+            historyCollection[articleId] = true;
           } else {
             historyCollection = {
-              [article_id]: true,
+              [articleId]: true,
             };
           }
           localStorage.setItem(

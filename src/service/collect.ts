@@ -1,7 +1,7 @@
 import { fetcher } from "../utils/request";
 import { IArticle } from "./public";
 
-export const collectAdd = (data: { article_id: string }) => {
+export const collectAdd = (data: { articleId: string; typeId: string }) => {
   return fetcher<boolean>("/userAdmin/collect/add", {
     method: "POST",
     body: JSON.stringify(data),
@@ -11,7 +11,7 @@ export const collectAdd = (data: { article_id: string }) => {
   });
 };
 
-export const collectDel = (data: { article_id: string }) => {
+export const collectDel = (data: { articleId: string; typeId: string }) => {
   return fetcher<boolean>("/userAdmin/collect/delete", {
     method: "POST",
     body: JSON.stringify(data),

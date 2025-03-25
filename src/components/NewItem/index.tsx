@@ -86,7 +86,7 @@ export const NewsItem: React.FC<INewsItemPramas> = (props) => {
           <div className={classNames(styles.three, "flex items-center gap-2")}>
             <Vote></Vote>
             <Share></Share>
-            <Collection article_id={`${data.id}`}></Collection>
+            <Collection articleId={`${data.id}`}></Collection>
             {/* <LaterRead newsId={`${data.id}`}></LaterRead> */}
           </div>
         </div>
