@@ -14,15 +14,16 @@ import {
 import { FilterPage } from "../FilterPage";
 import { Filter } from "../Filter";
 import { useCommonStore } from "../../store/common";
+import { IAllCollect } from "../../function/collect";
 
 interface IHomeList {
   data: IArticle[];
-
+  allCollectList: IAllCollect[];
   articleSource: IArticleSource[];
   articleType: IArticleType[];
 }
 export const HomeList: React.FC<IHomeList> = (props) => {
-  const { data, articleSource, articleType } = props;
+  const { data, articleSource, articleType, allCollectList } = props;
 
   const pageRef = useRef(1);
   const listRef = useRef<IArticle[]>(data);
@@ -31,6 +32,8 @@ export const HomeList: React.FC<IHomeList> = (props) => {
 
   const articleTypeIdRef = useRef<string>("0");
   const sourceTypeIdIdRef = useRef<string>("0");
+  const [articleTypeId, setArticleTypeId] = useState<string>("0");
+  const [sourceTypeId, setSourceTypeId] = useState<string>("0");
 
   const handleGetList = async () => {
     pageRef.current += 1;
@@ -59,6 +62,7 @@ export const HomeList: React.FC<IHomeList> = (props) => {
   return (
     <div>
       <Filter
+        value={sourceTypeId}
         title="全部来源"
         data={[
           ...articleSource.map((item) => ({
@@ -69,11 +73,13 @@ export const HomeList: React.FC<IHomeList> = (props) => {
         className="mt-4 mb-7"
         onChange={(value) => {
           sourceTypeIdIdRef.current = value;
+          setSourceTypeId(value);
           reset();
           handleGetList();
         }}
       ></Filter>
       <Filter
+        value={articleTypeId}
         title="全部类型"
         data={[
           ...articleType.map((item) => ({
@@ -84,6 +90,7 @@ export const HomeList: React.FC<IHomeList> = (props) => {
         className="mb-7"
         onChange={(value) => {
           articleTypeIdRef.current = value;
+          setArticleTypeId(value);
           reset();
           handleGetList();
         }}
@@ -102,7 +109,13 @@ export const HomeList: React.FC<IHomeList> = (props) => {
         }
       >
         {list.map((item) => {
-          return <NewsItem key={item.id} data={item}></NewsItem>;
+          return (
+            <NewsItem
+              key={item.id}
+              data={item}
+              allCollectList={allCollectList}
+            ></NewsItem>
+          );
         })}
       </InfiniteScroll>
     </div>

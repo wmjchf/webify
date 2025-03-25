@@ -25,7 +25,7 @@ export const getPostList = (params: {
   page: number;
   pageSize: number;
 }) => {
-  return fetcher<IArticle[]>("/userAdmin/post/list", {
+  return fetcher<{ list: IArticle[] }>("/userAdmin/post/list", {
     method: "GET",
     params,
   });

@@ -61,7 +61,7 @@ export const DropDownUser: React.FC<IDropDownUser> = (props) => {
           className="hover:!border-transparent hover:!bg-transparent hover:!bg-[#FFF0F5]"
           startContent={<i className={"iconfont icon-Profile text-5xl"} />}
         >
-          <Link href={`/my/shareLink`} className="text-[rgba(51,51,51,0.8)]">
+          <Link href={`/my/share`} className="text-[rgba(51,51,51,0.8)]">
             Profile
           </Link>
         </DropdownItem>

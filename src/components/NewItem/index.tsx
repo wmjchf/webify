@@ -15,16 +15,18 @@ import { useRouter } from "../../i18n/routing";
 import { IArticle } from "../../service/public";
 import Image from "next/image";
 import { useCommonStore } from "../../store/common";
+import { IAllCollect } from "../../function/collect";
 
 interface INewsItemPramas {
   data: IArticle;
+  allCollectList?: IAllCollect[];
+  apiType?: string;
 }
 
 export const NewsItem: React.FC<INewsItemPramas> = (props) => {
-  const { data } = props;
+  const { data, allCollectList, apiType } = props;
   const router = useRouter();
   const { user } = useCommonStore();
-
   const readNews = async () => {
     // await createHistory("1", `${data.articleId}`);
     window.open(data.url);
@@ -55,7 +57,7 @@ export const NewsItem: React.FC<INewsItemPramas> = (props) => {
                 event.stopPropagation();
 
                 if (user?.uid === data.from_id_info?.uid) {
-                  router.push(`/my/sharkLink`);
+                  router.push(`/my/share`);
                 } else {
                   router.push(`/profile/${data?.from_id_info?.uid}`);
                 }
@@ -86,7 +88,11 @@ export const NewsItem: React.FC<INewsItemPramas> = (props) => {
           <div className={classNames(styles.three, "flex items-center gap-2")}>
             <Vote></Vote>
             <Share></Share>
-            <Collection articleId={`${data.id}`}></Collection>
+            <Collection
+              articleId={`${data.articleId}`}
+              allCollectList={allCollectList}
+              apiType={apiType}
+            ></Collection>
             {/* <LaterRead newsId={`${data.id}`}></LaterRead> */}
           </div>
         </div>

@@ -6,23 +6,23 @@ import { Button } from "@heroui/react";
 
 import { collectAdd, collectDel } from "../../../../service/collect";
 import { POSTTYPE } from "../../../../constant/type";
+import { IAllCollect } from "../../../../function/collect";
 interface ICollectionProps {
   articleId: string;
+  allCollectList?: IAllCollect[];
+  apiType?: string;
 }
 export const Collection: React.FC<ICollectionProps> = (props) => {
-  const { articleId } = props;
-
+  const { articleId, allCollectList = [], apiType } = props;
   const [isCollect, setIsCollect] = useState(false);
 
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    const historyCollectionStr = localStorage.getItem("historyCollection");
-
-    let historyCollection =
-      historyCollectionStr && JSON.parse(historyCollectionStr);
-
-    setIsCollect(!!(historyCollection && historyCollection[articleId]));
+    setIsCollect(
+      allCollectList.some((item) => item.target_id === Number(articleId)) ||
+        apiType === "collect"
+    );
   }, []);
 
   const collectArticle = async () => {
@@ -35,21 +35,6 @@ export const Collection: React.FC<ICollectionProps> = (props) => {
           typeId: POSTTYPE.ARTICLE,
         });
         if (result.code === 200) {
-          const historyCollectionStr =
-            localStorage.getItem("historyCollection");
-          let historyCollection =
-            historyCollectionStr && JSON.parse(historyCollectionStr);
-          if (historyCollection) {
-            historyCollection[articleId] = false;
-          } else {
-            historyCollection = {
-              [articleId]: false,
-            };
-          }
-          localStorage.setItem(
-            "historyCollection",
-            JSON.stringify(historyCollection)
-          );
           setIsCollect(false);
         }
       } else {
@@ -58,21 +43,6 @@ export const Collection: React.FC<ICollectionProps> = (props) => {
           typeId: POSTTYPE.ARTICLE,
         });
         if (result.code === 200) {
-          const historyCollectionStr =
-            localStorage.getItem("historyCollection");
-          let historyCollection =
-            historyCollectionStr && JSON.parse(historyCollectionStr);
-          if (historyCollection) {
-            historyCollection[articleId] = true;
-          } else {
-            historyCollection = {
-              [articleId]: true,
-            };
-          }
-          localStorage.setItem(
-            "historyCollection",
-            JSON.stringify(historyCollection)
-          );
           setIsCollect(true);
         }
       }

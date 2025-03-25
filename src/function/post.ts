@@ -4,6 +4,11 @@ import { BASE_URL } from "../constant/url";
 export const fetcherUserPostList = async () => {
   const cookieStore = cookies();
   const token = cookieStore.get("token")?.value;
+  if (!token) {
+    return {
+      article: [],
+    };
+  }
   const str = new URLSearchParams({
     page: "1",
     pageSize: "10",

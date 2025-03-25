@@ -5,36 +5,44 @@ import React, { useRef, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 import { NewsItem } from "../NewItem";
-import { getArticleList, IArticle } from "../../service/public";
+import { IArticle } from "../../service/public";
+import { getPostList } from "../../service/post";
+import { getCollectList } from "../../service/collect";
 
 interface IPostList {
   data: IArticle[];
+  apiType: string;
 }
 export const PostList: React.FC<IPostList> = (props) => {
-  const { data } = props;
-
+  const { data, apiType } = props;
   const pageRef = useRef(1);
   const listRef = useRef<IArticle[]>(data);
   const [list, setList] = useState<IArticle[]>(data);
   const [hasMore, setHasMore] = useState(data.length === 10);
 
-  const articleTypeIdRef = useRef<string>("0");
-  const sourceTypeIdIdRef = useRef<string>("0");
-
   const handleGetList = async () => {
     pageRef.current += 1;
+    let result: IResponse<{ list: IArticle[] }> | null = null;
+    if (apiType === "share") {
+      result = await getPostList({
+        sort: "1",
+        page: pageRef.current,
+        pageSize: 10,
+      });
+    }
+    if (apiType === "collect") {
+      result = await getCollectList({
+        sort: "1",
+        page: pageRef.current,
+        pageSize: 10,
+      });
+    }
 
-    const result = await getArticleList({
-      articleTypeId: articleTypeIdRef.current,
-      sourceTypeId: sourceTypeIdIdRef.current,
-      page: pageRef.current,
-      pageSize: 10,
-    });
-    if (result.code === 200) {
-      const newList = [...listRef.current, ...result.data.article];
+    if (result?.code === 200) {
+      const newList = [...listRef.current, ...result.data.list];
       setList(newList);
       listRef.current = newList;
-      if (result.data.article.length < 10) {
+      if (result.data.list.length < 10) {
         setHasMore(false);
       }
     }
@@ -62,7 +70,9 @@ export const PostList: React.FC<IPostList> = (props) => {
         }
       >
         {list.map((item) => {
-          return <NewsItem key={item.id} data={item}></NewsItem>;
+          return (
+            <NewsItem key={item.id} data={item} apiType={apiType}></NewsItem>
+          );
         })}
       </InfiniteScroll>
     </div>

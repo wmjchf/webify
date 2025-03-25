@@ -26,7 +26,7 @@ export const getCollectList = (params: {
   page: number;
   pageSize: number;
 }) => {
-  return fetcher<IArticle[]>("/userAdmin/collect/list", {
+  return fetcher<{ list: IArticle[] }>("/userAdmin/collect/list", {
     method: "GET",
     params,
   });

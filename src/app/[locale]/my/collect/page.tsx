@@ -1,10 +1,10 @@
 import { PostList } from "../../../../components/PostList";
-import { fetcherUserPostList } from "../../../../function/post";
+import { fetcherUserCollectList } from "../../../../function/collect";
 
 async function Page() {
-  const { article } = await fetcherUserPostList();
+  const { article } = await fetcherUserCollectList();
 
-  return <PostList data={article}></PostList>;
+  return <PostList data={article} apiType="collect"></PostList>;
 }
 
 export default Page;
