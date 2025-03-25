@@ -3,10 +3,10 @@ import { IArticle } from "./public";
 
 export const postAdd = (data: {
   title: string;
-  image_url: string;
+  image_url?: string;
   url: string;
-  intro: string;
-  article_type_ids: string;
+  intro?: string;
+  article_type_ids?: string;
 }) => {
   return fetcher<{ title: string; description: string; image: string }>(
     "/userAdmin/post/add",

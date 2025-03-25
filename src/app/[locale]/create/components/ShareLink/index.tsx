@@ -13,11 +13,7 @@ import { IArticleType } from "../../../../../service/public";
 interface IShareLink {
   articleType: IArticleType[];
 }
-export const animals = [
-  { key: "solana", label: "solana" },
-  { key: "ethereum", label: "ethereum" },
-  { key: "elephant", label: "Elephant" },
-];
+
 export const ShareLink: React.FC<IShareLink> = (props) => {
   const [errors, setErrors] = useState({});
 
@@ -42,11 +38,6 @@ export const ShareLink: React.FC<IShareLink> = (props) => {
       setErrors({ title: "title is required" });
       return;
     }
-
-    // if (!data.articleTypeIds) {
-    //   setErrors({ articleTypeIds: "tags is required" });
-    //   return;
-    // }
 
     const result = await postAdd({
       title,
@@ -134,28 +125,10 @@ export const ShareLink: React.FC<IShareLink> = (props) => {
           setArticleTypeIds(v);
         }}
       ></Filter>
-      {/* <Select
-        className="max-w-xs"
-        label="Tags"
-        name="articleTypeIds"
-        placeholder="Choose Tags"
-        selectionMode="multiple"
-        labelPlacement={"outside"}
-        isRequired
-        multiple
-        onChange={(event) => {
-          setArticleTypeIds(`,${event.target.value},`);
-        }}
-      >
-        {articleType?.map((item) => {
-          return <SelectItem key={item.id}>{item.name}</SelectItem>;
-        })} */}
-      {/* </Select> */}
 
       <div className="flex flex-col">
         <div className="mb-3">
           <span className="text-[#111813]">Image</span>
-          {/* <span className="text-[#f31260] ml-[1px]">*</span> */}
         </div>
         <UploadImage
           width={204}

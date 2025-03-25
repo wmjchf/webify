@@ -14,6 +14,7 @@ import { DEFAULT_AVATAR } from "../../constant/url";
 import { useRouter } from "../../i18n/routing";
 import { IArticle } from "../../service/public";
 import Image from "next/image";
+import { useCommonStore } from "../../store/common";
 
 interface INewsItemPramas {
   data: IArticle;
@@ -22,6 +23,8 @@ interface INewsItemPramas {
 export const NewsItem: React.FC<INewsItemPramas> = (props) => {
   const { data } = props;
   const router = useRouter();
+  const { user } = useCommonStore();
+
   const readNews = async () => {
     // await createHistory("1", `${data.articleId}`);
     window.open(data.url);
@@ -50,7 +53,12 @@ export const NewsItem: React.FC<INewsItemPramas> = (props) => {
               className={classNames(styles.avatar, "flex items-center gap-2")}
               onClick={(event) => {
                 event.stopPropagation();
-                router.push(`/profile/${data?.from_id_info?.uid}`);
+
+                if (user?.uid === data.from_id_info?.uid) {
+                  router.push(`/my/sharkLink`);
+                } else {
+                  router.push(`/profile/${data?.from_id_info?.uid}`);
+                }
               }}
             >
               <Image

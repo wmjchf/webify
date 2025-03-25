@@ -62,7 +62,7 @@ export interface IUser {
   email?: string;
   facebook?: string;
   // fansCount?: string;
-  id: number;
+  uid: number;
   // followCount?: string;
   nickname?: string;
   picture_url?: string;
