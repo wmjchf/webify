@@ -16,6 +16,7 @@ import { IArticle } from "../../service/public";
 import Image from "next/image";
 import { useCommonStore } from "../../store/common";
 import { IAllCollect } from "../../function/list";
+import { historyAdd } from "../../service/hostory";
 
 interface INewsItemPramas {
   data: IArticle;
@@ -29,7 +30,10 @@ export const NewsItem: React.FC<INewsItemPramas> = (props) => {
   const router = useRouter();
   const { user } = useCommonStore();
   const readNews = async () => {
-    // await createHistory("1", `${data.articleId}`);
+    await historyAdd({
+      articleId:data.article_id.toString(),
+      typeId:'1'
+    })
     window.open(data.url);
   };
   return (

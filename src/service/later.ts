@@ -2,7 +2,7 @@
 import { fetcher } from "../utils/request";
 import { IArticle } from "./public";
 
-export const laterAdd = (data: { articleId: string; typeId: string }) => {
+export const laterAdd = (data: { targetId: string; typeId: string }) => {
   return fetcher<boolean>("/userAdmin/later/add", {
     method: "POST",
     body: JSON.stringify(data),
@@ -12,7 +12,7 @@ export const laterAdd = (data: { articleId: string; typeId: string }) => {
   });
 };
 
-export const laterDel = (data: { articleId: string; typeId: string }) => {
+export const laterDel = (data: { targetId: string; typeId: string }) => {
   return fetcher<boolean>("/userAdmin/later/delete", {
     method: "POST",
     body: JSON.stringify(data),

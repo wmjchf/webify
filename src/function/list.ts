@@ -23,7 +23,7 @@ export const fetcherUserList = async (type:string) => {
       },
     }
   );
-  console.log(token, "rewrwerew");
+  
   const result = await resultJSON.json();
 
   const { list } = result.data;

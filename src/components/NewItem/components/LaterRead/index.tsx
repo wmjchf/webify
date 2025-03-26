@@ -36,7 +36,7 @@ export const LaterRead: React.FC<ILaterReadProps> = (props) => {
     setIsLoading(true);
     try {
       if (isReadLater) {
-        result = await laterDel({ articleId, typeId: "1" });
+        result = await laterDel({ targetId:articleId, typeId: "1" });
         if (result.code === 200) {
           const historyReadLaterStr = localStorage.getItem("historyReadLater");
           let historyReadLater =
@@ -55,7 +55,7 @@ export const LaterRead: React.FC<ILaterReadProps> = (props) => {
           setIsReadLater(false);
         }
       } else {
-        result = await laterAdd({ articleId, typeId: "1" });
+        result = await laterAdd({ targetId:articleId, typeId: "1" });
         if (result.code === 200) {
           const historyReadLaterStr = localStorage.getItem("historyReadLater");
           let historyReadLater =

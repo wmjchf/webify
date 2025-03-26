@@ -8,12 +8,14 @@ async function Page() {
 
   const { articleSource, articleType } = await fetcherHome();
   const allCollectList = await fetcherUserAllList("collect");
+  const allLaterList = await fetcherUserAllList("later");
 
   return (
     <HomeList
       data={article}
       articleSource={articleSource}
       articleType={articleType}
+      allLaterList={allLaterList}
       allCollectList={allCollectList}
     ></HomeList>
   );
