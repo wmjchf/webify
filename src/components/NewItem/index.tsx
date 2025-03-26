@@ -26,7 +26,7 @@ interface INewsItemPramas {
 }
 
 export const NewsItem: React.FC<INewsItemPramas> = (props) => {
-  const { data, allCollectList, apiType,allLaterList } = props;
+  const { data, allCollectList, allLaterList } = props;
   const router = useRouter();
   const { user } = useCommonStore();
   const readNews = async () => {
@@ -96,7 +96,6 @@ export const NewsItem: React.FC<INewsItemPramas> = (props) => {
             <Collection
               articleId={`${data.article_id}`}
               allCollectList={allCollectList}
-              apiType={apiType}
             ></Collection>
             <LaterRead articleId={`${data.article_id}`} allLaterList={allLaterList}></LaterRead>
           </div>

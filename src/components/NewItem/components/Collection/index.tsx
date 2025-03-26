@@ -10,14 +10,12 @@ import { IAllCollect } from "../../../../function/list";
 interface ICollectionProps {
   articleId: string;
   allCollectList?: IAllCollect[];
-  apiType?: string;
 }
 export const Collection: React.FC<ICollectionProps> = (props) => {
-  const { articleId, allCollectList = [], apiType } = props;
+  const { articleId, allCollectList = [] } = props;
 
   const [isCollect, setIsCollect] = useState(
-    allCollectList.some((item) => item.target_id === Number(articleId)) ||
-      apiType === "collect"
+    allCollectList.some((item) => item.target_id === Number(articleId))
   );
 
   const [isLoading, setIsLoading] = useState(false);

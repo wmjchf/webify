@@ -15,5 +15,6 @@ export const StoreProvider: React.FC<IStoreProvider> = (props) => {
       hydrateCommon(commonState);
     }
   }, []);
+
   return <>{children}</>;
 };

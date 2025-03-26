@@ -10,13 +10,17 @@ import { getPostList } from "../../service/post";
 import { getCollectList } from "../../service/collect";
 import { NoData } from "../NoData";
 import { getLaterList } from "../../service/later";
+import { IAllCollect } from "../../function/list";
 
 interface IPostList {
   data: IArticle[];
   apiType: string;
+  allCollectList: IAllCollect[];
+  allLaterList:IAllCollect[];
+
 }
 export const PostList: React.FC<IPostList> = (props) => {
-  const { data, apiType } = props;
+  const { data, apiType,allCollectList,allLaterList } = props;
   const pageRef = useRef(1);
   const listRef = useRef<IArticle[]>(data);
   const [list, setList] = useState<IArticle[]>(data);
@@ -87,6 +91,8 @@ export const PostList: React.FC<IPostList> = (props) => {
           {list.map((item) => {
             return (
               <NewsItem
+                allCollectList={allCollectList}
+                allLaterList={allLaterList}
                 key={item.article_id}
                 data={item}
                 apiType={apiType}
