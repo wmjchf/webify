@@ -20,8 +20,8 @@ export const fetcherHomeArticle = async () => {
     `${BASE_URL}/public/page/home/getArticleList${searchParams}`
   );
   const result = await resultJSON.json();
-  const { article } = result.data;
-  return { article };
+  const { list } = result.data;
+  return { article: list };
 };
 
 export const fetcherOtherUser = async (uid: string) => {

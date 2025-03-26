@@ -89,7 +89,7 @@ export const NewsItem: React.FC<INewsItemPramas> = (props) => {
             <Vote></Vote>
             <Share></Share>
             <Collection
-              articleId={`${data.articleId}`}
+              articleId={`${data.article_id}`}
               allCollectList={allCollectList}
               apiType={apiType}
             ></Collection>

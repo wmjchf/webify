@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useRef, useState } from "react";
 
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -18,9 +17,9 @@ import { IAllCollect } from "../../function/collect";
 
 interface IHomeList {
   data: IArticle[];
-  allCollectList: IAllCollect[];
   articleSource: IArticleSource[];
   articleType: IArticleType[];
+  allCollectList: IAllCollect[];
 }
 export const HomeList: React.FC<IHomeList> = (props) => {
   const { data, articleSource, articleType, allCollectList } = props;
@@ -29,7 +28,6 @@ export const HomeList: React.FC<IHomeList> = (props) => {
   const listRef = useRef<IArticle[]>(data);
   const [list, setList] = useState<IArticle[]>(data);
   const [hasMore, setHasMore] = useState(true);
-
   const articleTypeIdRef = useRef<string>("0");
   const sourceTypeIdIdRef = useRef<string>("0");
   const [articleTypeId, setArticleTypeId] = useState<string>("0");
@@ -111,7 +109,7 @@ export const HomeList: React.FC<IHomeList> = (props) => {
         {list.map((item) => {
           return (
             <NewsItem
-              key={item.id}
+              key={item.article_id}
               data={item}
               allCollectList={allCollectList}
             ></NewsItem>

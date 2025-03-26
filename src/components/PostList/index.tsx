@@ -8,6 +8,7 @@ import { NewsItem } from "../NewItem";
 import { IArticle } from "../../service/public";
 import { getPostList } from "../../service/post";
 import { getCollectList } from "../../service/collect";
+import { NoData } from "../NoData";
 
 interface IPostList {
   data: IArticle[];
@@ -56,25 +57,35 @@ export const PostList: React.FC<IPostList> = (props) => {
 
   return (
     <div>
-      <InfiniteScroll
-        dataLength={list.length}
-        hasMore={hasMore}
-        loader={<></>}
-        next={() => {
-          handleGetList();
-        }}
-        endMessage={
-          <p className="text-center pt-4 pb-3 text-neutral-300">
-            Yay! You have seen it all
-          </p>
-        }
-      >
-        {list.map((item) => {
-          return (
-            <NewsItem key={item.id} data={item} apiType={apiType}></NewsItem>
-          );
-        })}
-      </InfiniteScroll>
+      {list.length === 0 ? (
+        <div className="h-[calc(100vh-210px)] flex justify-center items-center">
+          <NoData></NoData>
+        </div>
+      ) : (
+        <InfiniteScroll
+          dataLength={list.length}
+          hasMore={hasMore}
+          loader={<></>}
+          next={() => {
+            handleGetList();
+          }}
+          endMessage={
+            <p className="text-center pt-4 pb-3 text-neutral-300">
+              Yay! You have seen it all
+            </p>
+          }
+        >
+          {list.map((item) => {
+            return (
+              <NewsItem
+                key={item.article_id}
+                data={item}
+                apiType={apiType}
+              ></NewsItem>
+            );
+          })}
+        </InfiniteScroll>
+      )}
     </div>
   );
 };

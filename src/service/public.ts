@@ -18,7 +18,7 @@ export interface IArticleType {
 }
 
 export interface IArticle {
-  articleId: number;
+  article_id: number;
   title: string;
   image_url: string;
   is_video: number;

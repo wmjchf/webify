@@ -14,16 +14,13 @@ interface ICollectionProps {
 }
 export const Collection: React.FC<ICollectionProps> = (props) => {
   const { articleId, allCollectList = [], apiType } = props;
-  const [isCollect, setIsCollect] = useState(false);
+
+  const [isCollect, setIsCollect] = useState(
+    allCollectList.some((item) => item.target_id === Number(articleId)) ||
+      apiType === "collect"
+  );
 
   const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    setIsCollect(
-      allCollectList.some((item) => item.target_id === Number(articleId)) ||
-        apiType === "collect"
-    );
-  }, []);
 
   const collectArticle = async () => {
     let result = null;
