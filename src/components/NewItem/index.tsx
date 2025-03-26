@@ -15,16 +15,17 @@ import { useRouter } from "../../i18n/routing";
 import { IArticle } from "../../service/public";
 import Image from "next/image";
 import { useCommonStore } from "../../store/common";
-import { IAllCollect } from "../../function/collect";
+import { IAllCollect } from "../../function/list";
 
 interface INewsItemPramas {
   data: IArticle;
   allCollectList?: IAllCollect[];
+  allLaterList?:IAllCollect[];
   apiType?: string;
 }
 
 export const NewsItem: React.FC<INewsItemPramas> = (props) => {
-  const { data, allCollectList, apiType } = props;
+  const { data, allCollectList, apiType,allLaterList } = props;
   const router = useRouter();
   const { user } = useCommonStore();
   const readNews = async () => {
@@ -93,7 +94,7 @@ export const NewsItem: React.FC<INewsItemPramas> = (props) => {
               allCollectList={allCollectList}
               apiType={apiType}
             ></Collection>
-            {/* <LaterRead newsId={`${data.id}`}></LaterRead> */}
+            <LaterRead articleId={`${data.article_id}`} allLaterList={allLaterList}></LaterRead>
           </div>
         </div>
       </div>

@@ -6,66 +6,77 @@ import { Button } from "@heroui/react";
 import classNames from "classnames";
 import styles from "./index.module.scss";
 import { deleteReadLater, readLater } from "../../../../service/news";
+import { laterAdd, laterDel } from "../../../../service/later";
+import { IAllCollect } from "../../../../function/list";
 
 interface ILaterReadProps {
-  newsId: string;
-  typeId: string;
+  articleId: string;
+  allLaterList?: IAllCollect[];
+  apiType?: string;
 }
 
 export const LaterRead: React.FC<ILaterReadProps> = (props) => {
-  const { newsId, typeId } = props;
+  const { articleId,allLaterList = [],apiType } = props;
 
-  const [isReadLater, setIsReadLater] = useState(false);
+  const [isReadLater, setIsReadLater] = useState( allLaterList.some((item) => item.target_id === Number(articleId)) ||
+  apiType === "later");
 
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     const historyCollectionStr = localStorage.getItem("historyReadLater");
 
     let historyReadLater =
       historyCollectionStr && JSON.parse(historyCollectionStr);
 
-    setIsReadLater(!!(historyReadLater && historyReadLater[newsId]));
+    setIsReadLater(!!(historyReadLater && historyReadLater[articleId]));
   }, []);
 
   const readNews = async () => {
     let result = null;
-    if (isReadLater) {
-      result = await deleteReadLater(typeId, newsId);
-      if (result.code === 200) {
-        const historyReadLaterStr = localStorage.getItem("historyReadLater");
-        let historyReadLater =
-          historyReadLaterStr && JSON.parse(historyReadLaterStr);
-        if (historyReadLater) {
-          historyReadLater[newsId] = false;
-        } else {
-          historyReadLater = {
-            [newsId]: false,
-          };
+    setIsLoading(true);
+    try {
+      if (isReadLater) {
+        result = await laterDel({ articleId, typeId: "1" });
+        if (result.code === 200) {
+          const historyReadLaterStr = localStorage.getItem("historyReadLater");
+          let historyReadLater =
+            historyReadLaterStr && JSON.parse(historyReadLaterStr);
+          if (historyReadLater) {
+            historyReadLater[articleId] = false;
+          } else {
+            historyReadLater = {
+              [articleId]: false,
+            };
+          }
+          localStorage.setItem(
+            "historyReadLater",
+            JSON.stringify(historyReadLater)
+          );
+          setIsReadLater(false);
         }
-        localStorage.setItem(
-          "historyReadLater",
-          JSON.stringify(historyReadLater)
-        );
-        setIsReadLater(false);
-      }
-    } else {
-      result = await readLater(typeId, newsId);
-      if (result.code === 200) {
-        const historyReadLaterStr = localStorage.getItem("historyReadLater");
-        let historyReadLater =
-          historyReadLaterStr && JSON.parse(historyReadLaterStr);
-        if (historyReadLater) {
-          historyReadLater[newsId] = true;
-        } else {
-          historyReadLater = {
-            [newsId]: true,
-          };
+      } else {
+        result = await laterAdd({ articleId, typeId: "1" });
+        if (result.code === 200) {
+          const historyReadLaterStr = localStorage.getItem("historyReadLater");
+          let historyReadLater =
+            historyReadLaterStr && JSON.parse(historyReadLaterStr);
+          if (historyReadLater) {
+            historyReadLater[articleId] = true;
+          } else {
+            historyReadLater = {
+              [articleId]: true,
+            };
+          }
+          localStorage.setItem(
+            "historyReadLater",
+            JSON.stringify(historyReadLater)
+          );
+          setIsReadLater(true);
         }
-        localStorage.setItem(
-          "historyReadLater",
-          JSON.stringify(historyReadLater)
-        );
-        setIsReadLater(true);
       }
+    } catch (error) {
+    } finally {
+      setIsLoading(false);
     }
   };
   return (
@@ -75,6 +86,7 @@ export const LaterRead: React.FC<ILaterReadProps> = (props) => {
       variant="light"
       className={classNames(styles.laterRead)}
       onPress={readNews}
+      isLoading={isLoading}
     >
       <span>{isReadLater ? "unRead Later" : "Read Later"}</span>
     </Button>

@@ -6,7 +6,7 @@ import { Button } from "@heroui/react";
 
 import { collectAdd, collectDel } from "../../../../service/collect";
 import { POSTTYPE } from "../../../../constant/type";
-import { IAllCollect } from "../../../../function/collect";
+import { IAllCollect } from "../../../../function/list";
 interface ICollectionProps {
   articleId: string;
   allCollectList?: IAllCollect[];

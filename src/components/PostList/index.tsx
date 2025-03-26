@@ -9,6 +9,7 @@ import { IArticle } from "../../service/public";
 import { getPostList } from "../../service/post";
 import { getCollectList } from "../../service/collect";
 import { NoData } from "../NoData";
+import { getLaterList } from "../../service/later";
 
 interface IPostList {
   data: IArticle[];
@@ -33,6 +34,14 @@ export const PostList: React.FC<IPostList> = (props) => {
     }
     if (apiType === "collect") {
       result = await getCollectList({
+        sort: "1",
+        page: pageRef.current,
+        pageSize: 10,
+      });
+    }
+
+    if (apiType === "later") {
+      result = await getLaterList({
         sort: "1",
         page: pageRef.current,
         pageSize: 10,

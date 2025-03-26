@@ -13,7 +13,7 @@ import {
 import { FilterPage } from "../FilterPage";
 import { Filter } from "../Filter";
 import { useCommonStore } from "../../store/common";
-import { IAllCollect } from "../../function/collect";
+import { IAllCollect } from "../../function/list";
 
 interface IHomeList {
   data: IArticle[];

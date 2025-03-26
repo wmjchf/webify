@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import { BASE_URL } from "../constant/url";
 
-export const fetcherUserCollectList = async () => {
+export const fetcherUserList = async (type:string) => {
   const cookieStore = cookies();
   const token = cookieStore.get("token")?.value;
   const str = new URLSearchParams({
@@ -15,7 +15,7 @@ export const fetcherUserCollectList = async () => {
   }
   const searchParams = `?${str}`;
   const resultJSON = await fetch(
-    `${BASE_URL}/userAdmin/collect/list${searchParams}`,
+    `${BASE_URL}/userAdmin/${type}/list${searchParams}`,
     {
       method: "GET",
       headers: {
@@ -23,6 +23,7 @@ export const fetcherUserCollectList = async () => {
       },
     }
   );
+  console.log(token, "rewrwerew");
   const result = await resultJSON.json();
 
   const { list } = result.data;
@@ -33,13 +34,13 @@ export const fetcherUserCollectList = async () => {
 export interface IAllCollect {
   target_id: number;
 }
-export const fetcherUserAllCollectList = async () => {
+export const fetcherUserAllList = async (type:string) => {
   const cookieStore = cookies();
   const token = cookieStore.get("token")?.value;
   if (!token) {
     return [];
   }
-  const resultJSON = await fetch(`${BASE_URL}/userAdmin/collect/getAll`, {
+  const resultJSON = await fetch(`${BASE_URL}/userAdmin/${type}/getAll`, {
     method: "GET",
     headers: {
       Authorization: token as string,
