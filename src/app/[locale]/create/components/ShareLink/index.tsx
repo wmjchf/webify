@@ -9,6 +9,7 @@ import { UploadImage } from "../../../../../components/BackTop/UploadImage";
 import { postAdd } from "../../../../../service/post";
 import { Filter } from "../../../../../components/Filter";
 import { IArticleType } from "../../../../../service/public";
+import { useRouter } from "../../../../../i18n/routing";
 
 interface IShareLink {
   articleType: IArticleType[];
@@ -16,7 +17,8 @@ interface IShareLink {
 
 export const ShareLink: React.FC<IShareLink> = (props) => {
   const [errors, setErrors] = useState({});
-
+  const [loading,setLoading] = useState(false);
+  const router = useRouter();
   const { articleType } = props;
 
   const [url, setUrl] = useState("");
@@ -26,30 +28,38 @@ export const ShareLink: React.FC<IShareLink> = (props) => {
   const [articleTypeIds, setArticleTypeIds] = useState<string>();
 
   const onSubmit = async (event: any) => {
-    event.preventDefault();
+    try {
+      
+      event.preventDefault();
 
-    const data = Object.fromEntries(new FormData(event.currentTarget));
-
-    if (!data.url) {
-      setErrors({ url: "url is required" });
-      return;
+      const data = Object.fromEntries(new FormData(event.currentTarget));
+  
+      if (!data.url) {
+        setErrors({ url: "url is required" });
+        return;
+      }
+      if (!data.title) {
+        setErrors({ title: "title is required" });
+        return;
+      }
+      setLoading(true);
+      const result = await postAdd({
+        title,
+        image_url: imageUrl,
+  
+        url,
+        intro,
+        article_type_ids: articleTypeIds,
+      });
+      if (result.code === 200) {
+        router.replace("/my/share");
+      }
+    } catch (error) {
+      
+    }finally{
+      setLoading(false)
     }
-    if (!data.title) {
-      setErrors({ title: "title is required" });
-      return;
-    }
-
-    const result = await postAdd({
-      title,
-      image_url: imageUrl,
-
-      url,
-      intro,
-      article_type_ids: articleTypeIds,
-    });
-    if (result.code === 200) {
-      message.success("Share Success");
-    }
+   
   };
 
   const handleGetUrlInfo = async (url: string) => {
@@ -141,7 +151,7 @@ export const ShareLink: React.FC<IShareLink> = (props) => {
       </div>
 
       <div className="py-2"></div>
-      <Button type="submit" color="danger" className="rounded">
+      <Button type="submit" color="danger" className="rounded" isLoading={loading}>
         Share
       </Button>
     </Form>
