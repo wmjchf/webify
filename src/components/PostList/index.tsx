@@ -6,7 +6,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 
 import { NewsItem } from "../NewItem";
 import { IArticle } from "../../service/public";
-import { getPostList } from "../../service/post";
+import { getPostList, getPublicPostList } from "../../service/post";
 import { getCollectList } from "../../service/collect";
 import { NoData } from "../NoData";
 import { getLaterList } from "../../service/later";
@@ -16,11 +16,11 @@ interface IPostList {
   data: IArticle[];
   apiType: string;
   allCollectList: IAllCollect[];
-  allLaterList:IAllCollect[];
-
+  allLaterList: IAllCollect[];
+  uid?: string;
 }
 export const PostList: React.FC<IPostList> = (props) => {
-  const { data, apiType,allCollectList,allLaterList } = props;
+  const { data, apiType, allCollectList, allLaterList, uid } = props;
   const pageRef = useRef(1);
   const listRef = useRef<IArticle[]>(data);
   const [list, setList] = useState<IArticle[]>(data);
@@ -30,10 +30,11 @@ export const PostList: React.FC<IPostList> = (props) => {
     pageRef.current += 1;
     let result: IResponse<{ list: IArticle[] }> | null = null;
     if (apiType === "share") {
-      result = await getPostList({
+      result = await getPublicPostList({
         sort: "1",
         page: pageRef.current,
         pageSize: 10,
+        uid: uid as string,
       });
     }
     if (apiType === "collect") {

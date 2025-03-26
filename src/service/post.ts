@@ -30,3 +30,15 @@ export const getPostList = (params: {
     params,
   });
 };
+
+export const getPublicPostList = (params: {
+  sort: string;
+  page: number;
+  pageSize: number;
+  uid: string;
+}) => {
+  return fetcher<{ list: IArticle[] }>("/userAdmin/post/list", {
+    method: "GET",
+    params,
+  });
+};

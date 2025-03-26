@@ -41,3 +41,18 @@ export const fetcherOtherUser = async (uid: string) => {
   }
   return user;
 };
+
+export const fetcherPublicPost = async (uid: string) => {
+  // /public/post/list
+  const str = new URLSearchParams({
+    sort: "1",
+    page: "1",
+    pageSize: "10",
+    uid,
+  }).toString();
+  const searchParams = `?${str}`;
+  const resultJSON = await fetch(`${BASE_URL}/public/post/list${searchParams}`);
+  const result = await resultJSON.json();
+  const { list } = result.data;
+  return { article: list };
+};

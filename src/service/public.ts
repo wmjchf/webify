@@ -84,7 +84,7 @@ interface IGetArticleListParams {
 }
 
 export const getArticleList = (params: IGetArticleListParams) => {
-  return fetcher<{ article: IArticle[] }>("/public/page/home/getArticleList", {
+  return fetcher<{ list: IArticle[] }>("/public/page/home/getArticleList", {
     method: "GET",
     params,
   });

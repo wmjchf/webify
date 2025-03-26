@@ -20,10 +20,11 @@ interface IHomeList {
   articleSource: IArticleSource[];
   articleType: IArticleType[];
   allCollectList: IAllCollect[];
-  allLaterList:IAllCollect[];
+  allLaterList: IAllCollect[];
 }
 export const HomeList: React.FC<IHomeList> = (props) => {
-  const { data, articleSource, articleType, allCollectList,allLaterList } = props;
+  const { data, articleSource, articleType, allCollectList, allLaterList } =
+    props;
 
   const pageRef = useRef(1);
   const listRef = useRef<IArticle[]>(data);
@@ -43,10 +44,10 @@ export const HomeList: React.FC<IHomeList> = (props) => {
       pageSize: 10,
     });
     if (result.code === 200) {
-      const newList = [...listRef.current, ...result.data.article];
+      const newList = [...listRef.current, ...result.data.list];
       setList(newList);
       listRef.current = newList;
-      if (result.data.article.length < 10) {
+      if (result.data.list.length < 10) {
         setHasMore(false);
       }
     }
