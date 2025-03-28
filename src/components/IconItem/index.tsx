@@ -21,8 +21,8 @@ export const IconItem: React.FC<IIconItem> = (props) => {
           // isSelected && styles.active,
           "flex items-center gap-3 cursor-pointer rounded-md px-5 hover:bg-[#FFF0F5]",
           {
-            "bg-[#f31260]": isSelected,
-            "text-white": isSelected,
+            "!bg-[#f31260]": isSelected,
+            "!text-white": isSelected,
             "text-gray-900": !isSelected,
           }
         )}

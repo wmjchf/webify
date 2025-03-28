@@ -18,8 +18,7 @@ const requestInterceptor = (options: CustomRequestInit) => {
 
   options.headers = {
     ...options.headers,
-    ...headers,
-    "ngrok-skip-browser-warning": true,
+    ...headers
   };
   return options;
 };

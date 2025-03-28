@@ -4,7 +4,7 @@ import { useCommonStore } from "../../store/common";
 import styles from "./index.module.scss";
 
 export const Demo = () => {
-  const { name } = useCommonStore();
+  // const { name } = useCommonStore();
 
-  return <div className={styles.demo}>{name}</div>;
+  return <div className={styles.demo}></div>;
 };

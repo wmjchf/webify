@@ -34,7 +34,7 @@ export const ConfirmWallet = forwardRef<IConfirmWalletRef, IConfirmWallet>(
   (props, ref) => {
     const { address, isConnected, chainId } = useAccount();
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
-    const { setToken, setUid } = useCommonStore();
+    const { setToken, setUid, getUserInfo} = useCommonStore();
     const { signMessageAsync } = useSignMessage();
     const [signing, setSigning] = useState(false);
 
@@ -66,6 +66,8 @@ export const ConfirmWallet = forwardRef<IConfirmWalletRef, IConfirmWallet>(
           setSigning(false);
           setToken(token);
           setUid(`${uid}`);
+          getUserInfo();
+          
         }
       } catch (error) {
         console.log(error);

@@ -1,11 +1,13 @@
-import { Button } from "@heroui/react";
-import { Development } from "../../../components/Devlopment";
+// import { useTranslations } from "next-intl";
+import { AuthPage } from "../../../components/AuthPage";
+import styles from "./index.module.scss";
 
-function Page() {
+async function Page() {
+  // const t = useTranslations("home");
   return (
-    <div>
-      <Development></Development>
-    </div>
+    <AuthPage>
+      <div className={styles.page}></div>
+    </AuthPage>
   );
 }
 

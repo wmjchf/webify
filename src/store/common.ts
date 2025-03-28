@@ -56,7 +56,7 @@ export const useCommonStore = create<CommonState & Action>()(
     logout: () =>
       set((state) => {
         Cookies.remove("token");
-        Cookies.remove("userId");
+        Cookies.remove("uid");
         state.token = undefined;
         state.uid = undefined;
         window.location.reload();

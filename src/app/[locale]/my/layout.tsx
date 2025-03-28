@@ -4,6 +4,7 @@ import { Nav } from "../../../components/Nav";
 import { User } from "../../../components/User";
 
 import { fetcherCurrentUser } from "../../../function/user";
+import { AuthPage } from "../../../components/AuthPage";
 
 async function Page({
   children,
@@ -14,13 +15,15 @@ async function Page({
   const { user } = await fetcherCurrentUser();
 
   return (
-    <div>
-      <User user={user} isCurrentUser={true}></User>
-      <div className={classNames("pt-5")}>
-        <Nav></Nav>
-        <div className={classNames("py-3")}>{children}</div>
+    <AuthPage>
+      <div>
+        <User user={user} isCurrentUser={true}></User>
+        <div className={classNames("pt-5")}>
+          <Nav></Nav>
+          <div className={classNames("py-3")}>{children}</div>
+        </div>
       </div>
-    </div>
+    </AuthPage>
   );
 }
 

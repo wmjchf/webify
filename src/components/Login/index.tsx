@@ -31,12 +31,6 @@ export const Login: React.FC<ILogin> = (props) => {
             imgClassName="object-cover"
             className="w-[30px] h-[30px] rounded-full"
           />
-          // <Image
-          //   src={mergeUser.picture_url || DEFAULT_AVATAR}
-          //   width={30}
-          //   height={30}
-          //   alt=""
-          // ></Image>
         }
       ></DropDownUser>
     );

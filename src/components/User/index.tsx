@@ -23,7 +23,7 @@ export const User: React.FC<IUserProps> = (props) => {
   const doFollow = async () => {
     const result = await handleFollow({
       typeId: 1,
-      followUserId: user?.id as number,
+      followUserId: user?.uid as number,
       status: 1,
     });
   };
