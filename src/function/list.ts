@@ -18,6 +18,7 @@ export const fetcherUserList = async (type:string) => {
     `${BASE_URL}/userAdmin/${type}/list${searchParams}`,
     {
       method: "GET",
+      cache: "no-cache",
       headers: {
         Authorization: token as string,
       },
@@ -42,6 +43,7 @@ export const fetcherUserAllList = async (type:string) => {
   }
   const resultJSON = await fetch(`${BASE_URL}/userAdmin/${type}/getAll`, {
     method: "GET",
+    cache: "no-cache",
     headers: {
       Authorization: token as string,
     },

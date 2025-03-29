@@ -9,8 +9,8 @@ import {
 } from 'wagmi/chains';
 
 export const config = getDefaultConfig({
-  appName: 'RainbowKit demo',
-  projectId: 'YOUR_PROJECT_ID',
+  appName: 'webify',
+  projectId: 'd1f6f05b749ec6d832c8951abeca3038',
   chains: [
     mainnet,
     polygon,

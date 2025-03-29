@@ -35,6 +35,7 @@ export const fetcherOtherUser = async (uid: string) => {
         `${BASE_URL}/public/user/getUserInfo?${str}`,
         {
           method: "GET",
+          cache: "no-cache"
         }
       );
       const result = await resultJSON.json();
@@ -53,7 +54,9 @@ export const fetcherPublicPost = async (uid: string) => {
     uid,
   }).toString();
   const searchParams = `?${str}`;
-  const resultJSON = await fetch(`${BASE_URL}/public/post/list${searchParams}`);
+  const resultJSON = await fetch(`${BASE_URL}/public/post/list${searchParams}`,{
+    cache: "no-cache"
+  });
   const result = await resultJSON.json();
   const { list } = result.data;
   return { article: list };
