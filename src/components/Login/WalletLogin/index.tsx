@@ -1,8 +1,6 @@
 "use client";
 
-import { useRef } from "react";
 import { WalletConnect } from "../WalletConnect";
-import { ConfirmWallet, IConfirmWalletRef } from "../ConfirmWallet";
 import { useCommonStore } from "../../../store/common";
 import { IUser } from "../../../service/public";
 
@@ -12,9 +10,9 @@ interface IWalletLogin {
   user: IUser | null;
 }
 export const WalletLogin: React.FC<IWalletLogin> = (props) => {
-  const { user: clientUser } = useCommonStore();
+  const { user: clientUser, toggleConfirmLoginOpen } = useCommonStore();
   const { children, user } = props;
-  const confirmWalletRef = useRef<IConfirmWalletRef>(null);
+
   const mergeUser = clientUser || user;
 
   if (mergeUser) {
@@ -25,13 +23,12 @@ export const WalletLogin: React.FC<IWalletLogin> = (props) => {
       <WalletConnect
         onClick={() => {
           if (!mergeUser) {
-            confirmWalletRef.current?.open && confirmWalletRef.current?.open();
+            toggleConfirmLoginOpen();
           }
         }}
       >
         {children}
       </WalletConnect>
-      <ConfirmWallet ref={confirmWalletRef}></ConfirmWallet>
     </>
   );
 };

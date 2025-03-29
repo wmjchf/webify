@@ -18,6 +18,8 @@ type Action = {
   getUserInfo: () => void;
 
   hydrateCommon: (data: CommonState) => void;
+
+  toggleConfirmLoginOpen: () => void;
 };
 
 export interface CommonState {
@@ -28,6 +30,8 @@ export interface CommonState {
   user?: IUser | null;
 
   _hydrated?: boolean;
+
+  confirmLoginOpen?: boolean;
 
   articleSource: IArticleSource[];
 
@@ -43,6 +47,8 @@ export const useCommonStore = create<CommonState & Action>()(
     articleSource: [],
 
     articleType: [],
+
+    confirmLoginOpen: false,
     setToken: (token) =>
       set((state) => {
         state.token = token;
@@ -83,5 +89,11 @@ export const useCommonStore = create<CommonState & Action>()(
         state.articleType = data.articleType;
       });
     },
+    toggleConfirmLoginOpen: () =>{
+      const data = get();
+      set((state) => {
+        state.confirmLoginOpen = !data.confirmLoginOpen;
+      });
+    }
   }))
 );

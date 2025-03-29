@@ -24,123 +24,107 @@ import styles from "./index.module.scss";
 import { getWalletSignatureContent, login } from "../../../service/user";
 import { useCommonStore } from "../../../store/common";
 
-export interface IConfirmWalletRef {
-  open?: () => void;
-}
-interface IConfirmWallet {
-  ref?: React.Ref<IConfirmWalletRef>;
-}
-export const ConfirmWallet = forwardRef<IConfirmWalletRef, IConfirmWallet>(
-  (props, ref) => {
-    const { address, isConnected, chainId } = useAccount();
-    const { isOpen, onOpen, onOpenChange } = useDisclosure();
-    const { setToken, setUid, getUserInfo} = useCommonStore();
-    const { signMessageAsync } = useSignMessage();
-    const [signing, setSigning] = useState(false);
 
-    const { disconnect } = useDisconnect();
+export const ConfirmWallet = () => {
+  const { address, isConnected, chainId } = useAccount();
+  const {confirmLoginOpen,toggleConfirmLoginOpen} = useCommonStore();
+  const { setToken, setUid, getUserInfo} = useCommonStore();
+  const { signMessageAsync } = useSignMessage();
+  const [signing, setSigning] = useState(false);
 
-    async function signInWithEthereum() {
-      if (!address) {
-        return;
-      }
-      try {
-        const {
-          data: { message },
-        } = await getWalletSignatureContent();
+  const { disconnect } = useDisconnect();
 
-        if (message) {
-          setSigning(true);
-
-          const signature = await signMessageAsync({
-            message,
-          });
-
-          const {
-            data: { token, uid },
-          } = await login({
-            signature,
-            walletAddress: address,
-            message,
-          });
-          setSigning(false);
-          setToken(token);
-          setUid(`${uid}`);
-          getUserInfo();
-          
-        }
-      } catch (error) {
-        console.log(error);
-      }
+  async function signInWithEthereum() {
+    if (!address) {
+      return;
     }
+    try {
+      const {
+        data: { message },
+      } = await getWalletSignatureContent();
 
-    useEffect(() => {
-      if (isConnected && address && !Cookies.get("token")) {
-        onOpen();
+      if (message) {
+        setSigning(true);
+
+        const signature = await signMessageAsync({
+          message,
+        });
+
+        const {
+          data: { token, uid },
+        } = await login({
+          signature,
+          walletAddress: address,
+          message,
+        });
+        setSigning(false);
+        setToken(token);
+        setUid(`${uid}`);
+        getUserInfo();
+        
       }
-    }, [isConnected, address]);
-
-    useImperativeHandle(
-      ref,
-      () => {
-        return {
-          open: onOpen,
-        };
-      },
-      []
-    );
-    return (
-      <Modal
-        isOpen={isOpen}
-        onOpenChange={onOpenChange}
-        className={classNames("rounded")}
-      >
-        <ModalContent>
-          {(onClose) => (
-            <>
-              <ModalHeader className="flex flex-col gap-1">
-                CONNECT WALLET
-              </ModalHeader>
-              <ModalBody>
-                <p className="text-sm">
-                  You are connecting the following address:
-                </p>
-                <p
-                  className={classNames(
-                    styles.address,
-                    "text-sm rounded-full text-center py-2"
-                  )}
-                >
-                  {address}
-                </p>
-              </ModalBody>
-              <ModalFooter>
-                <Button
-                  color="danger"
-                  variant="bordered"
-                  className={classNames("rounded")}
-                  size="sm"
-                  onPress={() => {
-                    onClose();
-                    disconnect();
-                  }}
-                >
-                  DISCONNECT
-                </Button>
-                <Button
-                  color="danger"
-                  onPress={signInWithEthereum}
-                  size="sm"
-                  className={classNames("rounded")}
-                  isLoading={signing}
-                >
-                  CONFIRM
-                </Button>
-              </ModalFooter>
-            </>
-          )}
-        </ModalContent>
-      </Modal>
-    );
+    } catch (error) {
+      console.log(error);
+    }
   }
-);
+
+  useEffect(() => {
+    if (isConnected && address && !Cookies.get("token")) {
+      toggleConfirmLoginOpen();
+    }
+  }, [isConnected, address]);
+
+  return (
+    <Modal
+      isOpen={confirmLoginOpen}
+      onOpenChange={toggleConfirmLoginOpen}
+      className={classNames("rounded")}
+    >
+      <ModalContent>
+        {(onClose) => (
+          <>
+            <ModalHeader className="flex flex-col gap-1">
+              CONNECT WALLET
+            </ModalHeader>
+            <ModalBody>
+              <p className="text-sm">
+                You are connecting the following address:
+              </p>
+              <p
+                className={classNames(
+                  styles.address,
+                  "text-sm rounded-full text-center py-2"
+                )}
+              >
+                {address}
+              </p>
+            </ModalBody>
+            <ModalFooter>
+              <Button
+                color="danger"
+                variant="bordered"
+                className={classNames("rounded")}
+                size="sm"
+                onPress={() => {
+                  onClose();
+                  disconnect();
+                }}
+              >
+                DISCONNECT
+              </Button>
+              <Button
+                color="danger"
+                onPress={signInWithEthereum}
+                size="sm"
+                className={classNames("rounded")}
+                isLoading={signing}
+              >
+                CONFIRM
+              </Button>
+            </ModalFooter>
+          </>
+        )}
+      </ModalContent>
+    </Modal>
+  );
+}

@@ -12,6 +12,7 @@ import { fetcherCurrentUser } from "../../function/user";
 import "../../styles/globals.css";
 import "../../styles/iconfont.css";
 import { fetcherHome } from "../../function/common";
+import { ConfirmWallet } from "../../components/Login/ConfirmWallet";
 
 async function RootLayout({
   children,
@@ -35,6 +36,7 @@ async function RootLayout({
               <WalletProvider>
                 <Header></Header>
                 <Content>{children}</Content>
+                <ConfirmWallet></ConfirmWallet>
               </WalletProvider>
             </NextIntlClientProvider>
           </HeroUIProvider>
