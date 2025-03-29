@@ -7,13 +7,16 @@ import { Button } from "@heroui/react";
 import { collectAdd, collectDel } from "../../../../service/collect";
 import { POSTTYPE } from "../../../../constant/type";
 import { IAllCollect } from "../../../../function/list";
+import { WalletLogin } from "../../../Login/WalletLogin";
+import { useCommonStore } from "../../../../store/common";
+import { IUser } from "../../../../service/public";
 interface ICollectionProps {
   articleId: string;
   allCollectList?: IAllCollect[];
 }
 export const Collection: React.FC<ICollectionProps> = (props) => {
   const { articleId, allCollectList = [] } = props;
-
+  const { user } = useCommonStore();
   const [isCollect, setIsCollect] = useState(
     allCollectList.some((item) => item.target_id === Number(articleId))
   );
@@ -48,16 +51,28 @@ export const Collection: React.FC<ICollectionProps> = (props) => {
   };
 
   return (
-    <Button
-      radius="full"
-      size="sm"
-      variant="light"
-      onPress={collectArticle}
-      isLoading={isLoading}
-    >
-      <span className="text-[rgb(92, 108, 116)]">
-        {isCollect ? "unCollection" : "Collection"}
-      </span>
-    </Button>
+    <WalletLogin user={user as IUser}>
+      {(onClick) => {
+        return (
+          <Button
+            radius="full"
+            size="sm"
+            variant="light"
+            onPress={() => {
+              if (onClick) {
+                onClick();
+              } else {
+                collectArticle();
+              }
+            }}
+            isLoading={isLoading}
+          >
+            <span className="text-[rgb(92, 108, 116)]">
+              {isCollect ? "unCollection" : "Collection"}
+            </span>
+          </Button>
+        );
+      }}
+    </WalletLogin>
   );
 };

@@ -42,16 +42,28 @@ export const DropDownUser: React.FC<IDropDownUser> = (props) => {
           <div className="flex items-center justify-center">{avatar}</div>
         </DropdownItem>
         <DropdownItem
+          key="nickname"
+          className="flex items-center justify-center border-0 rounded-none hover:!bg-transparent"
+        >
+          <div className="flex items-center justify-center">
+            {user?.nickname}
+          </div>
+        </DropdownItem>
+        <DropdownItem
           key="user"
           className="!border-[#E5E5E5] border-t-0 border-l-0 border-r-0 rounded-none hover:!bg-transparent"
         >
           <div className="flex items-center justify-center gap-8">
             <div className="flex flex-col items-center justify-center gap-1 cursor-pointer">
-              <span className="font-bold text-[#333]">23</span>
+              <span className="font-bold text-[#333]">
+                {user?.followers_count || 0}
+              </span>
               <span className="text-[rgba(51,51,51,0.6)]">follower</span>
             </div>
             <div className="flex flex-col items-center justify-center gap-1 cursor-pointer">
-              <span className="font-bold text-[#333]">34</span>
+              <span className="font-bold text-[#333]">
+                {user?.following_count || 0}
+              </span>
               <span className="text-[rgba(51,51,51,0.6)]">fans</span>
             </div>
           </div>

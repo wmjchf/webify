@@ -17,7 +17,7 @@ async function Page({
   return (
     <AuthPage>
       <div>
-        <User user={user} isCurrentUser={true}></User>
+        <User user={user} isMy={true}></User>
         <div className={classNames("pt-5")}>
           <Nav></Nav>
           <div className={classNames("py-3")}>{children}</div>

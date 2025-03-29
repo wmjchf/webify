@@ -23,16 +23,7 @@ async function Page({
   return (
     <div>
       <User user={user}></User>
-      <div className="flex flex-row  gap-8 py-4 pl-16">
-        <div className="flex items-center gap-2 cursor-pointer">
-          <span className="text-[rgba(51,51,51,0.6)]">follower</span>
-          <span className="font-bold text-[#333]">12</span>
-        </div>
-        <div className="flex items-center gap-2 cursor-pointer">
-          <span className="text-[rgba(51,51,51,0.6)]">fans</span>
-          <span className="font-bold text-[#333]">43</span>
-        </div>
-      </div>
+
       <div className={classNames("pt-5")}>
         <div className={classNames("py-3")}>
           <PostList

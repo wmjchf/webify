@@ -1,5 +1,3 @@
-import { Button } from "@heroui/react";
-
 import { useTranslations } from "next-intl";
 import { useAccount } from "wagmi";
 
@@ -7,9 +5,10 @@ import { ConnectWallet } from "../ConnectWallet";
 
 interface IWalletConnect {
   onClick?: () => void;
+  children?: (onClick?: () => void) => React.ReactNode;
 }
 export const WalletConnect: React.FC<IWalletConnect> = (props) => {
-  const { onClick } = props;
+  const { onClick, children } = props;
   const t = useTranslations("home");
 
   const { isConnected } = useAccount();
@@ -17,28 +16,19 @@ export const WalletConnect: React.FC<IWalletConnect> = (props) => {
   return (
     <div>
       {isConnected ? (
-        <Button
-          aria-label="wallet"
-          color="danger"
-          size="sm"
-          className="rounded"
-          onPress={onClick}
-        >
-          {t("ConnectWallet")}
-        </Button>
+        <div onClick={onClick}>{children && children(onClick)}</div>
       ) : (
         <ConnectWallet>
           {(openConnectModal) => {
             return (
-              <Button
-                aria-label="wallet"
-                color="danger"
-                size="sm"
-                className="rounded"
-                onPress={openConnectModal}
+              <div
+                onClick={() => {
+                  console.log("open connect modal");
+                }}
+                data-id="open-connect-modal"
               >
-                {t("ConnectWallet")}
-              </Button>
+                {children && children(openConnectModal)}
+              </div>
             );
           }}
         </ConnectWallet>

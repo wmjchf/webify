@@ -9,7 +9,8 @@ import { IUser } from "../../service/public";
 import { useCommonStore } from "../../store/common";
 import { DEFAULT_AVATAR } from "../../constant/url";
 import { PlaceholderImage } from "../PlaceholderImage";
-import Image from "next/image";
+import { Button } from "@heroui/react";
+import { useTranslations } from "next-intl";
 
 interface ILogin {
   user: IUser | null;
@@ -17,6 +18,7 @@ interface ILogin {
 export const Login: React.FC<ILogin> = (props) => {
   const { user } = props;
   const { user: clientUser } = useCommonStore();
+  const t = useTranslations("home");
   const mergeUser = clientUser || user;
   if (mergeUser) {
     return (
@@ -35,5 +37,21 @@ export const Login: React.FC<ILogin> = (props) => {
       ></DropDownUser>
     );
   }
-  return <WalletLogin />;
+  return (
+    <WalletLogin user={user}>
+      {(onClick) => {
+        return (
+          <Button
+            aria-label="wallet"
+            color="danger"
+            size="sm"
+            className="rounded"
+            onPress={onClick}
+          >
+            {t("ConnectWallet")}
+          </Button>
+        );
+      }}
+    </WalletLogin>
+  );
 };

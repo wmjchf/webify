@@ -6,6 +6,8 @@ import { Link } from "../../i18n/routing";
 import styles from "./index.module.scss";
 import { fetcherCurrentUser } from "../../function/user";
 import { Login } from "../Login";
+import { WalletLogin } from "../Login/WalletLogin";
+import { ShareBtn } from "./ShareBtn";
 
 interface IHeader {}
 export const Header: React.FC<IHeader> = async (props) => {
@@ -40,17 +42,7 @@ export const Header: React.FC<IHeader> = async (props) => {
         />
       </div>
       <div className={classNames(styles.right, "flex items-center gap-2")}>
-        <Link href="/create">
-          <Button
-            startContent={<i className="iconfont icon-tianjia"></i>}
-            size="sm"
-            color="danger"
-            variant="light"
-            className="rounded"
-          >
-            Share
-          </Button>
-        </Link>
+        <ShareBtn user={user}></ShareBtn>
         <Login user={user}></Login>
         {/* <EmailLogin></EmailLogin> */}
       </div>
