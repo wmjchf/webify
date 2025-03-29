@@ -32,7 +32,7 @@ export const Filter: React.FC<IFilter> = (props) => {
               "text-[#f31260]": value?.includes("0"),
               "bg-red-100": value?.includes("0"),
               "border-[#f31260]": value?.includes("0"),
-              border: value?.includes("0"),
+              border: true,
               "text-gray-900": !value?.includes("0"),
             }
           )}
@@ -64,7 +64,7 @@ export const Filter: React.FC<IFilter> = (props) => {
                   "bg-red-100": value?.includes(item.value),
                   "text-gray-900": !value?.includes(item.value),
                   "border-[#f31260]": value?.includes(item.value),
-                  border: value === value?.includes(item.value),
+                  border: true
                 }
               )}
               key={item.value}
