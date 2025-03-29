@@ -17,7 +17,9 @@ export const fetcherHomeArticle = async () => {
   }).toString();
   const searchParams = `?${str}`;
   const resultJSON = await fetch(
-    `${BASE_URL}/public/page/home/getArticleList${searchParams}`
+    `${BASE_URL}/public/page/home/getArticleList${searchParams}`,{
+      cache: "no-cache"
+    }
   );
   const result = await resultJSON.json();
   const { list } = result.data;
