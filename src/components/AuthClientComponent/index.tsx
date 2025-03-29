@@ -13,5 +13,6 @@ export const AuthClientComponent: React.FC<IAuthPage> = (props) => {
   if (!token) {
     return;
   }
-  return <>{children}</>;
+  return <></>
+  // return <>{children}</>;
 };

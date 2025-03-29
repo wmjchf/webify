@@ -61,7 +61,7 @@ export const ConfirmWallet = () => {
         setToken(token);
         setUid(`${uid}`);
         getUserInfo();
-        
+        toggleConfirmLoginOpen();
       }
     } catch (error) {
       console.log(error);
