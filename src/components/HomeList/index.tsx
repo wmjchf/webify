@@ -14,6 +14,7 @@ import { FilterPage } from "../FilterPage";
 import { Filter } from "../Filter";
 import { useCommonStore } from "../../store/common";
 import { IAllCollect } from "../../function/list";
+import { NoData } from "../NoData";
 
 interface IHomeList {
   data: IArticle[];
@@ -95,7 +96,10 @@ export const HomeList: React.FC<IHomeList> = (props) => {
           handleGetList();
         }}
       ></Filter>
-      <InfiniteScroll
+      {
+        data.length === 0 ?<div className="h-[calc(100vh-210px)]">
+          <NoData></NoData>
+        </div>:<InfiniteScroll
         dataLength={list.length}
         hasMore={hasMore}
         loader={<></>}
@@ -119,6 +123,7 @@ export const HomeList: React.FC<IHomeList> = (props) => {
           );
         })}
       </InfiniteScroll>
+      }
     </div>
   );
 };
