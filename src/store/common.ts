@@ -20,7 +20,14 @@ type Action = {
   hydrateCommon: (data: CommonState) => void;
 
   toggleConfirmLoginOpen: () => void;
+
+  toggleFollowModalData: (uid: string) => void;
 };
+
+interface IFollowModalData {
+  isOpen: boolean;
+  uid: string;
+}
 
 export interface CommonState {
   token?: string;
@@ -32,6 +39,8 @@ export interface CommonState {
   _hydrated?: boolean;
 
   confirmLoginOpen?: boolean;
+
+  followModalData?: IFollowModalData;
 
   articleSource: IArticleSource[];
 
@@ -49,6 +58,12 @@ export const useCommonStore = create<CommonState & Action>()(
     articleType: [],
 
     confirmLoginOpen: false,
+
+    followModalData: {
+      isOpen: false,
+      uid: "",
+    },
+
     setToken: (token) =>
       set((state) => {
         state.token = token;
@@ -89,11 +104,22 @@ export const useCommonStore = create<CommonState & Action>()(
         state.articleType = data.articleType;
       });
     },
-    toggleConfirmLoginOpen: () =>{
+    toggleConfirmLoginOpen: () => {
       const data = get();
       set((state) => {
         state.confirmLoginOpen = !data.confirmLoginOpen;
       });
-    }
+    },
+
+    toggleFollowModalData: (uid: string) => {
+      const data = get();
+      set((state) => {
+        const followModalData = data.followModalData;
+        state.followModalData = {
+          isOpen: !followModalData?.isOpen,
+          uid: uid,
+        };
+      });
+    },
   }))
 );

@@ -67,7 +67,7 @@ export const Collection: React.FC<ICollectionProps> = (props) => {
             }}
             isLoading={isLoading}
           >
-            <span className="text-[rgb(92, 108, 116)]">
+            <span className="text-[#5C6C74]">
               {isCollect ? "unCollection" : "Collection"}
             </span>
           </Button>

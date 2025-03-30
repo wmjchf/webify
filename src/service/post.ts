@@ -20,6 +20,16 @@ export const postAdd = (data: {
   );
 };
 
+export const postDelete = (id: string) => {
+  return fetcher<{ id: string }>("/userAdmin/post/delete", {
+    method: "POST",
+    body: JSON.stringify({ id }),
+    headers: {
+      "content-type": "application/json",
+    },
+  });
+};
+
 export const getPostList = (params: {
   sort: string;
   page: number;

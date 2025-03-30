@@ -17,24 +17,28 @@ import Image from "next/image";
 import { useCommonStore } from "../../store/common";
 import { IAllCollect } from "../../function/list";
 import { historyAdd } from "../../service/hostory";
+import { DeletePost } from "./components/Delete";
 
 interface INewsItemPramas {
   data: IArticle;
   allCollectList?: IAllCollect[];
   allLaterList?: IAllCollect[];
   apiType?: string;
+  onDelete?: () => void;
 }
 
 export const NewsItem: React.FC<INewsItemPramas> = (props) => {
-  const { data, allCollectList, allLaterList } = props;
+  const { data, allCollectList, allLaterList, onDelete } = props;
   const router = useRouter();
   const { user } = useCommonStore();
   const readNews = async () => {
-    await historyAdd({
-      articleId: data.article_id.toString(),
-      typeId: "1",
-    });
     window.open(data.url);
+    try {
+      await historyAdd({
+        articleId: data.article_id.toString(),
+        typeId: "1",
+      });
+    } catch (error) {}
   };
 
   return (
@@ -105,6 +109,12 @@ export const NewsItem: React.FC<INewsItemPramas> = (props) => {
               articleId={`${data.article_id}`}
               allLaterList={allLaterList}
             ></LaterRead>
+            {onDelete && (
+              <DeletePost
+                articleId={`${data.article_id}`}
+                onDelete={onDelete}
+              ></DeletePost>
+            )}
           </div>
         </div>
       </div>

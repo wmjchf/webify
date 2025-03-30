@@ -1,17 +1,15 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
+
 import styles from "./index.module.scss";
 import classNames from "classnames";
 
-import { Button } from "@heroui/react";
 import { IUser } from "../../service/public";
 import { handleFollow } from "../../service/user";
 import { DEFAULT_AVATAR } from "../../constant/url";
 import { useCommonStore } from "../../store/common";
 import { PlaceholderImage } from "../PlaceholderImage";
-import { WalletLogin } from "../Login/WalletLogin";
 import { FollowBtn } from "./FollowBtn";
 
 interface IUserProps {
@@ -20,8 +18,9 @@ interface IUserProps {
 }
 export const User: React.FC<IUserProps> = (props) => {
   const { user: ServerUser, isMy = false } = props;
-  const { user: clientUser } = useCommonStore();
+  const { user: clientUser, toggleFollowModalData } = useCommonStore();
   const user = isMy ? clientUser || ServerUser : ServerUser;
+
   const doFollow = async () => {
     const result = await handleFollow({
       typeId: 1,
@@ -64,16 +63,30 @@ export const User: React.FC<IUserProps> = (props) => {
         </div>
       </div>
       <div className="flex flex-row  gap-8 py-4 pl-16">
-        <div className="flex items-center gap-2 cursor-pointer">
-          <span className="text-[rgba(51,51,51,0.6)]">follower</span>
-          <span className="font-bold text-[#333]">
-            {user?.followers_count || 0}
+        <div
+          className="flex items-center cursor-pointer hover:underline"
+          onClick={() => {
+            toggleFollowModalData(`${user?.uid}`);
+          }}
+        >
+          <span className="text-[rgba(51,51,51,0.6)]">
+            following&nbsp;&nbsp;
           </span>
-        </div>
-        <div className="flex items-center gap-2 cursor-pointer">
-          <span className="text-[rgba(51,51,51,0.6)]">fans</span>
           <span className="font-bold text-[#333]">
             {user?.following_count || 0}
+          </span>
+        </div>
+        <div
+          className="flex items-center gap-2 cursor-pointer hover:underline"
+          onClick={() => {
+            toggleFollowModalData(`${user?.uid}`);
+          }}
+        >
+          <span className="text-[rgba(51,51,51,0.6)]">
+            followers&nbsp;&nbsp;
+          </span>
+          <span className="font-bold text-[#333]">
+            {user?.followers_count || 0}
           </span>
         </div>
       </div>

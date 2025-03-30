@@ -56,15 +56,15 @@ export const DropDownUser: React.FC<IDropDownUser> = (props) => {
           <div className="flex items-center justify-center gap-8">
             <div className="flex flex-col items-center justify-center gap-1 cursor-pointer">
               <span className="font-bold text-[#333]">
-                {user?.followers_count || 0}
+                {user?.following_count || 0}
               </span>
-              <span className="text-[rgba(51,51,51,0.6)]">follower</span>
+              <span className="text-[rgba(51,51,51,0.6)]">following</span>
             </div>
             <div className="flex flex-col items-center justify-center gap-1 cursor-pointer">
               <span className="font-bold text-[#333]">
-                {user?.following_count || 0}
+                {user?.followers_count || 0}
               </span>
-              <span className="text-[rgba(51,51,51,0.6)]">fans</span>
+              <span className="text-[rgba(51,51,51,0.6)]">followers</span>
             </div>
           </div>
         </DropdownItem>

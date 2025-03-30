@@ -97,6 +97,16 @@ export const PostList: React.FC<IPostList> = (props) => {
                 key={item.article_id}
                 data={item}
                 apiType={apiType}
+                onDelete={
+                  apiType === "share"
+                    ? () => {
+                        listRef.current = listRef.current.filter(
+                          (i) => i.article_id !== item.article_id
+                        );
+                        setList(listRef.current);
+                      }
+                    : undefined
+                }
               ></NewsItem>
             );
           })}

@@ -13,6 +13,7 @@ import "../../styles/globals.css";
 import "../../styles/iconfont.css";
 import { fetcherHome } from "../../function/common";
 import { ConfirmWallet } from "../../components/Login/ConfirmWallet";
+import { FollowModal } from "../../components/FollowModal";
 
 async function RootLayout({
   children,
@@ -37,6 +38,7 @@ async function RootLayout({
                 <Header></Header>
                 <Content>{children}</Content>
                 <ConfirmWallet></ConfirmWallet>
+                <FollowModal></FollowModal>
               </WalletProvider>
             </NextIntlClientProvider>
           </HeroUIProvider>

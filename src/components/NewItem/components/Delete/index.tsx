@@ -10,35 +10,27 @@ import { IAllCollect } from "../../../../function/list";
 import { WalletLogin } from "../../../Login/WalletLogin";
 import { useCommonStore } from "../../../../store/common";
 import { IUser } from "../../../../service/public";
+import { postDelete } from "../../../../service/post";
 
-interface ILaterReadProps {
+interface IDeletePostProps {
   articleId: string;
-  allLaterList?: IAllCollect[];
+
+  onDelete?: () => void;
 }
 
-export const LaterRead: React.FC<ILaterReadProps> = (props) => {
-  const { articleId, allLaterList = [] } = props;
+export const DeletePost: React.FC<IDeletePostProps> = (props) => {
+  const { articleId, onDelete } = props;
   const { user } = useCommonStore();
-  const [isReadLater, setIsReadLater] = useState(
-    allLaterList.some((item) => item.target_id === Number(articleId))
-  );
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const readNews = async () => {
+  const deletePost = async () => {
     let result = null;
     setIsLoading(true);
     try {
-      if (isReadLater) {
-        result = await laterDel({ targetId: articleId, typeId: "1" });
-        if (result.code === 200) {
-          setIsReadLater(false);
-        }
-      } else {
-        result = await laterAdd({ targetId: articleId, typeId: "1" });
-        if (result.code === 200) {
-          setIsReadLater(true);
-        }
+      result = await postDelete(`${articleId}`);
+      if (result.code === 200) {
+        onDelete && onDelete();
       }
     } catch (error) {
     } finally {
@@ -57,14 +49,12 @@ export const LaterRead: React.FC<ILaterReadProps> = (props) => {
               if (onClick) {
                 onClick();
               } else {
-                readNews();
+                deletePost();
               }
             }}
             isLoading={isLoading}
           >
-            <span className="text-[#5C6C74]">
-              {isReadLater ? "unRead Later" : "Read Later"}
-            </span>
+            <span className="text-[#5C6C74]">Delete</span>
           </Button>
         );
       }}
