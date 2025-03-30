@@ -11,6 +11,7 @@ import { DEFAULT_AVATAR } from "../../constant/url";
 import { useCommonStore } from "../../store/common";
 import { PlaceholderImage } from "../PlaceholderImage";
 import { FollowBtn } from "./FollowBtn";
+import { WalletLogin } from "../Login/WalletLogin";
 
 interface IUserProps {
   user: IUser | null;
@@ -63,32 +64,52 @@ export const User: React.FC<IUserProps> = (props) => {
         </div>
       </div>
       <div className="flex flex-row  gap-8 py-4 pl-16">
-        <div
-          className="flex items-center cursor-pointer hover:underline"
-          onClick={() => {
-            toggleFollowModalData(`${user?.uid}`);
+        <WalletLogin user={clientUser as IUser}>
+          {(onClick) => {
+            return (
+              <div
+                className="flex items-center cursor-pointer hover:underline"
+                onClick={() => {
+                  if (onClick) {
+                    onClick();
+                  } else {
+                    toggleFollowModalData(`${user?.uid}`);
+                  }
+                }}
+              >
+                <span className="text-[rgba(51,51,51,0.6)]">
+                  following&nbsp;&nbsp;
+                </span>
+                <span className="font-bold text-[#333]">
+                  {user?.following_count || 0}
+                </span>
+              </div>
+            );
           }}
-        >
-          <span className="text-[rgba(51,51,51,0.6)]">
-            following&nbsp;&nbsp;
-          </span>
-          <span className="font-bold text-[#333]">
-            {user?.following_count || 0}
-          </span>
-        </div>
-        <div
-          className="flex items-center gap-2 cursor-pointer hover:underline"
-          onClick={() => {
-            toggleFollowModalData(`${user?.uid}`);
+        </WalletLogin>
+        <WalletLogin user={clientUser as IUser}>
+          {(onClick) => {
+            return (
+              <div
+                className="flex items-center gap-2 cursor-pointer hover:underline"
+                onClick={() => {
+                  if (onClick) {
+                    onClick();
+                  } else {
+                    toggleFollowModalData(`${user?.uid}`);
+                  }
+                }}
+              >
+                <span className="text-[rgba(51,51,51,0.6)]">
+                  followers&nbsp;&nbsp;
+                </span>
+                <span className="font-bold text-[#333]">
+                  {user?.followers_count || 0}
+                </span>
+              </div>
+            );
           }}
-        >
-          <span className="text-[rgba(51,51,51,0.6)]">
-            followers&nbsp;&nbsp;
-          </span>
-          <span className="font-bold text-[#333]">
-            {user?.followers_count || 0}
-          </span>
-        </div>
+        </WalletLogin>
       </div>
     </>
   );
