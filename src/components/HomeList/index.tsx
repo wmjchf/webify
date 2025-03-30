@@ -96,34 +96,36 @@ export const HomeList: React.FC<IHomeList> = (props) => {
           handleGetList();
         }}
       ></Filter>
-      {
-        data.length === 0 ?<div className="h-[calc(100vh-210px)]">
+      {list.length === 0 ? (
+        <div className="h-[calc(100vh-210px)]">
           <NoData></NoData>
-        </div>:<InfiniteScroll
-        dataLength={list.length}
-        hasMore={hasMore}
-        loader={<></>}
-        next={() => {
-          handleGetList();
-        }}
-        endMessage={
-          <p className="text-center pt-4 pb-3 text-neutral-300">
-            Yay! You have seen it all
-          </p>
-        }
-      >
-        {list.map((item) => {
-          return (
-            <NewsItem
-              key={item.article_id}
-              data={item}
-              allCollectList={allCollectList}
-              allLaterList={allLaterList}
-            ></NewsItem>
-          );
-        })}
-      </InfiniteScroll>
-      }
+        </div>
+      ) : (
+        <InfiniteScroll
+          dataLength={list.length}
+          hasMore={hasMore}
+          loader={<></>}
+          next={() => {
+            handleGetList();
+          }}
+          endMessage={
+            <p className="text-center pt-4 pb-3 text-neutral-300">
+              Yay! You have seen it all
+            </p>
+          }
+        >
+          {list.map((item) => {
+            return (
+              <NewsItem
+                key={item.article_id}
+                data={item}
+                allCollectList={allCollectList}
+                allLaterList={allLaterList}
+              ></NewsItem>
+            );
+          })}
+        </InfiniteScroll>
+      )}
     </div>
   );
 };

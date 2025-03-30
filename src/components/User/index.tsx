@@ -55,7 +55,12 @@ export const User: React.FC<IUserProps> = (props) => {
           </div>
         </div>
         <div className="shrink-0">
-          {!isMy && <FollowBtn user={clientUser as IUser}></FollowBtn>}
+          {!isMy && (
+            <FollowBtn
+              user={clientUser as IUser}
+              followUserId={ServerUser?.uid as number}
+            ></FollowBtn>
+          )}
         </div>
       </div>
       <div className="flex flex-row  gap-8 py-4 pl-16">

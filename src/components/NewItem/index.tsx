@@ -21,7 +21,7 @@ import { historyAdd } from "../../service/hostory";
 interface INewsItemPramas {
   data: IArticle;
   allCollectList?: IAllCollect[];
-  allLaterList?:IAllCollect[];
+  allLaterList?: IAllCollect[];
   apiType?: string;
 }
 
@@ -31,11 +31,12 @@ export const NewsItem: React.FC<INewsItemPramas> = (props) => {
   const { user } = useCommonStore();
   const readNews = async () => {
     await historyAdd({
-      articleId:data.article_id.toString(),
-      typeId:'1'
-    })
+      articleId: data.article_id.toString(),
+      typeId: "1",
+    });
     window.open(data.url);
   };
+
   return (
     <div onClick={readNews}>
       <div
@@ -91,13 +92,19 @@ export const NewsItem: React.FC<INewsItemPramas> = (props) => {
             </span>
           </div>
           <div className={classNames(styles.three, "flex items-center gap-2")}>
-            <Vote></Vote>
+            <Vote
+              likeCount={data.like_count}
+              articleId={`${data.article_id}`}
+            ></Vote>
             <Share></Share>
             <Collection
               articleId={`${data.article_id}`}
               allCollectList={allCollectList}
             ></Collection>
-            <LaterRead articleId={`${data.article_id}`} allLaterList={allLaterList}></LaterRead>
+            <LaterRead
+              articleId={`${data.article_id}`}
+              allLaterList={allLaterList}
+            ></LaterRead>
           </div>
         </div>
       </div>
