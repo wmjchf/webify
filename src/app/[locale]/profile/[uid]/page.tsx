@@ -20,6 +20,7 @@ async function Page({
   const { article } = await fetcherPublicPost(uid);
   const allCollectList = await fetcherUserAllList("collect");
   const allLaterList = await fetcherUserAllList("later");
+  const allLikeList = await fetcherUserAllList("like");
   return (
     <div>
       <User user={user}></User>
@@ -27,6 +28,7 @@ async function Page({
       <div className={classNames("pt-5")}>
         <div className={classNames("py-3")}>
           <PostList
+            allLikeList={allLikeList}
             data={article}
             apiType="share"
             allCollectList={allCollectList}
