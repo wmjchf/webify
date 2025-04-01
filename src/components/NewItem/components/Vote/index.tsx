@@ -7,8 +7,13 @@ import classNames from "classnames";
 
 import ShangCai from "./shangcai.svg";
 import ShangCai_hover from "./shangcai_hover.svg";
+import ShangCai_whie from "./shangcai_white.svg";
 import XiaCai from "./xiacai.svg";
+import XiaCai_white from "./xiacai_white.svg";
 import XiaCai_hover from "./xiacai_hover.svg";
+
+import XiaCai_yes from "./xiacai_yes.svg";
+import ShangCai_yes from "./shangcai_yes.svg";
 
 import Image from "next/image";
 import { WalletLogin } from "../../../Login/WalletLogin";
@@ -45,7 +50,7 @@ export const Vote: React.FC<IVote> = (props) => {
                 }}
               >
                 <Image
-                  src={likeHover ? ShangCai_hover : ShangCai}
+                  src={likeStatus!==0 ? (likeStatus===1?ShangCai_yes:ShangCai_whie): (likeHover ? ShangCai_hover : ShangCai)}
                   width={15}
                   height={15}
                   alt=""
@@ -73,7 +78,7 @@ export const Vote: React.FC<IVote> = (props) => {
                 }}
               >
                 <Image
-                  src={dislikeHover ? XiaCai_hover : XiaCai}
+                  src={likeStatus!==0 ? (likeStatus===-1?XiaCai_yes:XiaCai_white):(dislikeHover ? XiaCai_hover : XiaCai)}
                   width={15}
                   height={15}
                   alt=""
@@ -93,6 +98,8 @@ export const Vote: React.FC<IVote> = (props) => {
             }
             className={classNames({
               ['bg-red-500']: likeStatus === 1,
+              ['text-white']: likeStatus === 1||likeStatus === -1,
+              ['bg-[#6a5cff]']: likeStatus === -1,
             })}
           >
             <span className="font-medium">
