@@ -11,7 +11,7 @@ export const followAdd = (data: { followUserId: number; status: number }) => {
   });
 };
 
-export const followList = (params: { page: number; pageSize: number }) => {
+export const followList = (params: { page: number; pageSize: number,typeId:'1'|'2' }) => {
   return fetcher<{ list: IUser[] }>("/userAdmin/follow/list", {
     method: "GET",
     params,

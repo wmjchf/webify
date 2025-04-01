@@ -10,7 +10,7 @@ import { followList } from "../../../service/follow";
 import { IUser } from "../../../service/public";
 
 interface IList {
-  type: string;
+  type: '1'|'2';
 }
 export const List: React.FC<IList> = (props) => {
   const { type } = props;
@@ -25,6 +25,7 @@ export const List: React.FC<IList> = (props) => {
     const result = await followList({
       page: pageRef.current,
       pageSize: 10,
+      typeId:type
     });
     if (result.code === 200) {
       const newList = [...listRef.current, ...result.data.list];

@@ -20,7 +20,7 @@ interface IDropDownUser {
 }
 export const DropDownUser: React.FC<IDropDownUser> = (props) => {
   const { user, avatar } = props;
-  const { logout } = useCommonStore();
+  const { logout,toggleFollowModalData } = useCommonStore();
 
   const { disconnect } = useDisconnect({
     mutation: {
@@ -54,13 +54,17 @@ export const DropDownUser: React.FC<IDropDownUser> = (props) => {
           className="!border-[#E5E5E5] border-t-0 border-l-0 border-r-0 rounded-none hover:!bg-transparent"
         >
           <div className="flex items-center justify-center gap-8">
-            <div className="flex flex-col items-center justify-center gap-1 cursor-pointer">
+            <div className="flex flex-col items-center justify-center gap-1 cursor-pointer" onClick={()=>{
+              toggleFollowModalData(`${user?.uid}`,'1')
+            }}>
               <span className="font-bold text-[#333]">
                 {user?.following_count || 0}
               </span>
               <span className="text-[rgba(51,51,51,0.6)]">following</span>
             </div>
-            <div className="flex flex-col items-center justify-center gap-1 cursor-pointer">
+            <div className="flex flex-col items-center justify-center gap-1 cursor-pointer" onClick={()=>{
+              toggleFollowModalData(`${user?.uid}`,'2')
+            }}>
               <span className="font-bold text-[#333]">
                 {user?.followers_count || 0}
               </span>

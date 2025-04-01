@@ -16,7 +16,7 @@ import {
   CardBody,
 } from "@heroui/react";
 
-import { useCommonStore } from "../../store/common";
+import { IFollowModalType, useCommonStore } from "../../store/common";
 import { List } from "./List";
 
 export const FollowModal = () => {
@@ -27,7 +27,7 @@ export const FollowModal = () => {
       isOpen={followModalData?.isOpen}
       placement="center"
       onClose={() => {
-        toggleFollowModalData(followModalData?.uid as string);
+        toggleFollowModalData(followModalData?.uid as string,followModalData?.type as IFollowModalType);
       }}
       backdrop="blur"
       classNames={{
@@ -42,15 +42,17 @@ export const FollowModal = () => {
             <ModalBody>
               <Tabs
                 aria-label="Options"
+                selectedKey={followModalData?.type as IFollowModalType}
                 classNames={{
                   panel: "h-[calc(100%-50px)]",
                 }}
+                
               >
-                <Tab key="following" title="Following">
-                  <List type="following"></List>
+                <Tab key="1" title="Following">
+                  <List type="1"></List>
                 </Tab>
-                <Tab key="followers" title="Followers">
-                  <List type="followers"></List>
+                <Tab key="2" title="Followers">
+                  <List type="2"></List>
                 </Tab>
               </Tabs>
             </ModalBody>

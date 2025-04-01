@@ -73,7 +73,7 @@ export const User: React.FC<IUserProps> = (props) => {
                   if (onClick) {
                     onClick();
                   } else {
-                    toggleFollowModalData(`${user?.uid}`);
+                    toggleFollowModalData(`${user?.uid}`,'1');
                   }
                 }}
               >
@@ -96,7 +96,7 @@ export const User: React.FC<IUserProps> = (props) => {
                   if (onClick) {
                     onClick();
                   } else {
-                    toggleFollowModalData(`${user?.uid}`);
+                    toggleFollowModalData(`${user?.uid}`,'2');
                   }
                 }}
               >
