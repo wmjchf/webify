@@ -22,10 +22,17 @@ interface IHomeList {
   articleType: IArticleType[];
   allCollectList: IAllCollect[];
   allLaterList: IAllCollect[];
+  allLikeList: IAllCollect[];
 }
 export const HomeList: React.FC<IHomeList> = (props) => {
-  const { data, articleSource, articleType, allCollectList, allLaterList } =
-    props;
+  const {
+    data,
+    articleSource,
+    articleType,
+    allCollectList,
+    allLaterList,
+    allLikeList,
+  } = props;
 
   const pageRef = useRef(1);
   const listRef = useRef<IArticle[]>(data);
@@ -121,6 +128,7 @@ export const HomeList: React.FC<IHomeList> = (props) => {
                 data={item}
                 allCollectList={allCollectList}
                 allLaterList={allLaterList}
+                allLikeList={allLikeList}
               ></NewsItem>
             );
           })}

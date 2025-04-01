@@ -25,10 +25,11 @@ interface INewsItemPramas {
   allLaterList?: IAllCollect[];
   apiType?: string;
   onDelete?: () => void;
+  allLikeList?: IAllCollect[];
 }
 
 export const NewsItem: React.FC<INewsItemPramas> = (props) => {
-  const { data, allCollectList, allLaterList, onDelete } = props;
+  const { data, allCollectList, allLaterList, onDelete, allLikeList } = props;
   const router = useRouter();
   const { user } = useCommonStore();
   const readNews = async () => {
@@ -99,6 +100,7 @@ export const NewsItem: React.FC<INewsItemPramas> = (props) => {
             <Vote
               likeCount={data.like_count}
               articleId={`${data.article_id}`}
+              allLikeList={allLikeList}
             ></Vote>
             <Share></Share>
             <Collection

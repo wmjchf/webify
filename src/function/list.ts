@@ -34,6 +34,8 @@ export const fetcherUserList = async (type:string) => {
 
 export interface IAllCollect {
   target_id: number;
+  is_like?:number
+  article_id?:number
 }
 export const fetcherUserAllList = async (type:string) => {
   const cookieStore = cookies();
