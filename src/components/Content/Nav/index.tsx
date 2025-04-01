@@ -40,6 +40,14 @@ export const Nav: React.FC<INav> = (props) => {
         <div className="py-3">
           <Divider></Divider>
         </div>
+        <div>
+          <IconItem
+            icon="icon-guanyuwomen"
+            title="About us"
+            isSelected={path === "/about"}
+            href={"/about"}
+          ></IconItem>
+        </div>
         <AuthClientComponent>
           <div>
             <Collapse title="MY">
