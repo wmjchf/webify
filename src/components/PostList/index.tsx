@@ -18,9 +18,11 @@ interface IPostList {
   allCollectList: IAllCollect[];
   allLaterList: IAllCollect[];
   uid?: string;
+  allLikeList: IAllCollect[];
 }
 export const PostList: React.FC<IPostList> = (props) => {
-  const { data, apiType, allCollectList, allLaterList, uid } = props;
+  const { data, apiType, allCollectList, allLaterList, uid, allLikeList } =
+    props;
   const pageRef = useRef(1);
   const listRef = useRef<IArticle[]>(data);
   const [list, setList] = useState<IArticle[]>(data);
@@ -94,6 +96,7 @@ export const PostList: React.FC<IPostList> = (props) => {
               <NewsItem
                 allCollectList={allCollectList}
                 allLaterList={allLaterList}
+                allLikeList={allLikeList}
                 key={item.article_id}
                 data={item}
                 apiType={apiType}

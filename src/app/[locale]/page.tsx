@@ -10,7 +10,7 @@ async function Page() {
   const allCollectList = await fetcherUserAllList("collect");
   const allLaterList = await fetcherUserAllList("later");
   const allLikeList = await fetcherUserAllList("like");
-  console.log(allLikeList, "rewrewrewrew");
+
   return (
     <HomeList
       data={article}

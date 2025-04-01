@@ -10,12 +10,14 @@ async function Page() {
   const { article } = await fetcherPublicPost(uid as string);
   const allCollectList = await fetcherUserAllList("collect");
   const allLaterList = await fetcherUserAllList("later");
+  const allLikeList = await fetcherUserAllList("like");
   return (
     <PostList
       data={article}
       apiType="share"
       allCollectList={allCollectList}
       allLaterList={allLaterList}
+      allLikeList={allLikeList}
     ></PostList>
   );
 }

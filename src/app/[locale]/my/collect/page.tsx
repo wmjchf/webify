@@ -3,9 +3,18 @@ import { fetcherUserAllList, fetcherUserList } from "../../../../function/list";
 
 async function Page() {
   const { article } = await fetcherUserList("collect");
- const allCollectList = await fetcherUserAllList("collect");
- const allLaterList = await fetcherUserAllList("later");
-  return <PostList data={article} apiType="collect" allCollectList={allCollectList} allLaterList={allLaterList}></PostList>;
+  const allCollectList = await fetcherUserAllList("collect");
+  const allLaterList = await fetcherUserAllList("later");
+  const allLikeList = await fetcherUserAllList("like");
+  return (
+    <PostList
+      data={article}
+      apiType="collect"
+      allCollectList={allCollectList}
+      allLaterList={allLaterList}
+      allLikeList={allLikeList}
+    ></PostList>
+  );
 }
 
 export default Page;
