@@ -62,7 +62,10 @@ export const Vote: React.FC<IVote> = (props) => {
                         articleId,
                         typeId: 1,
                         isLike: 1,
-                      });
+                      }).then(()=>{
+                        setLikeStatus(1);
+                        setILikeCount(ilikeCount + 1 - (likeStatus))
+                      })
                     }
                   }}
                 ></Image>
@@ -90,7 +93,10 @@ export const Vote: React.FC<IVote> = (props) => {
                         articleId,
                         typeId: 1,
                         isLike: -1,
-                      });
+                      }).then(()=>{
+                        setLikeStatus(-1);
+                        setILikeCount(ilikeCount - 1 - (likeStatus))
+                      })
                     }
                   }}
                 ></Image>
@@ -103,7 +109,7 @@ export const Vote: React.FC<IVote> = (props) => {
             })}
           >
             <span className="font-medium">
-              {ilikeCount ? ilikeCount : "Vote"}
+              {ilikeCount>0 ? ilikeCount : "Vote"}
             </span>
           </Button>
         );
