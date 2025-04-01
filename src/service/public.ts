@@ -67,8 +67,8 @@ export interface IUser {
   nickname?: string;
   picture_url?: string;
   wallet_address?: string;
-  following_count?:number;
-  followers_count?:number;
+  following_total?:number;
+  followers_total?:number;
 }
 
 export const getUserInfo = (uid: string) => {

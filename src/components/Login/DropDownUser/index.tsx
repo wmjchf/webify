@@ -58,7 +58,7 @@ export const DropDownUser: React.FC<IDropDownUser> = (props) => {
               toggleFollowModalData(`${user?.uid}`,'1')
             }}>
               <span className="font-bold text-[#333]">
-                {user?.following_count || 0}
+                {user?.following_total || 0}
               </span>
               <span className="text-[rgba(51,51,51,0.6)]">following</span>
             </div>
@@ -66,7 +66,7 @@ export const DropDownUser: React.FC<IDropDownUser> = (props) => {
               toggleFollowModalData(`${user?.uid}`,'2')
             }}>
               <span className="font-bold text-[#333]">
-                {user?.followers_count || 0}
+                {user?.followers_total || 0}
               </span>
               <span className="text-[rgba(51,51,51,0.6)]">followers</span>
             </div>

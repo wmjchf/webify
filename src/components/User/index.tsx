@@ -58,7 +58,7 @@ export const User: React.FC<IUserProps> = (props) => {
           {!isMy && (
             <FollowBtn
               user={clientUser as IUser}
-              followUserId={ServerUser?.uid as number}
+              followUserUid={ServerUser?.uid as number}
             ></FollowBtn>
           )}
         </div>
@@ -73,7 +73,7 @@ export const User: React.FC<IUserProps> = (props) => {
                   if (onClick) {
                     onClick();
                   } else {
-                    toggleFollowModalData(`${user?.uid}`,'1');
+                    toggleFollowModalData(`${user?.uid}`, "1");
                   }
                 }}
               >
@@ -81,7 +81,7 @@ export const User: React.FC<IUserProps> = (props) => {
                   following&nbsp;&nbsp;
                 </span>
                 <span className="font-bold text-[#333]">
-                  {user?.following_count || 0}
+                  {user?.following_total || 0}
                 </span>
               </div>
             );
@@ -96,7 +96,7 @@ export const User: React.FC<IUserProps> = (props) => {
                   if (onClick) {
                     onClick();
                   } else {
-                    toggleFollowModalData(`${user?.uid}`,'2');
+                    toggleFollowModalData(`${user?.uid}`, "2");
                   }
                 }}
               >
@@ -104,7 +104,7 @@ export const User: React.FC<IUserProps> = (props) => {
                   followers&nbsp;&nbsp;
                 </span>
                 <span className="font-bold text-[#333]">
-                  {user?.followers_count || 0}
+                  {user?.followers_total || 0}
                 </span>
               </div>
             );

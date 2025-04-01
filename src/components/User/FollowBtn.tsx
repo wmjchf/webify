@@ -8,14 +8,14 @@ import { followAdd } from "../../service/follow";
 
 interface IFollowBtn {
   user: IUser | null;
-  followUserId: number;
+  followUserUid: number;
 }
 
 export const FollowBtn: React.FC<IFollowBtn> = (props) => {
-  const { user, followUserId } = props;
+  const { user, followUserUid } = props;
   const handleFollow = async () => {
     const result = await followAdd({
-      followUserId: followUserId,
+      followUserUid,
       status: 1,
     });
   };

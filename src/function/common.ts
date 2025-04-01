@@ -1,5 +1,6 @@
 import { BASE_URL } from "../constant/url";
 import { IUser } from "../service/public";
+import { cookies } from "next/headers";
 
 export const fetcherHome = async () => {
   const resultJSON = await fetch(`${BASE_URL}/public/page/home`);
@@ -27,7 +28,9 @@ export const fetcherHomeArticle = async () => {
 };
 
 export const fetcherOtherUser = async (uid: string) => {
+  const cookieStore = cookies();
   let user: IUser | null = null;
+  const token = cookieStore.get("token")?.value;
   if (uid) {
     try {
       const str = new URLSearchParams({ uid }).toString();
@@ -35,7 +38,10 @@ export const fetcherOtherUser = async (uid: string) => {
         `${BASE_URL}/public/user/getUserInfo?${str}`,
         {
           method: "GET",
-          cache: "no-cache"
+          cache: "no-cache",
+          headers: {
+            Authorization: token as string,
+          },
         }
       );
       const result = await resultJSON.json();
