@@ -32,7 +32,10 @@ export const Vote: React.FC<IVote> = (props) => {
   const [ilikeCount, setILikeCount] = useState(likeCount);
   const [likeHover, setLikeHover] = useState(false);
   const [dislikeHover, setDislikeHover] = useState(false);
-  const [likeStatus, setLikeStatus] = useState(allLikeList.find((item) => item.article_id === Number(articleId))?.is_like||0)
+  const [likeStatus, setLikeStatus] = useState(
+    allLikeList.find((item) => item.article_id === Number(articleId))
+      ?.is_like || 0
+  );
   return (
     <WalletLogin user={user as IUser}>
       {(onClick) => {
@@ -50,7 +53,15 @@ export const Vote: React.FC<IVote> = (props) => {
                 }}
               >
                 <Image
-                  src={likeStatus!==0 ? (likeStatus===1?ShangCai_yes:ShangCai_whie): (likeHover ? ShangCai_hover : ShangCai)}
+                  src={
+                    likeStatus !== 0
+                      ? likeStatus === 1
+                        ? ShangCai_yes
+                        : ShangCai_whie
+                      : likeHover
+                      ? ShangCai_hover
+                      : ShangCai
+                  }
                   width={15}
                   height={15}
                   alt=""
@@ -62,10 +73,10 @@ export const Vote: React.FC<IVote> = (props) => {
                         articleId,
                         typeId: 1,
                         isLike: 1,
-                      }).then(()=>{
+                      }).then(() => {
                         setLikeStatus(1);
-                        setILikeCount(ilikeCount + 1 - (likeStatus))
-                      })
+                        setILikeCount(ilikeCount + 1);
+                      });
                     }
                   }}
                 ></Image>
@@ -81,7 +92,15 @@ export const Vote: React.FC<IVote> = (props) => {
                 }}
               >
                 <Image
-                  src={likeStatus!==0 ? (likeStatus===-1?XiaCai_yes:XiaCai_white):(dislikeHover ? XiaCai_hover : XiaCai)}
+                  src={
+                    likeStatus !== 0
+                      ? likeStatus === -1
+                        ? XiaCai_yes
+                        : XiaCai_white
+                      : dislikeHover
+                      ? XiaCai_hover
+                      : XiaCai
+                  }
                   width={15}
                   height={15}
                   alt=""
@@ -93,23 +112,23 @@ export const Vote: React.FC<IVote> = (props) => {
                         articleId,
                         typeId: 1,
                         isLike: -1,
-                      }).then(()=>{
+                      }).then(() => {
                         setLikeStatus(-1);
-                        setILikeCount(ilikeCount - 1 - (likeStatus))
-                      })
+                        setILikeCount(ilikeCount - 1);
+                      });
                     }
                   }}
                 ></Image>
               </div>
             }
             className={classNames({
-              ['bg-red-500']: likeStatus === 1,
-              ['text-white']: likeStatus === 1||likeStatus === -1,
-              ['bg-[#6a5cff]']: likeStatus === -1,
+              ["bg-red-500"]: likeStatus === 1,
+              ["text-white"]: likeStatus === 1 || likeStatus === -1,
+              ["bg-[#6a5cff]"]: likeStatus === -1,
             })}
           >
             <span className="font-medium">
-              {ilikeCount>0 ? ilikeCount : "Vote"}
+              {ilikeCount > 0 ? ilikeCount : "Vote"}
             </span>
           </Button>
         );
