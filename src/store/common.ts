@@ -22,6 +22,8 @@ type Action = {
   toggleConfirmLoginOpen: () => void;
 
   toggleFollowModalData: (uid: string, type:IFollowModalType) => void;
+
+  switchFollowModal:(type:IFollowModalType)=>void
 };
 export type IFollowModalType  = '1'|'2'
 interface IFollowModalData {
@@ -124,5 +126,16 @@ export const useCommonStore = create<CommonState & Action>()(
         };
       });
     },
+    switchFollowModal:(type:IFollowModalType)=>{
+      const data = get();
+      set((state) => {
+        const followModalData = data.followModalData;
+        state.followModalData = {
+          isOpen: followModalData?.isOpen as boolean,
+          uid: followModalData?.uid as string,
+          type:type
+        };
+      });
+    }
   }))
 );

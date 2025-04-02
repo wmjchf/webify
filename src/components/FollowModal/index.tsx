@@ -20,7 +20,7 @@ import { IFollowModalType, useCommonStore } from "../../store/common";
 import { List } from "./List";
 
 export const FollowModal = () => {
-  const { followModalData, toggleFollowModalData } = useCommonStore();
+  const { followModalData, toggleFollowModalData, switchFollowModal } = useCommonStore();
 
   return (
     <Modal
@@ -45,6 +45,9 @@ export const FollowModal = () => {
                 selectedKey={followModalData?.type as IFollowModalType}
                 classNames={{
                   panel: "h-[calc(100%-50px)]",
+                }}
+                onSelectionChange={(key)=>{
+                  switchFollowModal(key as IFollowModalType);
                 }}
                 
               >
