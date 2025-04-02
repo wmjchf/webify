@@ -22,14 +22,6 @@ export const User: React.FC<IUserProps> = (props) => {
   const { user: clientUser, toggleFollowModalData } = useCommonStore();
   const user = isMy ? clientUser || ServerUser : ServerUser;
 
-  const doFollow = async () => {
-    const result = await handleFollow({
-      typeId: 1,
-      followUserId: user?.uid as number,
-      status: 1,
-    });
-  };
-
   return (
     <>
       <div
@@ -59,6 +51,7 @@ export const User: React.FC<IUserProps> = (props) => {
             <FollowBtn
               user={clientUser as IUser}
               followUserUid={ServerUser?.uid as number}
+              isFollowing={!!user?.is_followed}
             ></FollowBtn>
           )}
         </div>
