@@ -8,6 +8,8 @@ import { Divider } from "@heroui/react";
 import { usePathname } from "../../../i18n/routing";
 import { Collapse } from "../Collapse";
 import { AuthClientComponent } from "../../AuthClientComponent";
+import Link from "next/link";
+import Image from "next/image";
 
 interface INav {}
 
@@ -17,7 +19,7 @@ export const Nav: React.FC<INav> = (props) => {
     <div
       className={classNames(
         styles.nav,
-        "h-full bg-white fixed top-14 left-0 z-10"
+        "h-[calc(100vh-56px)] bg-white flex flex-col justify-between fixed top-14 left-0 z-10"
       )}
     >
       <div className={classNames(styles.nav_common, "p-3")}>
@@ -40,14 +42,14 @@ export const Nav: React.FC<INav> = (props) => {
         <div className="py-3">
           <Divider></Divider>
         </div>
-        <div>
+        {/* <div>
           <IconItem
             icon="icon-guanyuwomen"
             title="About us"
             isSelected={path === "/about"}
             href={"/about"}
           ></IconItem>
-        </div>
+        </div> */}
         <AuthClientComponent>
           <div>
             <Collapse title="MY">
@@ -99,6 +101,17 @@ export const Nav: React.FC<INav> = (props) => {
             </Collapse>
           </div>
         </AuthClientComponent>
+      </div>
+      <div className="flex items-center justify-center w-full h-[60px] gap-8">
+        <Link href="https://x.com/webifydao" target="_blank">
+        <Image src="/image/social/x.svg" alt="x" width={20} height={20}></Image>
+        </Link>
+        <Link href="https://t.me/webifyDao" target="_blank">
+        <Image src="/image/social/telegram.svg" alt="telegram" width={20} height={20}></Image>
+        </Link>
+        <Link href="https://discord.gg/Q87B4nWg7v" target="_blank">
+        <Image src="/image/social/discord.svg" alt="discord" width={20} height={20}></Image>
+        </Link>
       </div>
     </div>
   );
