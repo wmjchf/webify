@@ -26,8 +26,8 @@ export const Item: React.FC<IItem> = (props) => {
           ></PlaceholderImage>
           <div className="flex flex-col gap-2">
             <span className="font-bold">{data.nickname}</span>
-            <span className="text-gray-400 text-sm line-clamp-2">
-              {data.bio}
+            <span className="text-gray-400 text-sm line-clamp-1">
+              {data.bio || "比较懒，没有写简介!"}
             </span>
           </div>
         </div>
