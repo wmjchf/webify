@@ -15,6 +15,7 @@ import "../../styles/mixins.scss";
 import { fetcherHome } from "../../function/common";
 import { ConfirmWallet } from "../../components/Login/ConfirmWallet";
 import { FollowModal } from "../../components/FollowModal";
+import { fetcherUserAllList } from "../../function/list";
 
 async function RootLayout({
   children,
@@ -26,7 +27,7 @@ async function RootLayout({
   const messages = await getMessages();
   const { user, token, uid } = await fetcherCurrentUser();
   const { articleSource, articleType } = await fetcherHome();
-
+  const allFollowList = await fetcherUserAllList("follow");
   return (
     <html lang="en">
       <body>
@@ -39,7 +40,7 @@ async function RootLayout({
                 <Header></Header>
                 <Content>{children}</Content>
                 <ConfirmWallet></ConfirmWallet>
-                <FollowModal></FollowModal>
+                <FollowModal allFollowList={allFollowList}></FollowModal>
               </WalletProvider>
             </NextIntlClientProvider>
           </HeroUIProvider>

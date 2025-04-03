@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import { BASE_URL } from "../constant/url";
 
-export const fetcherUserList = async (type:string) => {
+export const fetcherUserList = async (type: string) => {
   const cookieStore = cookies();
   const token = cookieStore.get("token")?.value;
   const str = new URLSearchParams({
@@ -24,7 +24,7 @@ export const fetcherUserList = async (type:string) => {
       },
     }
   );
-  
+
   const result = await resultJSON.json();
 
   const { list } = result.data;
@@ -34,10 +34,11 @@ export const fetcherUserList = async (type:string) => {
 
 export interface IAllCollect {
   target_id: number;
-  is_like?:number
-  article_id?:number
+  is_like?: number;
+  article_id?: number;
+  follow_user_id?: number;
 }
-export const fetcherUserAllList = async (type:string) => {
+export const fetcherUserAllList = async (type: string) => {
   const cookieStore = cookies();
   const token = cookieStore.get("token")?.value;
   if (!token) {

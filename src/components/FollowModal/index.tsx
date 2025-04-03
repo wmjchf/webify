@@ -18,8 +18,13 @@ import {
 
 import { IFollowModalType, useCommonStore } from "../../store/common";
 import { List } from "./List";
+import { IAllCollect } from "../../function/list";
 
-export const FollowModal = () => {
+interface IFollowModal {
+  allFollowList: IAllCollect[];
+}
+export const FollowModal: React.FC<IFollowModal> = (props) => {
+  const { allFollowList } = props;
   const { followModalData, toggleFollowModalData, switchFollowModal } =
     useCommonStore();
 
@@ -55,10 +60,18 @@ export const FollowModal = () => {
                 }}
               >
                 <Tab key="1" title="Following">
-                  <List type="1" uid={followModalData?.uid as string}></List>
+                  <List
+                    allFollowList={allFollowList}
+                    type="1"
+                    uid={followModalData?.uid as string}
+                  ></List>
                 </Tab>
                 <Tab key="2" title="Followers">
-                  <List type="2" uid={followModalData?.uid as string}></List>
+                  <List
+                    allFollowList={allFollowList}
+                    type="2"
+                    uid={followModalData?.uid as string}
+                  ></List>
                 </Tab>
               </Tabs>
             </ModalBody>

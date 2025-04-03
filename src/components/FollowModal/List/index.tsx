@@ -8,13 +8,15 @@ import { Item } from "./Item";
 import { NoData } from "../../NoData";
 import { followList } from "../../../service/follow";
 import { IUser } from "../../../service/public";
+import { IAllCollect } from "../../../function/list";
 
 interface IList {
   type: "1" | "2";
   uid: string;
+  allFollowList: IAllCollect[];
 }
 export const List: React.FC<IList> = (props) => {
-  const { type, uid } = props;
+  const { type, uid, allFollowList } = props;
 
   const pageRef = useRef(0);
   const listRef = useRef<IUser[]>([]);
@@ -66,7 +68,13 @@ export const List: React.FC<IList> = (props) => {
           }}
         >
           {list?.map((item) => {
-            return <Item key={item.uid} data={item}></Item>;
+            return (
+              <Item
+                allFollowList={allFollowList}
+                key={item.uid}
+                data={item}
+              ></Item>
+            );
           })}
         </InfiniteScroll>
       )}

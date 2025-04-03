@@ -5,14 +5,16 @@ import { DEFAULT_AVATAR } from "../../../constant/url";
 import { FollowBtn } from "../../User/FollowBtn";
 import { useCommonStore } from "../../../store/common";
 import { Link, useRouter } from "../../../i18n/routing";
+import { IAllCollect } from "../../../function/list";
 
 interface IItem {
   data: IUser;
+  allFollowList: IAllCollect[];
 }
 export const Item: React.FC<IItem> = (props) => {
-  const { data } = props;
+  const { data, allFollowList } = props;
   const { user } = useCommonStore();
-  const router = useRouter();
+  console.log(allFollowList, data, "erwrewrwerw");
   return (
     <div className="flex justify-between items-center gap-2 p-2 rounded-md hover:bg-gray-100">
       <Link href={`/profile/${data.uid}`} target="_blank">
@@ -36,8 +38,9 @@ export const Item: React.FC<IItem> = (props) => {
         <FollowBtn
           user={user as IUser}
           followUserUid={data.uid}
-          isFollowing={false}
-          // isFollowing={data.is_followed}
+          isFollowing={
+            !!allFollowList.find((item) => item.follow_user_id === data?.id)
+          }
         ></FollowBtn>
       </div>
     </div>
