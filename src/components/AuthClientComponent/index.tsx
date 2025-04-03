@@ -1,18 +1,16 @@
 "use client";
 import React from "react";
 
-import { cookies } from "next/headers";
-import { useCommonStore } from "../../store/common";
-
 interface IAuthPage {
   children: React.ReactNode;
+  token?: string;
 }
 export const AuthClientComponent: React.FC<IAuthPage> = (props) => {
-  const { children } = props;
-  const { token } = useCommonStore();
+  const { children, token } = props;
+
   if (!token) {
     return;
   }
-  return <></>
-  // return <>{children}</>;
+  // return <></>
+  return <>{children}</>;
 };

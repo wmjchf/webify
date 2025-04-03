@@ -3,17 +3,19 @@ import classNames from "classnames";
 import { Nav } from "./Nav";
 import styles from "./index.module.scss";
 import { BackTop } from "../BackTop";
+import { fetcherCurrentUser } from "../../function/user";
 
 interface IContent {
   children?: React.ReactNode;
 }
 
-export const Content: React.FC<IContent> = (props) => {
+export const Content: React.FC<IContent> = async (props) => {
   const { children } = props;
+  const { token } = await fetcherCurrentUser();
   return (
     <div className={classNames(styles.content, "pt-14")}>
       <div className={classNames(styles.left, "float-left")}>
-        <Nav></Nav>
+        <Nav token={token}></Nav>
       </div>
 
       <div className={classNames(styles.right, "overflow-hidden")}>

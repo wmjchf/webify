@@ -11,9 +11,12 @@ import { AuthClientComponent } from "../../AuthClientComponent";
 import Link from "next/link";
 import Image from "next/image";
 
-interface INav {}
+interface INav {
+  token?: string;
+}
 
 export const Nav: React.FC<INav> = (props) => {
+  const { token } = props;
   const path = usePathname();
   return (
     <div
@@ -50,42 +53,38 @@ export const Nav: React.FC<INav> = (props) => {
             href={"/about"}
           ></IconItem>
         </div> */}
-        <AuthClientComponent>
+        <AuthClientComponent token={token}>
           <div>
             <Collapse title="MY">
               <IconItem
-                icon="icon-shaohouyuedu"
-                title="Read later"
-                isSelected={path === "/readLater"}
-                href={"/readLater"}
+                icon="icon-fenxiang"
+                title="Share Link"
+                isSelected={path === "/my/share"}
+                href={"/my/share"}
               ></IconItem>
+
               <IconItem
                 icon="icon-shoucangjia"
                 title="Collection"
-                isSelected={path === "/collection"}
-                href={"/collection"}
+                isSelected={path === "/my/collect"}
+                href={"/my/collect"}
+              ></IconItem>
+              <IconItem
+                icon="icon-shaohouyuedu"
+                title="Read Later"
+                isSelected={path === "/my/later"}
+                href={"/my/later"}
               ></IconItem>
               <IconItem
                 icon="icon-lishijilu"
                 title="History"
-                isSelected={path === "/history"}
-                href={"/history"}
+                isSelected={path === "/my/history"}
+                href={"/my/history"}
               ></IconItem>
-              <IconItem
-                icon="icon-dianzan"
-                title="Favorite"
-                isSelected={path === "/favorite"}
-                href={"/favorite"}
-              ></IconItem>
+
               {/* <div className="py-3">
               <Divider></Divider>
             </div> */}
-              <IconItem
-                icon="icon-fenxiang"
-                title="Share"
-                isSelected={path === "/share"}
-                href={"/share"}
-              ></IconItem>
               {/* <IconItem
               icon="icon-wodeguanzhu"
               title="Following"
@@ -104,13 +103,28 @@ export const Nav: React.FC<INav> = (props) => {
       </div>
       <div className="flex items-center justify-center w-full h-[60px] gap-8">
         <Link href="https://x.com/webifydao" target="_blank">
-        <Image src="/image/social/x.svg" alt="x" width={20} height={20}></Image>
+          <Image
+            src="/image/social/x.svg"
+            alt="x"
+            width={20}
+            height={20}
+          ></Image>
         </Link>
         <Link href="https://t.me/webifyDao" target="_blank">
-        <Image src="/image/social/telegram.svg" alt="telegram" width={20} height={20}></Image>
+          <Image
+            src="/image/social/telegram.svg"
+            alt="telegram"
+            width={20}
+            height={20}
+          ></Image>
         </Link>
         <Link href="https://discord.gg/Q87B4nWg7v" target="_blank">
-        <Image src="/image/social/discord.svg" alt="discord" width={20} height={20}></Image>
+          <Image
+            src="/image/social/discord.svg"
+            alt="discord"
+            width={20}
+            height={20}
+          ></Image>
         </Link>
       </div>
     </div>

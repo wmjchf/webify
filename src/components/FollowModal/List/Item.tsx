@@ -14,7 +14,7 @@ export const Item: React.FC<IItem> = (props) => {
   const { user } = useCommonStore();
   const router = useRouter();
   return (
-    <div className="flex justify-between items-center gap-2">
+    <div className="flex justify-between items-center gap-2 p-2 rounded-md hover:bg-gray-100">
       <Link href={`/profile/${data.uid}`} target="_blank">
         <div className="flex items-center gap-4 cursor-pointer">
           <PlaceholderImage
