@@ -11,6 +11,7 @@ import { Content } from "../../components/Content";
 import { fetcherCurrentUser } from "../../function/user";
 import "../../styles/globals.css";
 import "../../styles/iconfont.css";
+import "../../styles/mixins.scss";
 import { fetcherHome } from "../../function/common";
 import { ConfirmWallet } from "../../components/Login/ConfirmWallet";
 import { FollowModal } from "../../components/FollowModal";

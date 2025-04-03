@@ -85,11 +85,6 @@ export const PostList: React.FC<IPostList> = (props) => {
           next={() => {
             handleGetList();
           }}
-          endMessage={
-            <p className="text-center pt-4 pb-3 text-neutral-300">
-              Yay! You have seen it all
-            </p>
-          }
         >
           {list.map((item) => {
             return (

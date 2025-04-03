@@ -10,10 +10,11 @@ import { followList } from "../../../service/follow";
 import { IUser } from "../../../service/public";
 
 interface IList {
-  type: '1'|'2';
+  type: "1" | "2";
+  uid: string;
 }
 export const List: React.FC<IList> = (props) => {
-  const { type } = props;
+  const { type, uid } = props;
 
   const pageRef = useRef(0);
   const listRef = useRef<IUser[]>([]);
@@ -25,7 +26,8 @@ export const List: React.FC<IList> = (props) => {
     const result = await followList({
       page: pageRef.current,
       pageSize: 10,
-      typeId:type
+      typeId: type,
+      uid,
     });
     if (result.code === 200) {
       const newList = [...listRef.current, ...result.data.list];
@@ -60,7 +62,7 @@ export const List: React.FC<IList> = (props) => {
           scrollableTarget={type}
           loader={<></>}
           next={() => {
-            handleGetList();
+            // handleGetList();
           }}
         >
           {list?.map((item) => {
