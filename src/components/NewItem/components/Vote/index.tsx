@@ -69,6 +69,9 @@ export const Vote: React.FC<IVote> = (props) => {
                     if (onClick) {
                       onClick();
                     } else {
+                      if (likeStatus === 1) {
+                        return;
+                      }
                       likeAdd({
                         articleId,
                         typeId: 1,
@@ -108,6 +111,9 @@ export const Vote: React.FC<IVote> = (props) => {
                     if (onClick) {
                       onClick();
                     } else {
+                      if (likeStatus === -1) {
+                        return;
+                      }
                       likeAdd({
                         articleId,
                         typeId: 1,
