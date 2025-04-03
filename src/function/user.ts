@@ -15,7 +15,7 @@ export const fetcherCurrentUser = async () => {
         `${BASE_URL}/public/user/getUserInfo?${str}`,
         {
           method: "GET",
-          cache: "no-cache"
+          cache: "no-cache",
         }
       );
       const result = await resultJSON.json();

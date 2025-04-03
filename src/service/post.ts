@@ -52,3 +52,13 @@ export const getPublicPostList = (params: {
     params,
   });
 };
+
+export const getSubscribeList = (params: {
+  page: number;
+  pageSize: number;
+}) => {
+  return fetcher<{ list: IArticle[] }>("/userAdmin/page/home/getFeedList", {
+    method: "GET",
+    params,
+  });
+};

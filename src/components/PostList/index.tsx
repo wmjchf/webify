@@ -6,7 +6,11 @@ import InfiniteScroll from "react-infinite-scroll-component";
 
 import { NewsItem } from "../NewItem";
 import { IArticle } from "../../service/public";
-import { getPostList, getPublicPostList } from "../../service/post";
+import {
+  getPostList,
+  getPublicPostList,
+  getSubscribeList,
+} from "../../service/post";
 import { getCollectList } from "../../service/collect";
 import { NoData } from "../NoData";
 import { getLaterList } from "../../service/later";
@@ -50,6 +54,13 @@ export const PostList: React.FC<IPostList> = (props) => {
     if (apiType === "later") {
       result = await getLaterList({
         sort: "1",
+        page: pageRef.current,
+        pageSize: 10,
+      });
+    }
+
+    if (apiType === "subscribe") {
+      result = await getSubscribeList({
         page: pageRef.current,
         pageSize: 10,
       });

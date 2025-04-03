@@ -3,19 +3,22 @@ import classNames from "classnames";
 import { DisplayName } from "./DisplayName";
 import { EditAvatar } from "./EditAvatar";
 import { EditDescription } from "./EditDescription";
+import { AuthPage } from "../../../components/AuthPage";
 
 function Page() {
   return (
-    <div>
+    <AuthPage>
       <div>
-        <span className={"font-bold text-[30px] px-4"}>Setting</span>
+        <div>
+          <span className={"font-bold text-[30px] px-4"}>Setting</span>
+        </div>
+        <div className={classNames("px-4")}>
+          <DisplayName></DisplayName>
+          <EditDescription></EditDescription>
+          <EditAvatar></EditAvatar>
+        </div>
       </div>
-      <div className={classNames("px-4")}>
-        <DisplayName></DisplayName>
-        <EditDescription></EditDescription>
-        <EditAvatar></EditAvatar>
-      </div>
-    </div>
+    </AuthPage>
   );
 }
 

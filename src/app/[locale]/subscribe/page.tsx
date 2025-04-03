@@ -1,11 +1,25 @@
-import { Button } from "@heroui/react";
-import { Development } from "../../../components/Devlopment";
+import { AuthPage } from "../../../components/AuthPage";
+import { HomeList } from "../../../components/HomeList";
+import { PostList } from "../../../components/PostList";
+import { fetcherUserAllList } from "../../../function/list";
+import { fetcherHomeFeed } from "../../../function/post";
 
-function Page() {
+async function Page() {
+  const { article } = await fetcherHomeFeed();
+  const allCollectList = await fetcherUserAllList("collect");
+  const allLaterList = await fetcherUserAllList("later");
+  const allLikeList = await fetcherUserAllList("like");
+
   return (
-    <div>
-      <Development></Development>
-    </div>
+    <AuthPage>
+      <PostList
+        data={article}
+        apiType="subscribe"
+        allLaterList={allLaterList}
+        allCollectList={allCollectList}
+        allLikeList={allLikeList}
+      ></PostList>
+    </AuthPage>
   );
 }
 
