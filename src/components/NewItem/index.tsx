@@ -23,7 +23,6 @@ interface INewsItemPramas {
   data: IArticle;
   allCollectList?: IAllCollect[];
   allLaterList?: IAllCollect[];
-  apiType?: string;
   onDelete?: () => void;
   allLikeList?: IAllCollect[];
 }

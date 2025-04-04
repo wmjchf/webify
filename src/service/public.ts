@@ -93,3 +93,16 @@ export const getArticleList = (params: IGetArticleListParams) => {
     params,
   });
 };
+
+interface IGetSearchListParams {
+  q: string;
+  page: number;
+  pageSize: number;
+  typeId: string;
+}
+export const getSearchList = (params: IGetSearchListParams) => {
+  return fetcher<{ articleList: IArticle[] }>("/public/page/search", {
+    method: "GET",
+    params,
+  });
+};

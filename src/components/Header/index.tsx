@@ -8,6 +8,7 @@ import { fetcherCurrentUser } from "../../function/user";
 import { Login } from "../Login";
 import { WalletLogin } from "../Login/WalletLogin";
 import { ShareBtn } from "./ShareBtn";
+import { InputSearch } from "./InputSearch";
 
 interface IHeader {}
 export const Header: React.FC<IHeader> = async (props) => {
@@ -34,12 +35,7 @@ export const Header: React.FC<IHeader> = async (props) => {
         ></Image>
       </div>
       <div className={classNames(styles.middle, "h-full flex items-center")}>
-        <Input
-          label=""
-          placeholder="search"
-          // className="rounded-full overflow-hidden border-solid border-2 border-indigo-600"
-          startContent={<i className="iconfont icon-sousuo"></i>}
-        />
+        <InputSearch></InputSearch>
       </div>
       <div className={classNames(styles.right, "flex items-center gap-2")}>
         <ShareBtn user={user}></ShareBtn>
