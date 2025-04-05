@@ -23,6 +23,12 @@ export const Collection: React.FC<ICollectionProps> = (props) => {
 
   const [isLoading, setIsLoading] = useState(false);
 
+  useEffect(() => {
+    setIsCollect(
+      allCollectList.some((item) => item.target_id === Number(articleId))
+    );
+  }, [allCollectList]);
+
   const collectArticle = async () => {
     let result = null;
     setIsLoading(true);

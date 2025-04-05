@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Button } from "@heroui/react";
 import classNames from "classnames";
@@ -24,6 +24,12 @@ export const LaterRead: React.FC<ILaterReadProps> = (props) => {
   );
 
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    setIsReadLater(
+      allLaterList.some((item) => item.target_id === Number(articleId))
+    );
+  }, []);
 
   const readNews = async () => {
     let result = null;

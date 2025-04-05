@@ -24,11 +24,10 @@ import styles from "./index.module.scss";
 import { getWalletSignatureContent, login } from "../../../service/user";
 import { useCommonStore } from "../../../store/common";
 
-
 export const ConfirmWallet = () => {
   const { address, isConnected, chainId } = useAccount();
-  const {confirmLoginOpen,toggleConfirmLoginOpen} = useCommonStore();
-  const { setToken, setUid, getUserInfo} = useCommonStore();
+  const { confirmLoginOpen, toggleConfirmLoginOpen } = useCommonStore();
+  const { setToken, setUid, getUserInfo, getAllList } = useCommonStore();
   const { signMessageAsync } = useSignMessage();
   const [signing, setSigning] = useState(false);
 
@@ -61,6 +60,7 @@ export const ConfirmWallet = () => {
         setToken(token);
         setUid(`${uid}`);
         getUserInfo();
+        getAllList();
         toggleConfirmLoginOpen();
       }
     } catch (error) {
@@ -127,4 +127,4 @@ export const ConfirmWallet = () => {
       </ModalContent>
     </Modal>
   );
-}
+};

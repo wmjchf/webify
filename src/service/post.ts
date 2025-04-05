@@ -1,3 +1,4 @@
+import { IAllCollect } from "../function/list";
 import { fetcher } from "../utils/request";
 import { IArticle } from "./public";
 
@@ -60,5 +61,11 @@ export const getSubscribeList = (params: {
   return fetcher<{ list: IArticle[] }>("/userAdmin/page/home/getFeedList", {
     method: "GET",
     params,
+  });
+};
+
+export const getAllList = (type: string) => {
+  return fetcher<IAllCollect[]>(`/userAdmin/${type}/getAll`, {
+    method: "GET",
   });
 };

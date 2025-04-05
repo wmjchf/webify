@@ -11,11 +11,11 @@ interface IContent {
 
 export const Content: React.FC<IContent> = async (props) => {
   const { children } = props;
-  const { token } = await fetcherCurrentUser();
+  const { token, user } = await fetcherCurrentUser();
   return (
     <div className={classNames(styles.content, "pt-14")}>
       <div className={classNames(styles.left, "float-left")}>
-        <Nav token={token}></Nav>
+        <Nav token={token} user={user}></Nav>
       </div>
 
       <div className={classNames(styles.right, "overflow-hidden")}>

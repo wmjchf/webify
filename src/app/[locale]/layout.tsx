@@ -28,11 +28,21 @@ async function RootLayout({
   const { user, token, uid } = await fetcherCurrentUser();
   const { articleSource, articleType } = await fetcherHome();
   const allFollowList = await fetcherUserAllList("follow");
+  // const allCollectList = await fetcherUserAllList("collect");
+  // const allLaterList = await fetcherUserAllList("later");
+  // const allLikeList = await fetcherUserAllList("like");
+
   return (
     <html lang="en">
       <body>
         <StoreProvider
-          commonState={{ token, user, uid, articleSource, articleType }}
+          commonState={{
+            token,
+            user,
+            uid,
+            articleSource,
+            articleType,
+          }}
         >
           <HeroUIProvider>
             <NextIntlClientProvider messages={messages}>

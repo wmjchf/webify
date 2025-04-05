@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Button } from "@heroui/react";
 import classNames from "classnames";
@@ -29,6 +29,7 @@ interface IVote {
 export const Vote: React.FC<IVote> = (props) => {
   const { user } = useCommonStore();
   const { articleId, likeCount, allLikeList = [] } = props;
+
   const [ilikeCount, setILikeCount] = useState(likeCount);
   const [likeHover, setLikeHover] = useState(false);
   const [dislikeHover, setDislikeHover] = useState(false);
@@ -36,6 +37,12 @@ export const Vote: React.FC<IVote> = (props) => {
     allLikeList.find((item) => item.article_id === Number(articleId))
       ?.is_like || 0
   );
+  useEffect(() => {
+    setLikeStatus(
+      allLikeList.find((item) => item.article_id === Number(articleId))
+        ?.is_like || 0
+    );
+  }, [allLikeList]);
   return (
     <WalletLogin user={user as IUser}>
       {(onClick) => {

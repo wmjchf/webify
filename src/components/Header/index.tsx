@@ -1,7 +1,5 @@
 import classNames from "classnames";
 import Image from "next/image";
-import { Button, Input } from "@heroui/react";
-import { Link } from "../../i18n/routing";
 
 import styles from "./index.module.scss";
 import { fetcherCurrentUser } from "../../function/user";

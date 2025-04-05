@@ -30,7 +30,13 @@ interface INewsItemPramas {
 export const NewsItem: React.FC<INewsItemPramas> = (props) => {
   const { data, allCollectList, allLaterList, onDelete, allLikeList } = props;
   const router = useRouter();
-  const { user } = useCommonStore();
+  const {
+    user,
+    allCollectList: allCollectList_client,
+    allLaterList: allLaterList_client,
+    allLikeList: allLikeList_client,
+  } = useCommonStore();
+
   const readNews = async () => {
     window.open(data.url);
     try {
@@ -99,16 +105,16 @@ export const NewsItem: React.FC<INewsItemPramas> = (props) => {
             <Vote
               likeCount={data.like_count}
               articleId={`${data.article_id}`}
-              allLikeList={allLikeList}
+              allLikeList={allLikeList_client || allLikeList}
             ></Vote>
             <Share></Share>
             <Collection
               articleId={`${data.article_id}`}
-              allCollectList={allCollectList}
+              allCollectList={allCollectList_client || allCollectList}
             ></Collection>
             <LaterRead
               articleId={`${data.article_id}`}
-              allLaterList={allLaterList}
+              allLaterList={allLaterList_client || allLaterList}
             ></LaterRead>
             {onDelete && (
               <DeletePost

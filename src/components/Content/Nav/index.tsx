@@ -10,13 +10,16 @@ import { Collapse } from "../Collapse";
 import { AuthClientComponent } from "../../AuthClientComponent";
 import Link from "next/link";
 import Image from "next/image";
+import { WalletLogin } from "../../Login/WalletLogin";
+import { IUser } from "../../../service/public";
 
 interface INav {
   token?: string;
+  user: IUser | null;
 }
 
 export const Nav: React.FC<INav> = (props) => {
-  const { token } = props;
+  const { token, user } = props;
   const path = usePathname();
   return (
     <div
@@ -33,12 +36,19 @@ export const Nav: React.FC<INav> = (props) => {
             isSelected={path === "/"}
             href={"/"}
           ></IconItem>
-          <IconItem
-            icon="icon-dingyue"
-            title="Subscribe"
-            isSelected={path === "/subscribe"}
-            href={"/subscribe"}
-          ></IconItem>
+          <WalletLogin user={user}>
+            {(onClick) => {
+              return (
+                <IconItem
+                  onCLick={onClick}
+                  icon="icon-dingyue"
+                  title="Subscribe"
+                  isSelected={path === "/subscribe"}
+                  href={"/subscribe"}
+                ></IconItem>
+              );
+            }}
+          </WalletLogin>
           {/* <IconItem icon="icon-privilege" title="Privilege"></IconItem>
           <IconItem icon="icon-photo" title="Photo"></IconItem> */}
         </div>

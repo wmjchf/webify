@@ -34,6 +34,7 @@ export const FollowBtn: React.FC<IFollowBtn> = (props) => {
   useEffect(() => {
     setText(iisFollowing ? "Following" : "Follow");
   }, [iisFollowing]);
+
   return (
     <>
       <ConfirmModal

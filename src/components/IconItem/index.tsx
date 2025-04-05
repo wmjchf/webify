@@ -8,13 +8,22 @@ interface IIconItem {
   title: string;
   isSelected?: boolean;
   href: string;
+  onCLick?: () => void;
 }
 
 export const IconItem: React.FC<IIconItem> = (props) => {
   const { icon, title, isSelected = false, href } = props;
 
   return (
-    <Link href={href}>
+    <Link
+      href={props.onCLick ? "" : href}
+      onClick={(event) => {
+        if (props.onCLick) {
+          event.preventDefault();
+          props.onCLick();
+        }
+      }}
+    >
       <div
         className={classNames(
           styles.icon_item,

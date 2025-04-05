@@ -9,6 +9,7 @@ export const InputSearch = () => {
   return (
     <div className={"h-full flex items-center"}>
       <Input
+        autoComplete="off"
         ref={inputRef}
         label=""
         placeholder="search"

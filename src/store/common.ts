@@ -1,3 +1,4 @@
+import { getAllList } from "./../service/post";
 import { create } from "zustand";
 import Cookies from "js-cookie";
 import { immer } from "zustand/middleware/immer";
@@ -7,6 +8,7 @@ import {
   IArticleType,
   IUser,
 } from "../service/public";
+import { IAllCollect } from "../function/list";
 
 type Action = {
   setToken: (token: string) => void;
@@ -21,15 +23,17 @@ type Action = {
 
   toggleConfirmLoginOpen: () => void;
 
-  toggleFollowModalData: (uid: string, type:IFollowModalType) => void;
+  toggleFollowModalData: (uid: string, type: IFollowModalType) => void;
 
-  switchFollowModal:(type:IFollowModalType)=>void
+  switchFollowModal: (type: IFollowModalType) => void;
+
+  getAllList: () => void;
 };
-export type IFollowModalType  = '1'|'2'
+export type IFollowModalType = "1" | "2";
 interface IFollowModalData {
   isOpen: boolean;
   uid: string;
-  type:IFollowModalType
+  type: IFollowModalType;
 }
 
 export interface CommonState {
@@ -48,6 +52,14 @@ export interface CommonState {
   articleSource: IArticleSource[];
 
   articleType: IArticleType[];
+
+  allCollectList?: IAllCollect[] | null;
+
+  allLaterList?: IAllCollect[] | null;
+
+  allLikeList?: IAllCollect[] | null;
+
+  allFollowList?: IAllCollect[] | null;
 }
 
 export const useCommonStore = create<CommonState & Action>()(
@@ -60,12 +72,17 @@ export const useCommonStore = create<CommonState & Action>()(
 
     articleType: [],
 
+    allCollectList: null,
+    allLaterList: null,
+    allLikeList: null,
+    allFollowList: null,
+
     confirmLoginOpen: false,
 
     followModalData: {
       isOpen: false,
       uid: "",
-      type:"1"
+      type: "1",
     },
 
     setToken: (token) =>
@@ -115,27 +132,42 @@ export const useCommonStore = create<CommonState & Action>()(
       });
     },
 
-    toggleFollowModalData: (uid: string,type:IFollowModalType) => {
+    toggleFollowModalData: (uid: string, type: IFollowModalType) => {
       const data = get();
       set((state) => {
         const followModalData = data.followModalData;
         state.followModalData = {
           isOpen: !followModalData?.isOpen,
           uid: uid,
-          type:type
+          type: type,
         };
       });
     },
-    switchFollowModal:(type:IFollowModalType)=>{
+    switchFollowModal: (type: IFollowModalType) => {
       const data = get();
       set((state) => {
         const followModalData = data.followModalData;
         state.followModalData = {
           isOpen: followModalData?.isOpen as boolean,
           uid: followModalData?.uid as string,
-          type:type
+          type: type,
         };
       });
-    }
+    },
+    getAllList: async () => {
+      Promise.all([
+        getAllList("collect"),
+        getAllList("later"),
+        getAllList("like"),
+        getAllList("follow"),
+      ]).then((data) => {
+        set((state) => {
+          state.allCollectList = data[0].data;
+          state.allLaterList = data[1].data;
+          state.allLikeList = data[2].data;
+          state.allFollowList = data[3].data;
+        });
+      });
+    },
   }))
 );

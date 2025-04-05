@@ -25,8 +25,12 @@ interface IFollowModal {
 }
 export const FollowModal: React.FC<IFollowModal> = (props) => {
   const { allFollowList } = props;
-  const { followModalData, toggleFollowModalData, switchFollowModal } =
-    useCommonStore();
+  const {
+    followModalData,
+    toggleFollowModalData,
+    switchFollowModal,
+    allFollowList: allFollowList_client,
+  } = useCommonStore();
 
   return (
     <Modal
@@ -61,14 +65,14 @@ export const FollowModal: React.FC<IFollowModal> = (props) => {
               >
                 <Tab key="1" title="Following">
                   <List
-                    allFollowList={allFollowList}
+                    allFollowList={allFollowList_client || allFollowList}
                     type="1"
                     uid={followModalData?.uid as string}
                   ></List>
                 </Tab>
                 <Tab key="2" title="Followers">
                   <List
-                    allFollowList={allFollowList}
+                    allFollowList={allFollowList_client || allFollowList}
                     type="2"
                     uid={followModalData?.uid as string}
                   ></List>
