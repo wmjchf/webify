@@ -1,10 +1,10 @@
 @font-face {
   font-family: "iconfont"; /* Project id 4804718 */
-  src: url("//at.alicdn.com/t/c/font_4804718_0perk73yenk.woff2?t=1743484976931")
+  src: url("//at.alicdn.com/t/c/font_4804718_30tjwmq4rch.woff2?t=1743866933540")
       format("woff2"),
-    url("//at.alicdn.com/t/c/font_4804718_0perk73yenk.woff?t=1743484976931")
+    url("//at.alicdn.com/t/c/font_4804718_30tjwmq4rch.woff?t=1743866933540")
       format("woff"),
-    url("//at.alicdn.com/t/c/font_4804718_0perk73yenk.ttf?t=1743484976931")
+    url("//at.alicdn.com/t/c/font_4804718_30tjwmq4rch.ttf?t=1743866933540")
       format("truetype");
 }
 
@@ -14,6 +14,18 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-join-us:before {
+  content: "\e6e0";
+}
+
+.icon-icon_tokenomics:before {
+  content: "\e609";
+}
+
+.icon-ic_privacy_policy:before {
+  content: "\e642";
 }
 
 .icon-guanyuwomen:before {

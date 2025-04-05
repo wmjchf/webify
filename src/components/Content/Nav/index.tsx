@@ -12,6 +12,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { WalletLogin } from "../../Login/WalletLogin";
 import { IUser } from "../../../service/public";
+import { useCommonStore } from "../../../store/common";
 
 interface INav {
   token?: string;
@@ -21,6 +22,7 @@ interface INav {
 export const Nav: React.FC<INav> = (props) => {
   const { token, user } = props;
   const path = usePathname();
+  const { token: tokenClient } = useCommonStore();
   return (
     <div
       className={classNames(
@@ -52,9 +54,7 @@ export const Nav: React.FC<INav> = (props) => {
           {/* <IconItem icon="icon-privilege" title="Privilege"></IconItem>
           <IconItem icon="icon-photo" title="Photo"></IconItem> */}
         </div>
-        <div className="py-3">
-          <div className="border-b border-gray-200"></div>
-        </div>
+
         {/* <div>
           <IconItem
             icon="icon-guanyuwomen"
@@ -63,7 +63,10 @@ export const Nav: React.FC<INav> = (props) => {
             href={"/about"}
           ></IconItem>
         </div> */}
-        <AuthClientComponent token={token}>
+        <AuthClientComponent token={tokenClient || token}>
+          <div className="py-3">
+            <div className="border-b border-gray-200"></div>
+          </div>
           <div>
             <Collapse title="MY">
               <IconItem
@@ -110,6 +113,54 @@ export const Nav: React.FC<INav> = (props) => {
             </Collapse>
           </div>
         </AuthClientComponent>
+        <div className="py-3">
+          <div className="border-b border-gray-200"></div>
+        </div>
+        <div>
+          <Collapse title="RESOURCES">
+            <IconItem
+              icon="icon-guanyuwomen"
+              title="About Us"
+              isSelected={path === "/about"}
+              href={"/about"}
+            ></IconItem>
+
+            <IconItem
+              icon="icon-icon_tokenomics"
+              title="Tokenomics"
+              isSelected={path === "/tokenomics"}
+              href={"/tokenomics"}
+            ></IconItem>
+            <IconItem
+              icon="icon-ic_privacy_policy"
+              title="Privacy Policy"
+              isSelected={path === "/privacy"}
+              href={"/privacy"}
+            ></IconItem>
+            <IconItem
+              icon="icon-join-us"
+              title="Join Us"
+              isSelected={path === "/join"}
+              href={"/join"}
+            ></IconItem>
+
+            {/* <div className="py-3">
+              <Divider></Divider>
+            </div> */}
+            {/* <IconItem
+              icon="icon-wodeguanzhu"
+              title="Following"
+              isSelected={path === "/following"}
+              href={"/following"}
+            ></IconItem>
+            <IconItem
+              icon="icon-beiguanzhu"
+              title="Fan"
+              isSelected={path === "/fans"}
+              href={"/fans"}
+            ></IconItem> */}
+          </Collapse>
+        </div>
       </div>
       <div className="flex items-center justify-center w-full h-[60px] gap-8">
         <Link href="https://x.com/webifydao" target="_blank">
