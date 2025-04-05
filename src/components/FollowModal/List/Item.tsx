@@ -14,7 +14,6 @@ interface IItem {
 export const Item: React.FC<IItem> = (props) => {
   const { data, allFollowList } = props;
   const { user } = useCommonStore();
-  console.log(allFollowList, data, "erwrewrwerw");
   return (
     <div className="flex justify-between items-center gap-2 p-2 rounded-md hover:bg-gray-100">
       <Link href={`/profile/${data.uid}`} target="_blank">

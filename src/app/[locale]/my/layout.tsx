@@ -13,7 +13,6 @@ async function Page({
   params: { locale: string };
 }) {
   const { user } = await fetcherCurrentUser();
-
   return (
     <AuthPage>
       <div>

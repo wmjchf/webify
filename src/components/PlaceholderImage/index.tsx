@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image";
 import classNames from "classnames";
 
 interface IPlaceholderImage {
@@ -19,7 +18,7 @@ export const PlaceholderImage: React.FC<IPlaceholderImage> = (props) => {
       <div className={`w-full h-full bg-slate-200 animate-pulse`}></div>
       {/* </div> */}
       {src && (
-        <Image
+        <img
           src={src}
           alt={alt}
           width={width}
@@ -28,7 +27,7 @@ export const PlaceholderImage: React.FC<IPlaceholderImage> = (props) => {
             `absolute top-0 left-0 w-full h-full`,
             imgClassName
           )}
-        ></Image>
+        />
       )}
     </div>
   );

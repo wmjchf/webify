@@ -39,6 +39,7 @@ export const User: React.FC<IUserProps> = (props) => {
             imgClassName="object-cover"
             className="w-[40px] h-[40px] rounded-full shrink-0 relative top-2"
           />
+
           <div className="flex flex-col">
             <span className="text-lg font-semibold">{user?.nickname}</span>
             <span className="text-sm">
