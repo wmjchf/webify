@@ -22,7 +22,7 @@ export const Nav: React.FC<INav> = (props) => {
     <div
       className={classNames(
         styles.nav,
-        "h-[calc(100vh-56px)] bg-white flex flex-col justify-between fixed top-14 left-0 z-10"
+        "w-[250px] border-r border-gray-200 h-[calc(100vh-56px)] bg-white flex flex-col justify-between fixed top-14 left-0 z-10"
       )}
     >
       <div className={classNames(styles.nav_common, "p-3")}>
@@ -43,7 +43,7 @@ export const Nav: React.FC<INav> = (props) => {
           <IconItem icon="icon-photo" title="Photo"></IconItem> */}
         </div>
         <div className="py-3">
-          <Divider></Divider>
+          <div className="border-b border-gray-200"></div>
         </div>
         {/* <div>
           <IconItem
