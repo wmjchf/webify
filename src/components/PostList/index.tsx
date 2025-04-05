@@ -105,7 +105,6 @@ export const PostList: React.FC<IPostList> = (props) => {
                 allLikeList={allLikeList}
                 key={item.article_id}
                 data={item}
-                apiType={apiType}
                 onDelete={
                   apiType === "share"
                     ? () => {
