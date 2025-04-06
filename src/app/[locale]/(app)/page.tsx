@@ -1,6 +1,6 @@
-import { fetcherHome, fetcherHomeArticle } from "../../../../function/common";
-import { HomeList } from "../../../../components/HomeList";
-import { fetcherUserAllList } from "../../../../function/list";
+import { fetcherHome, fetcherHomeArticle } from "../../../function/common";
+import { HomeList } from "../../../components/HomeList";
+import { fetcherUserAllList } from "../../../function/list";
 
 async function Page() {
   const { article } = await fetcherHomeArticle();

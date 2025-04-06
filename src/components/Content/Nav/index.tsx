@@ -35,7 +35,7 @@ export const Nav: React.FC<INav> = (props) => {
           <IconItem
             icon="icon-home"
             title="Home"
-            isSelected={path === "/home"}
+            isSelected={path === "/"}
             href={"/"}
           ></IconItem>
           <WalletLogin user={user}>
@@ -123,6 +123,7 @@ export const Nav: React.FC<INav> = (props) => {
               title="About Us"
               isSelected={path === "/about"}
               href={"/about"}
+              target="_blank"
             ></IconItem>
 
             <IconItem

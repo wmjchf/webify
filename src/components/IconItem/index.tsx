@@ -9,13 +9,15 @@ interface IIconItem {
   isSelected?: boolean;
   href: string;
   onCLick?: () => void;
+  target?: string;
 }
 
 export const IconItem: React.FC<IIconItem> = (props) => {
-  const { icon, title, isSelected = false, href } = props;
+  const { icon, title, isSelected = false, href, target } = props;
 
   return (
     <Link
+      target={target}
       href={props.onCLick ? "" : href}
       onClick={(event) => {
         if (props.onCLick) {
