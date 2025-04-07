@@ -28,8 +28,8 @@ export const Header: React.FC<IHeader> = (props) => {
         >
           <Image
             src="/image/header/logo.png"
-            height={40}
-            width={214}
+            height={30}
+            width={161}
             alt=""
           ></Image>
         </div>

@@ -146,7 +146,7 @@ export const Vote: React.FC<IVote> = (props) => {
             })}
           >
             <span className="font-medium">
-              {ilikeCount - idislikeCount !== 0
+              {ilikeCount - idislikeCount > 0
                 ? ilikeCount - idislikeCount
                 : "Vote"}
             </span>
