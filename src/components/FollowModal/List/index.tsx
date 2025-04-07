@@ -9,6 +9,7 @@ import { NoData } from "../../NoData";
 import { followList } from "../../../service/follow";
 import { IUser } from "../../../service/public";
 import { IAllCollect } from "../../../function/list";
+import { Loading } from "../../Loading";
 
 interface IList {
   type: "1" | "2";
@@ -17,7 +18,7 @@ interface IList {
 }
 export const List: React.FC<IList> = (props) => {
   const { type, uid, allFollowList } = props;
-
+  const [loading, setLoading] = useState(false);
   const pageRef = useRef(0);
   const listRef = useRef<IUser[]>([]);
   const [list, setList] = useState<IUser[] | null>(null);
@@ -34,6 +35,7 @@ export const List: React.FC<IList> = (props) => {
     if (result.code === 200) {
       const newList = [...listRef.current, ...result.data.list];
       setList(newList);
+      setLoading(false);
       listRef.current = newList;
       if (result.data.list.length < 10) {
         setHasMore(false);
@@ -48,36 +50,51 @@ export const List: React.FC<IList> = (props) => {
   };
 
   useEffect(() => {
+    setLoading(true);
     handleGetList();
   }, []);
 
-  return (
-    <div className="h-full" id={type}>
-      {list?.length === 0 ? (
+  const renderList = () => {
+    if (loading) {
+      return (
+        <div className="h-[calc(100%-50px)] flex justify-center items-center">
+          <Loading></Loading>
+        </div>
+      );
+    }
+    if (list?.length === 0) {
+      return (
         <div className="h-[calc(100%-50px)]">
           <NoData></NoData>
         </div>
-      ) : (
-        <InfiniteScroll
-          dataLength={list?.length || 0}
-          hasMore={hasMore}
-          scrollableTarget={type}
-          loader={<></>}
-          next={() => {
-            // handleGetList();
-          }}
-        >
-          {list?.map((item) => {
-            return (
-              <Item
-                allFollowList={allFollowList}
-                key={item.uid}
-                data={item}
-              ></Item>
-            );
-          })}
-        </InfiniteScroll>
-      )}
+      );
+    }
+    return (
+      <InfiniteScroll
+        dataLength={list?.length || 0}
+        hasMore={hasMore}
+        scrollableTarget={type}
+        loader={<></>}
+        next={() => {
+          // handleGetList();
+        }}
+      >
+        {list?.map((item) => {
+          return (
+            <Item
+              allFollowList={allFollowList}
+              key={item.uid}
+              data={item}
+            ></Item>
+          );
+        })}
+      </InfiniteScroll>
+    );
+  };
+
+  return (
+    <div className="h-full" id={type}>
+      {renderList()}
     </div>
   );
 };
