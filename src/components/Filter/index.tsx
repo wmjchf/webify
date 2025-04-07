@@ -21,7 +21,6 @@ interface IFilter {
 
 export const Filter: React.FC<IFilter> = (props) => {
   const { data, title, className, onChange, value, multiple } = props;
-
   return (
     <div className={classNames("flex flex-row", className)}>
       {title && (

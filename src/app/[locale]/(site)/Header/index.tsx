@@ -20,9 +20,9 @@ export const Header: React.FC<IHeader> = async (props) => {
           )}
         >
           <Image
-            src="/image/header/logo.png"
+            src="/image/header/logo.svg"
             height={40}
-            width={112}
+            width={128}
             alt=""
           ></Image>
         </div>
@@ -32,8 +32,8 @@ export const Header: React.FC<IHeader> = async (props) => {
             variant={"underlined"}
             className={styles.tabs}
           >
-            <Tab key="about" title="About Us" />
-            <Tab key="tokenomics" title="Tokenomics" />
+            <Tab key="about" title="About Us" onClick={() => {}} />
+            <Tab key="Points Tokenomics" title="Points Tokenomics" />
             <Tab key="join" title="Join Us" />
           </Tabs>
         </div>
