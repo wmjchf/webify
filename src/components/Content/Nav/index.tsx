@@ -131,6 +131,7 @@ export const Nav: React.FC<INav> = (props) => {
               title="Points Tokenomics"
               isSelected={path === "/points"}
               href={"/points"}
+              target="_blank"
             ></IconItem>
 
             <IconItem
@@ -138,6 +139,7 @@ export const Nav: React.FC<INav> = (props) => {
               title="Join Us"
               isSelected={path === "/join"}
               href={"/join"}
+              target="_blank"
             ></IconItem>
 
             {/* <div className="py-3">
