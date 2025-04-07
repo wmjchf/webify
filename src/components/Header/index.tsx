@@ -28,7 +28,7 @@ export const Header: React.FC<IHeader> = async (props) => {
         <Image
           src="/image/header/logo.png"
           height={40}
-          width={215}
+          width={216}
           alt=""
         ></Image>
       </div>
