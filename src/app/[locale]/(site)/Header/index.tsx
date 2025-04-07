@@ -12,7 +12,7 @@ interface IHeader {
 export const Header: React.FC<IHeader> = (props) => {
   const { locale } = props;
   const pathname = usePathname();
-  console.log(pathname, "rewrwrw");
+
   return (
     <div
       id="header"

@@ -2,6 +2,8 @@
   "home": {
     "ConnectWallet": "连接钱包",
     "aboutUs": "关于我们",
-    "contact": "联系方式"
+    "contact": "联系方式",
+    "allType": "全部类型",
+    "allResource": "全部资源"
   }
 }

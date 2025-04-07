@@ -2,6 +2,8 @@
   "home": {
     "ConnectWallet": "Connect Wallet",
     "aboutUs": "About Us",
-    "contact": "Contact"
+    "contact": "Contact",
+    "allType": "All Type",
+    "allResource": "All Resource"
   }
 }

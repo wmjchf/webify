@@ -10,11 +10,10 @@ import {
   IArticleSource,
   IArticleType,
 } from "../../service/public";
-import { FilterPage } from "../FilterPage";
 import { Filter } from "../Filter";
-import { useCommonStore } from "../../store/common";
 import { IAllCollect } from "../../function/list";
 import { NoData } from "../NoData";
+import { useTranslations } from "next-intl";
 
 interface IHomeList {
   data: IArticle[];
@@ -33,7 +32,7 @@ export const HomeList: React.FC<IHomeList> = (props) => {
     allLaterList,
     allLikeList,
   } = props;
-
+  const t = useTranslations("home");
   const pageRef = useRef(1);
   const listRef = useRef<IArticle[]>(data);
   const [list, setList] = useState<IArticle[]>(data);
@@ -71,7 +70,7 @@ export const HomeList: React.FC<IHomeList> = (props) => {
     <div>
       <Filter
         value={sourceTypeId}
-        title="全部来源"
+        title={t("allResource")}
         data={[
           ...articleSource.map((item) => ({
             value: `${item.id}`,
@@ -88,7 +87,7 @@ export const HomeList: React.FC<IHomeList> = (props) => {
       ></Filter>
       <Filter
         value={articleTypeId}
-        title="全部类型"
+        title={t("allType")}
         data={[
           ...articleType.map((item) => ({
             value: `${item.id}`,
