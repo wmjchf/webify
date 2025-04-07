@@ -1,10 +1,10 @@
 @font-face {
   font-family: "iconfont"; /* Project id 4804718 */
-  src: url("//at.alicdn.com/t/c/font_4804718_30tjwmq4rch.woff2?t=1743866933540")
+  src: url("//at.alicdn.com/t/c/font_4804718_2q1d0hnubnk.woff2?t=1744025871935")
       format("woff2"),
-    url("//at.alicdn.com/t/c/font_4804718_30tjwmq4rch.woff?t=1743866933540")
+    url("//at.alicdn.com/t/c/font_4804718_2q1d0hnubnk.woff?t=1744025871935")
       format("woff"),
-    url("//at.alicdn.com/t/c/font_4804718_30tjwmq4rch.ttf?t=1743866933540")
+    url("//at.alicdn.com/t/c/font_4804718_2q1d0hnubnk.ttf?t=1744025871935")
       format("truetype");
 }
 
@@ -14,6 +14,10 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-post:before {
+  content: "\e7ab";
 }
 
 .icon-join-us:before {

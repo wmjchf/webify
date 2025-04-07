@@ -55,15 +55,31 @@ export const NewsItem: React.FC<INewsItemPramas> = (props) => {
           "flex px-1 py-2 gap-3 cursor-pointer rounded-md"
         )}
       >
-        <div className={classNames(styles.left, "w-[102px] h-[76px] shrink-0")}>
-          <PlaceholderImage
-            alt={data.title}
-            src={data.image_url}
-            width={102}
-            height={76}
-            imgClassName="object-cover"
-            className="w-[102px] h-[76px] rounded-md"
-          />
+        <div
+          className={classNames(
+            styles.left,
+            "w-[102px] h-[76px] shrink-0 rounded-md",
+            {
+              "border-1": !data.image_url,
+              "border-gray-300": !data.image_url,
+              flex: !data.image_url,
+              "justify-center": !data.image_url,
+              "items-center": !data.image_url,
+            }
+          )}
+        >
+          {data.image_url ? (
+            <PlaceholderImage
+              alt={data.title}
+              src={data.image_url}
+              width={102}
+              height={76}
+              imgClassName="object-cover"
+              className="w-[102px] h-[76px] rounded-md"
+            />
+          ) : (
+            <i className="iconfont icon-post"></i>
+          )}
         </div>
         <div className={classNames(styles.right, "flex flex-col gap-3")}>
           <div className={classNames(styles.one, "flex items-center gap-2")}>
