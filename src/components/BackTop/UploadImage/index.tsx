@@ -47,6 +47,10 @@ export const UploadImage: React.FC<UploadImageProps> = (props) => {
     return false;
   };
 
+  useEffect(() => {
+    setImageUrl(src);
+  }, [src]);
+
   return (
     <Upload
       showUploadList={false}

@@ -61,12 +61,16 @@ export const ShareLink: React.FC<IShareLink> = (props) => {
 
   const handleGetUrlInfo = async (url: string) => {
     if (!url) {
+      setTitle("");
+      setIntro("");
+      setImageUrl("");
       return;
     }
     const result = await getUrlInfo(url);
     if (result.code === 200) {
       setTitle(result.data.title);
       setIntro(result.data.description);
+      setImageUrl(result.data.image);
     }
   };
   const debouncedGetUrlInfo = useDebounceCallback(handleGetUrlInfo, 100);
@@ -138,6 +142,7 @@ export const ShareLink: React.FC<IShareLink> = (props) => {
           <span className="text-[#111813]">Image</span>
         </div>
         <UploadImage
+          src={imageUrl}
           width={204}
           height={152}
           onChanged={(url) => {
