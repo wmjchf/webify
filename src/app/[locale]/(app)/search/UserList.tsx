@@ -3,29 +3,26 @@
 import React, { useRef, useState } from "react";
 
 import InfiniteScroll from "react-infinite-scroll-component";
-import { getSearchList, IArticle } from "../../../../service/public";
+import { getSearchList, IArticle, IUser } from "../../../../service/public";
 import { IAllCollect } from "../../../../function/list";
 import { NoData } from "../../../../components/NoData";
-import { NewsItem } from "../../../../components/NewItem";
+import { Item } from "../../../../components/FollowModal/List/Item";
 
-interface IPostList {
-  data: IArticle[];
-
-  allCollectList: IAllCollect[];
-  allLaterList: IAllCollect[];
+interface IUserList {
+  data: IUser[];
+  allFollowList: IAllCollect[];
   q: string;
-  allLikeList: IAllCollect[];
 }
-export const PostList: React.FC<IPostList> = (props) => {
-  const { data, allCollectList, allLaterList, q, allLikeList } = props;
+export const UserList: React.FC<IUserList> = (props) => {
+  const { data, q, allFollowList } = props;
   const pageRef = useRef(1);
-  const listRef = useRef<IArticle[]>(data);
-  const [list, setList] = useState<IArticle[]>(data);
+  const listRef = useRef<IUser[]>(data);
+  const [list, setList] = useState<IUser[]>(data);
   const [hasMore, setHasMore] = useState(data.length === 10);
 
   const handleGetList = async () => {
     pageRef.current += 1;
-    let result: IResponse<{ articleList?: IArticle[] }> | null = null;
+    let result: IResponse<{ userList?: IUser[] }> | null = null;
 
     result = await getSearchList({
       page: pageRef.current,
@@ -34,10 +31,10 @@ export const PostList: React.FC<IPostList> = (props) => {
       q,
     });
     if (result?.code === 200) {
-      const newList = [...listRef.current, ...(result.data.articleList || [])];
+      const newList = [...listRef.current, ...(result.data.userList || [])];
       setList(newList);
       listRef.current = newList;
-      if ((result.data.articleList || []).length < 10) {
+      if ((result.data.userList || []).length < 10) {
         setHasMore(false);
       }
     }
@@ -66,13 +63,11 @@ export const PostList: React.FC<IPostList> = (props) => {
         >
           {list.map((item) => {
             return (
-              <NewsItem
-                allCollectList={allCollectList}
-                allLaterList={allLaterList}
-                allLikeList={allLikeList}
-                key={item.article_id}
+              <Item
+                allFollowList={allFollowList}
+                key={item.uid}
                 data={item}
-              ></NewsItem>
+              ></Item>
             );
           })}
         </InfiniteScroll>

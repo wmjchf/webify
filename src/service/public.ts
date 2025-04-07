@@ -101,8 +101,11 @@ interface IGetSearchListParams {
   typeId: string;
 }
 export const getSearchList = (params: IGetSearchListParams) => {
-  return fetcher<{ articleList: IArticle[] }>("/public/page/search", {
-    method: "GET",
-    params,
-  });
+  return fetcher<{ articleList?: IArticle[]; userList?: IUser[] }>(
+    "/public/page/search",
+    {
+      method: "GET",
+      params,
+    }
+  );
 };

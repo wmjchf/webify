@@ -17,6 +17,6 @@ export const fetcherSearch = async (q: string, typeId: string) => {
   );
   const result = await resultJSON.json();
 
-  const { articleList } = result.data;
-  return { article: articleList };
+  const { articleList, userList } = result.data;
+  return { article: articleList, user: userList };
 };
