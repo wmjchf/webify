@@ -3,7 +3,9 @@ import { IUser } from "../service/public";
 import { cookies } from "next/headers";
 
 export const fetcherHome = async () => {
-  const resultJSON = await fetch(`${BASE_URL}/public/page/home`);
+  const resultJSON = await fetch(`${BASE_URL}/public/page/home`,{
+     cache: "no-cache"
+  });
   const result = await resultJSON.json();
   const { articleSource, articleType, article } = result.data;
   return { articleSource, articleType, article };
