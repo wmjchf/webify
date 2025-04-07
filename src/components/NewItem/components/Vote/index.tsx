@@ -24,13 +24,15 @@ import { IAllCollect } from "../../../../function/list";
 interface IVote {
   articleId: string;
   likeCount: number;
+  dislikeCount: number;
   allLikeList?: IAllCollect[];
 }
 export const Vote: React.FC<IVote> = (props) => {
   const { user } = useCommonStore();
-  const { articleId, likeCount, allLikeList = [] } = props;
+  const { articleId, likeCount, allLikeList = [], dislikeCount } = props;
 
   const [ilikeCount, setILikeCount] = useState(likeCount);
+  const [idislikeCount, setIDislikeCount] = useState(dislikeCount);
   const [likeHover, setLikeHover] = useState(false);
   const [dislikeHover, setDislikeHover] = useState(false);
   const [likeStatus, setLikeStatus] = useState(
@@ -86,6 +88,8 @@ export const Vote: React.FC<IVote> = (props) => {
                       }).then(() => {
                         setLikeStatus(1);
                         setILikeCount(ilikeCount + 1);
+                        likeStatus === -1 &&
+                          setIDislikeCount(idislikeCount - 1);
                       });
                     }
                   }}
@@ -127,7 +131,8 @@ export const Vote: React.FC<IVote> = (props) => {
                         isLike: -1,
                       }).then(() => {
                         setLikeStatus(-1);
-                        setILikeCount(ilikeCount - 1);
+                        likeStatus === 1 && setILikeCount(ilikeCount - 1);
+                        setIDislikeCount(idislikeCount + 1);
                       });
                     }
                   }}
@@ -141,7 +146,9 @@ export const Vote: React.FC<IVote> = (props) => {
             })}
           >
             <span className="font-medium">
-              {ilikeCount > 0 ? ilikeCount : "Vote"}
+              {ilikeCount - idislikeCount > 0
+                ? ilikeCount - idislikeCount
+                : "Vote"}
             </span>
           </Button>
         );

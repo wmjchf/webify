@@ -106,6 +106,7 @@ export const NewsItem: React.FC<INewsItemPramas> = (props) => {
               likeCount={data.like_count}
               articleId={`${data.article_id}`}
               allLikeList={allLikeList_client || allLikeList}
+              dislikeCount={data.dislike_count}
             ></Vote>
             <Share></Share>
             <Collection
