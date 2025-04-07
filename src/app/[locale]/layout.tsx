@@ -13,6 +13,23 @@ import "../../styles/iconfont.css";
 import "../../styles/mixins.scss";
 import { fetcherHome } from "../../function/common";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "webify - Making quality content visible,where sharing creates value",
+  keywords: [
+    "web3",
+    "news",
+    "web3 social",
+    "social",
+    "share",
+    "value",
+    "webify",
+  ],
+  description:
+    "webify does not create content, but we excel at discovering,curating, and sharing valuable information, ensuring it reaches awider audience.",
+};
+
 async function RootLayout({
   children,
   params: { locale },
