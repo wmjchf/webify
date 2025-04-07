@@ -14,7 +14,7 @@ const Layout = async ({
   const allFollowList = await fetcherUserAllList("follow");
   return (
     <>
-      <Header></Header>
+      <Header locale={locale}></Header>
       <Content>{children}</Content>
       <ConfirmWallet></ConfirmWallet>
       <FollowModal allFollowList={allFollowList}></FollowModal>

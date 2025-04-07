@@ -8,8 +8,11 @@ import { WalletLogin } from "../Login/WalletLogin";
 import { ShareBtn } from "./ShareBtn";
 import { InputSearch } from "./InputSearch";
 
-interface IHeader {}
+interface IHeader {
+  locale: string;
+}
 export const Header: React.FC<IHeader> = async (props) => {
+  const { locale } = props;
   const { user } = await fetcherCurrentUser();
   return (
     <div
@@ -33,7 +36,7 @@ export const Header: React.FC<IHeader> = async (props) => {
         ></Image>
       </div>
       <div className={classNames(styles.middle, "h-full flex items-center")}>
-        <InputSearch></InputSearch>
+        <InputSearch locale={locale}></InputSearch>
       </div>
       <div className={classNames(styles.right, "flex items-center gap-2")}>
         <ShareBtn user={user}></ShareBtn>

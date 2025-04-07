@@ -1,9 +1,15 @@
 "use client";
 import { Input } from "@heroui/react";
-import { useRef } from "react";
-import { useRouter } from "../../i18n/routing";
+import React, { useRef } from "react";
+import PagesTopLoader from "nextjs-toploader";
+// import { useRouter } from "../../i18n/routing";
+import { useRouter } from "nextjs-toploader/app";
 
-export const InputSearch = () => {
+interface IInputSearch {
+  locale: string;
+}
+export const InputSearch: React.FC<IInputSearch> = (props) => {
+  const { locale } = props;
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
   return (
@@ -17,7 +23,7 @@ export const InputSearch = () => {
         startContent={<i className="iconfont icon-sousuo"></i>}
         onKeyDown={(event) => {
           if (event.key === "Enter") {
-            router.push(`/search/1?q=${inputRef.current?.value}`);
+            router.push(`/${locale}/search/1?q=${inputRef.current?.value}`);
           }
         }}
       />
