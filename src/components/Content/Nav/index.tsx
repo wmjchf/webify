@@ -128,16 +128,11 @@ export const Nav: React.FC<INav> = (props) => {
 
             <IconItem
               icon="icon-icon_tokenomics"
-              title="Tokenomics"
-              isSelected={path === "/tokenomics"}
-              href={"/tokenomics"}
+              title="Points Tokenomics"
+              isSelected={path === "/points"}
+              href={"/points"}
             ></IconItem>
-            <IconItem
-              icon="icon-ic_privacy_policy"
-              title="Privacy Policy"
-              isSelected={path === "/privacy"}
-              href={"/privacy"}
-            ></IconItem>
+
             <IconItem
               icon="icon-join-us"
               title="Join Us"

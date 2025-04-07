@@ -9,7 +9,7 @@ const Layout = ({
 }) => {
   return (
     <div className="h-screen">
-      <Header></Header>
+      <Header locale={locale}></Header>
       <div className="h-full bg-[url(/image/hero-bg.webp)] bg-cover">
         {children}
       </div>
