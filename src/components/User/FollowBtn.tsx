@@ -34,7 +34,9 @@ export const FollowBtn: React.FC<IFollowBtn> = (props) => {
   useEffect(() => {
     setText(iisFollowing ? "Following" : "Follow");
   }, [iisFollowing]);
-
+  if(user?.uid === followUserUid){
+    return;
+  }
   return (
     <>
       <ConfirmModal
