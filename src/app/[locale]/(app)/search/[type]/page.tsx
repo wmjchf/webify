@@ -16,7 +16,6 @@ const Page = async ({
   const allLaterList = await fetcherUserAllList("later");
   const allLikeList = await fetcherUserAllList("like");
   const allFollowList = await fetcherUserAllList("follow");
-
   if (type === "1") {
     return (
       <PostList

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import InfiniteScroll from "react-infinite-scroll-component";
 import { getSearchList, IArticle } from "../../../../service/public";
@@ -22,6 +22,10 @@ export const PostList: React.FC<IPostList> = (props) => {
   const listRef = useRef<IArticle[]>(data);
   const [list, setList] = useState<IArticle[]>(data);
   const [hasMore, setHasMore] = useState(data.length === 10);
+  useEffect(() => {
+    listRef.current = data;
+    setList(data);
+  }, [data]);
 
   const handleGetList = async () => {
     pageRef.current += 1;
