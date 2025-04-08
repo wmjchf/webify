@@ -36,7 +36,7 @@ export const HomeList: React.FC<IHomeList> = (props) => {
   const pageRef = useRef(1);
   const listRef = useRef<IArticle[]>(data);
   const [list, setList] = useState<IArticle[]>(data);
-  const [hasMore, setHasMore] = useState(true);
+  const [hasMore, setHasMore] = useState(data.length === 10);
   const articleTypeIdRef = useRef<string>("0");
   const sourceTypeIdIdRef = useRef<string>("0");
   const [articleTypeId, setArticleTypeId] = useState<string>("0");
