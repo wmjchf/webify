@@ -54,7 +54,6 @@ export const ShareLink: React.FC<IShareLink> = (props) => {
         router.replace("/my/share");
       }
     } catch (error) {
-    } finally {
       setLoading(false);
     }
   };
@@ -81,14 +80,14 @@ export const ShareLink: React.FC<IShareLink> = (props) => {
   return (
     <Form
       className="w-full max-w-2xl flex flex-col gap-3 py-4"
-      validationErrors={errors}
       onSubmit={onSubmit}
     >
       <Input
         label="Link URL"
         name="url"
+        errorMessage="please enter link url"
         labelPlacement="outside"
-        placeholder="parse Link URL"
+        placeholder="please enter link url"
         isRequired
         onChange={(event) => {
           setUrl(event.target.value);
@@ -99,8 +98,9 @@ export const ShareLink: React.FC<IShareLink> = (props) => {
         label="Title"
         name="title"
         value={title}
+        errorMessage="please enter title"
         labelPlacement="outside"
-        placeholder="parse Title"
+        placeholder="please enter Title"
         isRequired
         onChange={(event) => {
           setTitle(event.target.value);
@@ -112,7 +112,7 @@ export const ShareLink: React.FC<IShareLink> = (props) => {
         value={intro}
         name="intro"
         labelPlacement="outside"
-        placeholder="parse Description"
+        placeholder="please enter Description"
         minRows={2}
         onChange={(event) => {
           setIntro(event.target.value);
