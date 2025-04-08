@@ -12,12 +12,14 @@ import { useCommonStore } from "../../store/common";
 import { PlaceholderImage } from "../PlaceholderImage";
 import { FollowBtn } from "./FollowBtn";
 import { WalletLogin } from "../Login/WalletLogin";
+import { useTranslations } from "next-intl";
 
 interface IUserProps {
   user: IUser | null;
   isMy?: boolean;
 }
 export const User: React.FC<IUserProps> = (props) => {
+  const t = useTranslations("profile");
   const { user: ServerUser, isMy = false } = props;
   const { user: clientUser, toggleFollowModalData } = useCommonStore();
   const user = isMy ? clientUser || ServerUser : ServerUser;
@@ -43,7 +45,7 @@ export const User: React.FC<IUserProps> = (props) => {
           <div className="flex flex-col">
             <span className="text-lg font-semibold">{user?.nickname}</span>
             <span className="text-sm">
-              {user?.bio || "比较懒，还没有简介。"}
+              {user?.bio || t("defaultBio")}
             </span>
           </div>
         </div>

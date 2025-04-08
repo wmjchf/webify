@@ -5,5 +5,8 @@
     "contact": "Contact",
     "allType": "All Type",
     "allResource": "All Resource"
+  },
+  "profile":{
+    "defaultBio":"Too lazy, no introduction yet."
   }
 }

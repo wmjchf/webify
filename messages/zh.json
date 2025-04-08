@@ -5,5 +5,8 @@
     "contact": "联系方式",
     "allType": "全部类型",
     "allResource": "全部资源"
+  },
+  "profile":{
+    "defaultBio":"比较懒，还没有简介。"
   }
 }

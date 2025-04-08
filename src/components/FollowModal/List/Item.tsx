@@ -6,6 +6,7 @@ import { FollowBtn } from "../../User/FollowBtn";
 import { useCommonStore } from "../../../store/common";
 import { Link, useRouter } from "../../../i18n/routing";
 import { IAllCollect } from "../../../function/list";
+import { useTranslations } from "next-intl";
 
 interface IItem {
   data: IUser;
@@ -13,6 +14,7 @@ interface IItem {
 }
 export const Item: React.FC<IItem> = (props) => {
   const { data, allFollowList } = props;
+  const t = useTranslations("profile");
   const { user } = useCommonStore();
   return (
     <div className="flex justify-between items-center gap-2 p-2 rounded-md hover:bg-gray-100">
@@ -28,7 +30,7 @@ export const Item: React.FC<IItem> = (props) => {
           <div className="flex flex-col gap-2">
             <span className="font-bold">{data.nickname}</span>
             <span className="text-gray-400 text-sm line-clamp-1">
-              {data.bio || "比较懒，没有写简介!"}
+              {data.bio || t("defaultBio")}
             </span>
           </div>
         </div>
