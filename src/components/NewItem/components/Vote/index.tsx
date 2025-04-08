@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import { Button } from "@heroui/react";
 import classNames from "classnames";
@@ -34,6 +34,8 @@ export const Vote: React.FC<IVote> = (props) => {
   const [ilikeCount, setILikeCount] = useState(likeCount);
   const [idislikeCount, setIDislikeCount] = useState(dislikeCount);
   const [likeHover, setLikeHover] = useState(false);
+  const loadingRef = useRef<boolean>(false);
+  const [loading,setIsLoading] = useState(false);
   const [dislikeHover, setDislikeHover] = useState(false);
   const [likeStatus, setLikeStatus] = useState(
     allLikeList.find((item) => item.article_id === Number(articleId))
@@ -52,6 +54,7 @@ export const Vote: React.FC<IVote> = (props) => {
           <Button
             radius="full"
             size="sm"
+            isLoading={loading}
             startContent={
               <div
                 onMouseEnter={() => {
@@ -74,13 +77,19 @@ export const Vote: React.FC<IVote> = (props) => {
                   width={15}
                   height={15}
                   alt=""
-                  onClick={() => {
+                  onClick={(event) => {
+                    
                     if (onClick) {
                       onClick();
                     } else {
                       if (likeStatus === 1) {
                         return;
                       }
+                      if(loadingRef.current){
+                        return;
+                      }
+                      setIsLoading(true);
+                      loadingRef.current = true;
                       likeAdd({
                         articleId,
                         typeId: 1,
@@ -90,7 +99,10 @@ export const Vote: React.FC<IVote> = (props) => {
                         setILikeCount(ilikeCount + 1);
                         likeStatus === -1 &&
                           setIDislikeCount(idislikeCount - 1);
-                      });
+                      }).finally(()=>{
+                        setIsLoading(false);
+                        loadingRef.current = false;
+                      })
                     }
                   }}
                 ></Image>
@@ -118,13 +130,19 @@ export const Vote: React.FC<IVote> = (props) => {
                   width={15}
                   height={15}
                   alt=""
-                  onClick={() => {
+                  onClick={(event) => {
+                    
                     if (onClick) {
                       onClick();
                     } else {
                       if (likeStatus === -1) {
                         return;
                       }
+                      if(loadingRef.current){
+                        return;
+                      }
+                      setIsLoading(true);
+                      loadingRef.current = true;
                       likeAdd({
                         articleId,
                         typeId: 1,
@@ -133,7 +151,10 @@ export const Vote: React.FC<IVote> = (props) => {
                         setLikeStatus(-1);
                         likeStatus === 1 && setILikeCount(ilikeCount - 1);
                         setIDislikeCount(idislikeCount + 1);
-                      });
+                      }).finally(()=>{
+                        setIsLoading(false);
+                      loadingRef.current = false;
+                      })
                     }
                   }}
                 ></Image>
