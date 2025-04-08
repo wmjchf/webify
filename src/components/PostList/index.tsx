@@ -15,6 +15,7 @@ import { getCollectList } from "../../service/collect";
 import { NoData } from "../NoData";
 import { getLaterList } from "../../service/later";
 import { IAllCollect } from "../../function/list";
+import { getHistoryList } from "../../service/hostory";
 
 interface IPostList {
   data: IArticle[];
@@ -31,7 +32,7 @@ export const PostList: React.FC<IPostList> = (props) => {
   const listRef = useRef<IArticle[]>(data);
   const [list, setList] = useState<IArticle[]>(data);
   const [hasMore, setHasMore] = useState(data.length === 10);
-
+console.log(hasMore,'rewrwer')
   const handleGetList = async () => {
     pageRef.current += 1;
     let result: IResponse<{ list: IArticle[] }> | null = null;
@@ -53,6 +54,14 @@ export const PostList: React.FC<IPostList> = (props) => {
 
     if (apiType === "later") {
       result = await getLaterList({
+        sort: "1",
+        page: pageRef.current,
+        pageSize: 10,
+      });
+    }
+
+    if (apiType === "history") {
+      result = await getHistoryList({
         sort: "1",
         page: pageRef.current,
         pageSize: 10,
