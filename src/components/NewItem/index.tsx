@@ -18,6 +18,7 @@ import { useCommonStore } from "../../store/common";
 import { IAllCollect } from "../../function/list";
 import { historyAdd } from "../../service/hostory";
 import { DeletePost } from "./components/Delete";
+import { useLocale } from "next-intl";
 
 interface INewsItemPramas {
   data: IArticle;
@@ -29,6 +30,7 @@ interface INewsItemPramas {
 
 export const NewsItem: React.FC<INewsItemPramas> = (props) => {
   const { data, allCollectList, allLaterList, onDelete, allLikeList } = props;
+  const locale = useLocale();
   const router = useRouter();
   const {
     user,
@@ -108,7 +110,7 @@ export const NewsItem: React.FC<INewsItemPramas> = (props) => {
             </div>
             <span className={classNames(styles.dot)}></span>
             <span className={classNames(styles.time, "text-xs")}>
-              {timeAgo(data.created)}
+              {timeAgo(data.created,locale)}
             </span>
           </div>
           <div className={"flex flex-col gap-2"}>

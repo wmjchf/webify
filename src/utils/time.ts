@@ -1,8 +1,10 @@
 import dayjs from "dayjs";
 
-export function timeAgo(createdTime: number) {
-  const now = dayjs().unix();
 
+
+export function timeAgo(createdTime: number,locale: string) {
+  const now = dayjs().unix();
+ 
   const timeDiff = now - createdTime; // 计算时间差，单位为毫秒
 
   const seconds = timeDiff; // 转换为秒
@@ -12,17 +14,32 @@ export function timeAgo(createdTime: number) {
   const months = Math.floor(days / 30); // 转换为月数（大致）
   const years = Math.floor(months / 12); // 转换为年数
 
+  const lang:any={
+    zh : {
+      now:"刚刚",
+      minutes:"分钟",
+      hours:"小时",
+    },
+    en : {
+      now:"just now",
+      minutes:"m",
+      hours:"h",
+    }
+  }
+
+
+
+
+
   if (seconds < 60) {
-    return "刚刚"; // 小于60秒，显示“刚刚”
+    return lang[locale].now; // 小于60秒，显示“刚刚”
   } else if (minutes < 60) {
-    return `${minutes}分钟前`; // 小于1小时，显示“X分钟前”
+    return `${minutes}${lang[locale].minutes}`; // 小于1小时，显示“X分钟前”
   } else if (hours < 24) {
-    return `${hours}小时${minutes % 60}分钟前`; // 小于1天，显示“X小时X分钟前”
+    return `${hours}${lang[locale].hours}`; // 小于1天，显示“X小时X分钟前”
   } else if (days < 30) {
-    return `${days}天${hours % 24}小时之前`; // 小于1个月，显示“X天X小时之前”
-  } else if (months < 12) {
-    return `${months}个月前`; // 小于1年，显示“X个月前”
+    return dayjs(createdTime).format('MMM D'); // 小于1个月，显示“X天X小时之前”
   } else {
-    return `${years}年前`; // 超过1年，显示“X年前”
+    return  dayjs(createdTime).format('MMM D'); // 小于1个月，显示“X天X小时之前”
   }
 }
