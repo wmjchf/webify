@@ -26,7 +26,7 @@ export const ShareLink: React.FC<IShareLink> = (props) => {
   const [intro, setIntro] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [articleTypeIds, setArticleTypeIds] = useState<string>();
-
+  const [isGrabing, setIsGrabing] = useState(false);
   const onSubmit = async (event: any) => {
     try {
       event.preventDefault();
@@ -55,6 +55,8 @@ export const ShareLink: React.FC<IShareLink> = (props) => {
       }
     } catch (error) {
       setLoading(false);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -65,11 +67,17 @@ export const ShareLink: React.FC<IShareLink> = (props) => {
       setImageUrl("");
       return;
     }
-    const result = await getUrlInfo(url);
-    if (result.code === 200) {
-      setTitle(result.data.title);
-      setIntro(result.data.description);
-      setImageUrl(result.data.image);
+    try {
+      setIsGrabing(true);
+      const result = await getUrlInfo(url);
+      if (result.code === 200) {
+        setTitle(result.data.title);
+        setIntro(result.data.description);
+        setImageUrl(result.data.image);
+      }
+    } catch (error) {
+    } finally {
+      setIsGrabing(false);
     }
   };
   const debouncedGetUrlInfo = useDebounceCallback(handleGetUrlInfo, 100);
@@ -93,7 +101,7 @@ export const ShareLink: React.FC<IShareLink> = (props) => {
           setUrl(event.target.value);
         }}
       />
-      <div className="py-4"></div>
+      <div className="py-4">{}</div>
       <Input
         label="Title"
         name="title"
