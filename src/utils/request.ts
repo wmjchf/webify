@@ -1,6 +1,6 @@
 import Cookies from "js-cookie";
 
-const baseUrl = "/api";
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
 interface CustomRequestInit extends RequestInit {
   params?: Record<string, any>;
